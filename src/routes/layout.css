@@ -1,0 +1,131 @@
+@import 'tailwindcss';
+@config '../../tailwind.config.js';
+@plugin '@tailwindcss/typography';
+
+body {
+    max-width: 100vw;
+    overflow-x: clip;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    cursor: var(--cursor-default);
+}
+
+/* Explicit URLs (not @apply) so custom cursors survive cascade after a single Tailwind build. */
+@layer base {
+    :where(p, h1, h2, h3, h4, h5, h6, li, blockquote, figcaption) {
+        cursor: var(--cursor-text);
+    }
+
+    :where(input[type='text'],
+		input[type='email'],
+		input[type='search'],
+		input[type='password'],
+		input[type='url'],
+		input[type='tel'],
+		textarea) {
+        cursor: var(--cursor-text);
+    }
+
+    :where(a,
+		button,
+		[role='button'],
+		input[type='submit'],
+		input[type='button'],
+		input[type='reset'],
+		label[for],
+		summary,
+		select) {
+        cursor: var(--cursor-pointer);
+    }
+
+    ::selection {
+        background: #141417;
+        color: #0278FF;
+    }
+
+    .jit-container::selection {
+        background: transparent;
+        color: inherit;
+    }
+
+    .jit-container {
+        user-select: none;
+        -webkit-user-select: none;
+    }
+}
+
+@theme {
+    --font-exposure: 'Exposure', sans-serif;
+
+    --font-weight-light: 60;
+    --font-weight-neutral: -10;
+    --font-weight-regular: -20;
+    --font-weight-semibold: -60;
+    --font-weight-extrabold: -100;
+
+    --cursor-default: url('/cursors/Cursor-Point.svg') 20 17, auto;
+    --cursor-pointer: url('/cursors/Cursor-Touch.svg') 32 32, pointer;
+    --cursor-text: url('/cursors/textcursor 1.svg') 32 32, text;
+    --cursor-grab: url('/cursors/Cursor-Grab.svg') 32 32, grab;
+    --cursor-grabbing: url('/cursors/Cursor-Grab.svg') 32 32, grabbing;
+
+    --cursor-cursor-default: var(--cursor-default);
+    --cursor-cursor-pointer: var(--cursor-pointer);
+    --cursor-cursor-text: var(--cursor-text);
+    --cursor-cursor-grab: var(--cursor-grab);
+    --cursor-cursor-grabbing: var(--cursor-grabbing);
+}
+
+@utility font-light {
+    font-variation-settings: 'EXPO' 60;
+    font-weight: 60;
+}
+
+@utility font-neutral {
+    font-variation-settings: 'EXPO' -10;
+    font-weight: -10;
+}
+
+@utility font-regular {
+    font-variation-settings: 'EXPO' -20;
+    font-weight: -10;
+}
+
+@utility font-398 {
+    font-variation-settings: 'EXPO' 2;
+    font-weight: 2;
+}
+
+@utility font-semibold {
+    font-variation-settings: 'EXPO' -60;
+    font-weight: -60;
+}
+
+@utility font-extrabold {
+    font-variation-settings: 'EXPO' -100;
+    font-weight: -100;
+}
+
+
+@font-face {
+    font-family: 'Exposure';
+    src: url('/fonts/Exposure.ttf') format('truetype');
+    font-weight: -100 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Exposure';
+    src: url('/fonts/ExposureVAR-Italic.ttf') format('truetype');
+    font-weight: -100 100;
+    font-style: italic;
+}
+
+
+@font-face {
+    font-family: 'PP Mori';
+    src: url('/fonts/PPMori-Regular.otf') format('truetype');
+}
