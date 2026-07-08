@@ -9,7 +9,7 @@
     let activeSection = $state("text");
 
     let scale = $derived(
-        innerWidth > 0
+        innerWidth > 0 && innerWidth >= 768
             ? Math.min(1, (innerWidth - 48) / 705, (innerHeight - 48) / 600)
             : 1
     );
