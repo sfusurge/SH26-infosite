@@ -1,7 +1,7 @@
 <script lang="ts">
-	import './layout.css';
-
-	const { children } = $props();
+    let { children } = $props();
 </script>
 
-{@render children()}
+<div class="font-exposure">
+    {@render children()}
+</div>
