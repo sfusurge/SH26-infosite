@@ -6,7 +6,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        'background-blue': '#0283F7',
+        'background-blue': '#0278FF',
         'primary-black': '#141417',
         'primary-white':'#E1E7EE',
         'primary-gray': '#73879D',

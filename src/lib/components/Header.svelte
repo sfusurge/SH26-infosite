@@ -34,5 +34,7 @@
         </div>
     </div>
 
-    <Button href={applyHref} letter="A" label="APPLY >" variant="dark" />
+    <div class="font-bold">
+        <Button href={applyHref} letter="A" label="APPLY >" variant="dark" />
+    </div>
 </header>
