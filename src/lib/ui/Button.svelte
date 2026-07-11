@@ -1,4 +1,3 @@
-<!-- src/lib/ui/Button.svelte -->
 <script lang="ts">
     let {
         href = undefined,
@@ -33,14 +32,14 @@
 {#if href}
     
     <a href=    {href}
-        class="group inline-flex items-center justify-center gap-[10px] rounded-[6px] px-[6px] py-[6px] {variant === 'light' ? 'bg-primary-white' : 'bg-[#101A21]'}"
+        class="group inline-flex items-center justify-center gap-[10px] rounded-[6px] px-[6px] py-[4px] {variant === 'light' ? 'bg-primary-white' : 'bg-[#101A21]'}"
     >
         {@render content()}
     </a>
 {:else}
     <button
         onclick={onclick}
-        class="group inline-flex items-center justify-center gap-[10px] rounded-[6px] px-[6px] py-[6px] {variant === 'light' ? 'bg-primary-white' : 'bg-[#101A21]'}"
+        class="group inline-flex items-center justify-center gap-[10px] rounded-[6px] px-[6px] py-[4px] {variant === 'light' ? 'bg-primary-white' : 'bg-[#101A21]'}"
     >
         {@render content()}
     </button>

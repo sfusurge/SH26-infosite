@@ -6,7 +6,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        'background-blue': '#0278FF',
+        'background-blue': '#0283F7',
         'primary-black': '#141417',
         'primary-white':'#E1E7EE',
         'primary-gray': '#73879D',
@@ -28,7 +28,7 @@ export default {
         'copy': 'cubic-bezier(.2,.6,.2,1)',
       },
       transitionDuration: {
-        'copy': '1400ms',
+        'copy': '2200ms',
       },
       keyframes: {
         'stagger-in': {
