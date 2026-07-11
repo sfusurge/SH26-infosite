@@ -1,20 +1,7 @@
-<script>
-    import TextSection from "../lib/components/TextSection.svelte";
-    import UILayer from "../lib/components/UILayer.svelte";
-    let innerWidth = $state(0);
-    let innerHeight = $state(0);
-    let scale = $derived(innerWidth > 0 ? Math.min(1, (innerWidth - 48) / 705, (innerHeight - 48) / 600) : 1);
+<script lang="ts">
+    import LandingUI from "$lib/components/LandingUI.svelte";
 </script>
 
-<svelte:window bind:innerWidth bind:innerHeight />
-
-<div class="bg-background-blue w-full h-screen font-exposure overflow-hidden relative">
-  <UILayer />
-
-  <div
-    class="relative flex justify-center items-center h-full text-primary-black gap-19 flex-col origin-center"
-    style="transform: scale({scale}); transform-origin: center;"
-  >
-    <TextSection />
-  </div>
+<div class="w-full h-screen font-exposure overflow-hidden bg-[#0283F7] relative">
+    <LandingUI />
 </div>
