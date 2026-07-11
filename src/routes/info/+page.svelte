@@ -1,6 +1,7 @@
 <script lang="ts">
     import TextSection from "$lib/components/TextSection.svelte";
     import Header from "$lib/components/Header.svelte";
+    import SoundButton from "$lib/ui/SoundButton.svelte";
 </script>
 
 <div class="w-full h-screen bg-background-blue flex justify-center items-center">
@@ -8,4 +9,5 @@
     <div class="relative flex justify-center items-center h-full text-primary-black gap-19 flex-col origin-center">
         <TextSection />
     </div>
+    <SoundButton />
 </div>

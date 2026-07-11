@@ -1,4 +1,3 @@
-<!-- src/lib/components/Header.svelte -->
 <script lang="ts">
     import Button from "$lib/ui/Button.svelte";
 
@@ -18,11 +17,9 @@
         
         <a href={backHref}
             aria-label="Go back"
-            class="flex items-center justify-center w-9 h-9 md:w-10 md:h-10 rounded-full bg-primary-white"
+            class="flex items-center justify-center w-9 h-9 md:w-10 md:h-10 rounded-[6px] bg-primary-white"
         >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="#101A21" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            <img src="/ui/arrowback.svg" alt="" class="w-[24px] h-[24px]" />
         </a>
 
         <span class="hidden md:inline text-primary-white text-[16px] font-semibold">
@@ -30,9 +27,7 @@
         </span>
 
         <div class="flex items-center gap-1.5 text-primary-white">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="currentColor"/>
-            </svg>
+            <img src="/ui/star.svg" alt="" aria-hidden="true" class="w-[18px] h-[18px]" />
             <span class="text-[16px] font-medium">
                 {pageLabel}
             </span>
