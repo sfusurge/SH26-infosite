@@ -13,4 +13,46 @@
     <!-- ForeGround: stairs + building -->
     <img src="/landing-page/stairs.svg" alt="" class="absolute right-0 bottom-0 w-[1263px] z-[5]" />
 
+    <!-- Bush 3: back foliage layer -->
+    <img
+        src="/landing-page/bush3.svg"
+        alt=""
+        aria-hidden="true"
+        class="absolute z-[6] pointer-events-none select-none"
+        style="
+            left: 0.13%;
+            top: 75.36%;
+            width: 22.82%;
+            height: 22.30%;
+        "
+    />
+
+    <!-- Bush 2: middle foliage layer -->
+    <img
+        src="/landing-page/bush2.svg"
+        alt=""
+        aria-hidden="true"
+        class="absolute z-[7] pointer-events-none select-none"
+        style="
+            left: -8%;
+            top: 81.36%;
+            width: 22.96%;
+            height: 26.07%;
+        "
+    />
+
+    <!-- Bush 1: front foliage layer -->
+    <img
+        src="/landing-page/bush1.svg"
+        alt=""
+        aria-hidden="true"
+        class="absolute z-[8] pointer-events-none select-none"
+        style="
+            left: -4.04%;
+            top: 88.70%;
+            width: 28.41%;
+            height: 24.58%;
+        "
+    />
+
 </div>
