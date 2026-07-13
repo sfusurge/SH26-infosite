@@ -9,12 +9,12 @@
 </script>
 
 <div
-    class="relative z-0 flex flex-col items-center text-center text-4xl leading-[118%] tracking-[0%] gap-10.25 w-125 brush-stroke font-regular transition-all duration-300 ease-out"
+    class="relative z-0 flex flex-col mt-50 items-center text-4xl leading-[118%] tracking-[0%] gap-10.25 w-125 brush-stroke font-regular transition-all duration-300 ease-out"
     class:opacity-30={highlighted}
     class:blur-[4.5px]={highlighted}
 >
     <div
-        class="transition-[opacity,filter,transform] duration-copy ease-copy flex flex-col items-center gap-10.25"
+        class="transition-[opacity,filter,transform] duration-copy ease-copy flex flex-col items-center gap-10.25 max-h-[75vh] overflow-y-auto hide-scrollbar"
         class:opacity-0={!isMounted}
         class:blur-sm={!isMounted}
         class:translate-y-[6px]={!isMounted}
@@ -22,16 +22,76 @@
         class:blur-none={isMounted}
         class:translate-y-0={isMounted}
     >
-        <p>
-            <span class="font-semibold">StormHacks</span> isn’t just West Canada’s biggest Hackathon.
-        </p>
+        <div class="max-w-xl mb-15">
+            <h2 class="mb-6 text-4xl leading-none" class:animate-stagger-in={isMounted} class:opacity-0={!isMounted}>
+                Do I have to dress like Harry Park at StormHacks 26?
+            </h2>
 
-        <p class:animate-stagger-in={isMounted} class:opacity-0={!isMounted}>
-            This is your chance to prove that no matter where you start, <span class="font-semibold">you</span> were always born to build great things.
-        </p>
+            <div class="border-l-2 border-black pl-5" class:animate-stagger-in={isMounted} class:opacity-0={!isMounted}>
+                <p class="text-lg leading-7" >
+                    You don’t necessarily have to, but you could! We recommend coming to StormHacks with a fresh Low Taper Fade, and maybe - just maybe - your mom.                
+                </p>
+            </div>
+        </div>
 
-        <p class:animate-stagger-in-delayed={isMounted} class:opacity-0={!isMounted}>
-            Join us on <span class="font-semibold">October 3rd & 4th</span> at SFU Burnaby Campus.
-        </p>
+        <div class="max-w-xl mb-15">
+            <h2 class="mb-6 text-4xl leading-none" class:animate-stagger-in={isMounted} class:opacity-0={!isMounted}>
+                Do I have to dress like Harry Park at StormHacks 26?
+            </h2>
+
+            <div class="border-l-2 border-black pl-5" class:animate-stagger-in={isMounted} class:opacity-0={!isMounted}>
+                <p class="text-lg leading-7" >
+                    You don’t necessarily have to, but you could! We recommend coming to StormHacks with a fresh Low Taper Fade, and maybe - just maybe - your mom.                
+                </p>
+            </div>
+        </div>
+
+        <div class="max-w-xl mb-15">
+            <h2 class="mb-6 text-4xl leading-none" class:animate-stagger-in={isMounted} class:opacity-0={!isMounted}>
+                Do I have to dress like Harry Park at StormHacks 26?
+            </h2>
+
+            <div class="border-l-2 border-black pl-5" class:animate-stagger-in={isMounted} class:opacity-0={!isMounted}>
+                <p class="text-lg leading-7" >
+                    You don’t necessarily have to, but you could! We recommend coming to StormHacks with a fresh Low Taper Fade, and maybe - just maybe - your mom.                
+                </p>
+            </div>
+        </div>
+
+        <div class="max-w-xl mb-15">
+            <h2 class="mb-6 text-3xl leading-none" class:animate-stagger-in={isMounted} class:opacity-0={!isMounted}>
+                Do I have to dress like Harry Park at StormHacks 26?
+            </h2>
+
+            <div class="border-l-2 border-black pl-5" class:animate-stagger-in={isMounted} class:opacity-0={!isMounted}>
+                <p class="text-lg leading-7" >
+                    You don’t necessarily have to, but you could! We recommend coming to StormHacks with a fresh Low Taper Fade, and maybe - just maybe - your mom.                
+                </p>
+            </div>
+        </div>
+
+        <div class="max-w-xl mb-15">
+            <h2 class="mb-6 text-3xl leading-none" class:animate-stagger-in={isMounted} class:opacity-0={!isMounted}>
+                Do I have to dress like Harry Park at StormHacks 26?
+            </h2>
+
+            <div class="border-l-2 border-black pl-5" class:animate-stagger-in={isMounted} class:opacity-0={!isMounted}>
+                <p class="text-lg leading-7" >
+                    You don’t necessarily have to, but you could! We recommend coming to StormHacks with a fresh Low Taper Fade, and maybe - just maybe - your mom.                
+                </p>
+            </div>
+        </div>
     </div>
+    <div class="pointer-events-none absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#FF5D0B] via-[#FF5D0B]/70 to-transparent"></div>
 </div>
+
+<style>
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+</style>
