@@ -48,10 +48,66 @@
         aria-hidden="true"
         class="absolute z-[8] pointer-events-none select-none"
         style="
-            left: -8.04%;
-            top: 82.70%;
+            left: -7.94%;
+            top: 83.19%;
             width: 28.41%;
             height: 24.58%;
+        "
+    />
+
+    <!-- Flower 1: large foreground flower -->
+    <img
+        src="/landing-page/flower.svg"
+        alt=""
+        aria-hidden="true"
+        class="absolute z-[9] pointer-events-none select-none"
+        style="
+            left: 10.28%;
+            bottom: 0%;
+            width: 10.71%;
+            height: 21%;
+        "
+    />
+
+    <!-- Flower 2 -->
+    <img
+        src="/landing-page/flower2.svg"
+        alt=""
+        aria-hidden="true"
+        class="absolute z-[9] pointer-events-none select-none"
+        style="
+            left: 19.80%;
+            top: 80.99%;
+            width: 3.28%;
+            height: 9.74%;
+        "
+    />
+
+    <!-- Flower 3 -->
+    <img
+        src="/landing-page/flower3.svg"
+        alt=""
+        aria-hidden="true"
+        class="absolute z-[9] pointer-events-none select-none"
+        style="
+            left: 17.29%;
+            top: 72.99%;
+            width: 4.97%;
+            height: 14.76%;
+        "
+    />
+
+    <!-- Flower 4 -->
+    <img
+        src="/landing-page/flower4.svg"
+        alt=""
+        aria-hidden="true"
+        class="absolute z-[9] pointer-events-none select-none"
+        style="
+            left: 21.65%;
+            top: 71.14%;
+            width: 3.71%;
+            height: 11.03%;
         "
     />
 
