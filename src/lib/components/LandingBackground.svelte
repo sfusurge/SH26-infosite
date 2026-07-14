@@ -20,10 +20,10 @@
         aria-hidden="true"
         class="absolute z-[6] pointer-events-none select-none"
         style="
-            left: 0.13%;
-            top: 75.36%;
-            width: 22.82%;
-            height: 22.30%;
+            left: -3.85%;
+            top: 73.36%;
+            width: 25.82%;
+            height: 25.30%;
         "
     />
 
@@ -34,10 +34,10 @@
         aria-hidden="true"
         class="absolute z-[7] pointer-events-none select-none"
         style="
-            left: -8%;
-            top: 81.36%;
+            left: -5%;
+            top: 80.36%;;
             width: 22.96%;
-            height: 26.07%;
+            height: 20%;
         "
     />
 
@@ -48,8 +48,8 @@
         aria-hidden="true"
         class="absolute z-[8] pointer-events-none select-none"
         style="
-            left: -4.04%;
-            top: 88.70%;
+            left: -8.04%;
+            top: 82.70%;
             width: 28.41%;
             height: 24.58%;
         "
