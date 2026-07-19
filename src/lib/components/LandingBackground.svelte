@@ -16,7 +16,7 @@
             alt=""
             aria-hidden="true"
             class="absolute z-[6] pointer-events-none select-none"
-            style="left: -3.85%; top: 73.36%; width: 25.82%; height: 25.30%;"
+            style="left: -0.0%; top: 75.36%; width: 25.82%; height: 25.30%;"
         />
 
         <img
@@ -24,7 +24,7 @@
             alt=""
             aria-hidden="true"
             class="absolute z-[7] pointer-events-none select-none"
-            style="left: -5%; top: 80.36%; width: 22.96%; height: 20%;"
+            style="left: -3%; top: 80.36%; width: 22.96%; height: 20%;"
         />
 
         <img
@@ -32,7 +32,7 @@
             alt=""
             aria-hidden="true"
             class="absolute z-[8] pointer-events-none select-none"
-            style="left: -7.94%; top: 83.19%; width: 28.41%; height: 24.58%;"
+            style="left: -6.24%; top: 83.19%; width: 28.41%; height: 24.58%;"
         />
 
         <img
@@ -40,7 +40,7 @@
             alt=""
             aria-hidden="true"
             class="flower-sway flower-sway-1 absolute z-[9] pointer-events-none select-none"
-            style="left: 10.28%; bottom: 0%; width: 10.71%; height: 21%;"
+            style="left: 14.28%; bottom: 0%; width: 10.71%; height: 21%;"
         />
 
         <img
@@ -48,7 +48,7 @@
             alt=""
             aria-hidden="true"
             class="flower-sway flower-sway-2 absolute z-[9] pointer-events-none select-none"
-            style="left: 19.80%; top: 80.99%; width: 3.28%; height: 9.74%;"
+            style="left: 23.80%; top: 82.99%; width: 3.28%; height: 9.74%;"
         />
 
         <img
@@ -56,7 +56,7 @@
             alt=""
             aria-hidden="true"
             class="flower-sway flower-sway-3 absolute z-[9] pointer-events-none select-none"
-            style="left: 17.29%; top: 72.99%; width: 4.97%; height: 14.76%;"
+            style="left: 20.29%; top: 74.99%; width: 5.67%; height: 14.76%;"
         />
 
         <img
@@ -64,7 +64,7 @@
             alt=""
             aria-hidden="true"
             class="flower-sway flower-sway-4 absolute z-[9] pointer-events-none select-none"
-            style="left: 21.65%; top: 71.14%; width: 3.71%; height: 11.03%;"
+            style="left: 25.65%; top: 73.14%; width: 3.71%; height: 11.03%;"
         />
 
     </div>
