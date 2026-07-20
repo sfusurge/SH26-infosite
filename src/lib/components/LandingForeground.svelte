@@ -119,7 +119,7 @@
     }
 
     .flower-2 {
-        left: 23.8%;
+        left: 24.8%;
         top: 82.99%;
         z-index: 9;
         width: 3.28%;
@@ -127,7 +127,7 @@
     }
 
     .flower-3 {
-        left: 20.29%;
+        left: 21.79%;
         top: 74.99%;
         z-index: 9;
         width: 5.67%;
@@ -135,11 +135,11 @@
     }
 
     .flower-4 {
-        left: 25.65%;
+        left: 26.95%;
         top: 73.14%;
         z-index: 9;
         width: 3.71%;
-        height: 11.03%;
+        height: 10.03%;
     }
 
     @keyframes flower-sway {
