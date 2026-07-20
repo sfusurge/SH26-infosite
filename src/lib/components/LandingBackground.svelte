@@ -3,7 +3,10 @@
 
     <div class="scene-canvas">
 
-        <img src="/landing-page/cloud-shape.svg" alt="" class="absolute inset-0 w-full h-full object-cover" />
+        <div class="cloud-window" aria-hidden="true">
+            <img src="/landing-page/cloud-shape.svg" alt="" class="cloud-copy cloud-copy-1" />
+            <img src="/landing-page/cloud-shape.svg" alt="" class="cloud-copy cloud-copy-2" />
+        </div>
 
         <img src="/landing-page/road.svg" alt="" class="absolute left-0 top-[30%] w-full" />
 
@@ -100,6 +103,39 @@
         height: auto;
     }
 
+    .cloud-window {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
+    .cloud-copy {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        max-width: none;
+        height: auto;
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 3%, #000 97%, transparent 100%);
+        mask-image: linear-gradient(to right, transparent 0%, #000 3%, #000 97%, transparent 100%);
+        animation: cloud-drift 360s linear infinite;
+        will-change: transform;
+    }
+
+    .cloud-copy-1 {
+        animation-delay: -90s;
+    }
+
+    .cloud-copy-2 {
+        animation-delay: -270s;
+    }
+
+    @keyframes cloud-drift {
+        from { transform: translate3d(100%, 0, 0); }
+        to { transform: translate3d(-100%, 0, 0); }
+    }
+
     @keyframes flower-sway {
         0% { transform: rotate(0deg); }
         14% { transform: rotate(var(--sway-1)); }
@@ -144,8 +180,54 @@
         animation-delay: -6.1s;
     }
 
+    @keyframes bush-rustle {
+        0%, 100% { transform: rotate(0deg); }
+        18% { transform: rotate(var(--rustle-1)); }
+        39% { transform: rotate(var(--rustle-2)); }
+        61% { transform: rotate(var(--rustle-3)); }
+        82% { transform: rotate(var(--rustle-4)); }
+    }
+
+    .bush-rustle {
+        animation-name: bush-rustle;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+        will-change: transform;
+    }
+
+    .bush-rustle-back {
+        --rustle-1: 0.28deg;
+        --rustle-2: -0.18deg;
+        --rustle-3: 0.38deg;
+        --rustle-4: -0.12deg;
+        transform-origin: 8% 100%;
+        animation-duration: 6.8s;
+        animation-delay: -3.1s;
+    }
+
+    .bush-rustle-middle {
+        --rustle-1: -0.42deg;
+        --rustle-2: 0.24deg;
+        --rustle-3: -0.31deg;
+        --rustle-4: 0.16deg;
+        transform-origin: 12% 100%;
+        animation-duration: 5.4s;
+        animation-delay: -1.7s;
+    }
+
+    .bush-rustle-front {
+        --rustle-1: 0.2deg;
+        --rustle-2: -0.3deg;
+        --rustle-3: 0.34deg;
+        --rustle-4: -0.2deg;
+        transform-origin: 5% 100%;
+        animation-duration: 7.3s;
+        animation-delay: -5.2s;
+    }
+
     @media (prefers-reduced-motion: reduce) {
-        .flower-sway {
+        .flower-sway,
+        .bush-rustle {
             animation: none;
         }
     }
