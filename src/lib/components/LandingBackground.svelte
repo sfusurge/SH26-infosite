@@ -7,7 +7,7 @@
 
         <img src="/landing-page/road.svg" alt="" class="absolute left-0 top-[30%] w-full" />
 
-        <img src="/landing-page/sidewalk.svg" alt="" class="absolute left-0 top-[60%]" style="width: 95%;" />
+        <img src="/landing-page/sidewalk.svg" alt="" class="absolute bottom-0 left-0 w-full" />
 
         <img src="/landing-page/stairs.svg" alt="" class="absolute right-0 bottom-0 z-[5]" style="width: 75%;" />
 
@@ -15,24 +15,24 @@
             src="/landing-page/bush3.svg"
             alt=""
             aria-hidden="true"
-            class="absolute z-[6] pointer-events-none select-none"
-            style="left: -0.0%; top: 75.36%; width: 25.82%; height: 25.30%;"
+            class="bush-rustle bush-rustle-back absolute z-[6] pointer-events-none select-none"
+            style="left: 0; bottom: 0; width: 23.94%; height: auto;"
         />
 
         <img
             src="/landing-page/bush2.svg"
             alt=""
             aria-hidden="true"
-            class="absolute z-[7] pointer-events-none select-none"
-            style="left: -3%; top: 80.36%; width: 22.96%; height: 20%;"
+            class="bush-rustle bush-rustle-middle absolute z-[7] pointer-events-none select-none"
+            style="left: 0; bottom: 0; width: 15.01%; height: auto;"
         />
 
         <img
             src="/landing-page/bush1.svg"
             alt=""
             aria-hidden="true"
-            class="absolute z-[8] pointer-events-none select-none"
-            style="left: -6.24%; top: 83.19%; width: 28.41%; height: 24.58%;"
+            class="bush-rustle bush-rustle-front absolute z-[8] pointer-events-none select-none"
+            style="left: 0; bottom: 0; width: 24.54%; height: auto;"
         />
 
         <img
@@ -69,29 +69,35 @@
 
     </div>
 
+    <!-- Replace this source with the final animated otter when it is delivered. -->
+    <img
+        src="/landing-page/boba-otter.svg"
+        alt=""
+        aria-hidden="true"
+        class="landing-otter absolute z-[10] pointer-events-none select-none"
+    />
+
 </div>
 
 <style>
     .scene-canvas {
         position: absolute;
-        top: 50%;
+        top: auto;
+        bottom: 0;
         left: 50%;
-        transform: translate(-50%, -50%);
+        transform: translateX(-50%);
 
-        width: 100%;
-        height: 100%;
-        min-width: 1512px;
-        min-height: 982px;
+        width: max(100vw, 153.97vh);
+        height: max(100vh, 64.95vw);
     }
 
-    @media (max-width: 767px) {
-        .scene-canvas {
-            top: auto;
-            bottom: 0;
-            left: auto;
-            right: -430px;
-            transform: none;
-        }
+    .landing-otter {
+        --horizontal-nudge: 3vw;
+
+        left: calc(50% + var(--horizontal-nudge) - max(29.1648vh, 18.7293vw));
+        top: calc(88.8796vh - max(26.9656vh, 17.3279vw));
+        width: max(30.9571vh, 19.8929vw);
+        height: auto;
     }
 
     @keyframes flower-sway {

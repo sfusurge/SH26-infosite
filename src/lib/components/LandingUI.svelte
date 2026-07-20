@@ -1,4 +1,4 @@
-<!-- src/lib/components/LandingHeader.svelte -->
+<!-- src/lib/components/LandingUI.svelte -->
 <script lang="ts">
     import { onMount } from 'svelte';
     import Button from "$lib/ui/Button.svelte";
@@ -18,7 +18,7 @@
     ];
 </script>
 
-<div class="absolute top-0 left-0 w-full flex flex-col md:flex-row items-start justify-between p-4 md:p-8 z-10">
+<div class="absolute top-0 left-0 w-full flex flex-col md:flex-row items-start justify-between p-5 z-20">
 
     <div class="flex flex-col gap-4">
         <div
@@ -32,35 +32,35 @@
         >
             <img src="/mlhBanner.svg" alt="MLH Official 2027 Season" class="hidden md:block w-15 h-20" />
 
-            <div class="flex flex-col items-start gap-1">
-                <h1 class="font-exposure text-white text-[41.76px] md:text-6xl font-semibold whitespace-nowrap">
+            <div class="flex flex-col items-start md:items-center gap-0">
+                <h1 class="title-lockup">
                     [ StormHacks 26' ]
                 </h1>
 
                 <!-- desktop -->
-                <p class="font-sf text-white text-base mt-1 hidden md:flex items-center gap-2 whitespace-nowrap">
+                <p class="subtitle-lockup subtitle-type hidden md:flex">
                     <span>West Canada's Largest Hackathon</span>
-                    <img src="/ui/star.svg" alt="" aria-hidden="true" class="w-[18px] h-[18px]" />
+                    <img src="/ui/star.svg" alt="" aria-hidden="true" class="subtitle-star" />
                     <span>Oct 3 + 4</span>
-                    <img src="/ui/star.svg" alt="" aria-hidden="true" class="w-[18px] h-[18px]" />
+                    <img src="/ui/star.svg" alt="" aria-hidden="true" class="subtitle-star" />
                     <span>SFU Burnaby</span>
                 </p>
 
                 <!-- mobile -->
-                <p class="font-sf text-white text-lg mt-1 md:hidden">
-                    West Canada's Largest Hackathon
-                </p>
-                <p class="font-sf text-white text-lg md:hidden flex items-center gap-2">
-                    <span>Oct 3 + 4</span>
-                    <img src="/ui/star.svg" alt="" aria-hidden="true" class="w-[16px] h-[16px]" />
-                    <span>SFU Burnaby</span>
-                </p>
+                <div class="subtitle-mobile subtitle-type flex md:hidden">
+                    <span>West Canada's Largest Hackathon</span>
+                    <span class="subtitle-mobile-row">
+                        <span>Oct 3 + 4</span>
+                        <img src="/ui/star.svg" alt="" aria-hidden="true" class="subtitle-star" />
+                        <span>SFU Burnaby</span>
+                    </span>
+                </div>
             </div>
         </div>
 
         <!-- mobile nav -->
         <nav
-            class="font-sans font-bold flex md:hidden flex-col items-start gap-3 mt-4 transition-[opacity,filter,transform] duration-copy ease-copy delay-500"
+            class="font-sans font-bold flex xl:hidden flex-col items-start gap-3 mt-4 transition-[opacity,filter,transform] duration-copy ease-copy delay-500"
             class:opacity-0={!isMounted}
             class:blur-sm={!isMounted}
             class:translate-y-[6px]={!isMounted}
@@ -69,14 +69,14 @@
             class:translate-y-0={isMounted}
         >
             {#each navItems as item}
-                <Button href={item.href} letter={item.key} label={item.label} variant={item.variant ?? 'light'} showBadge={false} />
+                <Button href={item.href} letter={item.key} label={item.label} variant={item.variant ?? 'light'} showBadge={false} appearance="landing" />
             {/each}
         </nav>
     </div>
 
     <!-- desktop nav -->
     <nav
-        class="font-sans font-bold hidden md:flex items-center gap-3 transition-[opacity,filter,transform] duration-copy ease-copy delay-500"
+        class="font-sans font-bold hidden xl:flex items-center gap-[10px] max-w-[calc(100vw-40px)] transition-[opacity,filter,transform] duration-copy ease-copy delay-500"
         class:opacity-0={!isMounted}
         class:blur-sm={!isMounted}
         class:translate-y-[6px]={!isMounted}
@@ -85,7 +85,7 @@
         class:translate-y-0={isMounted}
     >
         {#each navItems as item}
-            <Button href={item.href} letter={item.key} label={item.label} variant={item.variant ?? 'light'} />
+            <Button href={item.href} letter={item.key} label={item.label} variant={item.variant ?? 'light'} appearance="landing" />
         {/each}
     </nav>
 
@@ -94,7 +94,7 @@
 
 
 <button
-    class="absolute left-5 bottom-5 grid place-items-center w-[32px] h-[32px] rounded-md bg-[#ececef] z-10 transition-[opacity,filter,transform] duration-copy ease-copy delay-700"
+    class="absolute left-5 bottom-5 grid place-items-center w-[32px] h-[32px] p-[2px] rounded-[6px] bg-[#ececef] z-20 transition-[opacity,filter,transform] duration-copy ease-copy delay-700"
     class:opacity-0={!isMounted}
     class:blur-sm={!isMounted}
     class:translate-y-[6px]={!isMounted}
@@ -103,11 +103,11 @@
     class:translate-y-0={isMounted}
     aria-label="Toggle sound"
 >
-    <img src="/ui/sound.svg" alt="" class="w-[24px] h-[24px]" />
+    <img src="/ui/sound.svg" alt="" class="block w-full h-full" />
 </button>
 
 <button
-    class="absolute right-5 bottom-5 grid place-items-center w-[32px] h-[32px] rounded-md bg-[#ececef] z-10 transition-[opacity,filter,transform] duration-copy ease-copy delay-700"
+    class="absolute right-5 bottom-5 grid place-items-center w-[32px] h-[32px] p-[2px] rounded-[6px] bg-[#ececef] z-20 transition-[opacity,filter,transform] duration-copy ease-copy delay-700"
     class:opacity-0={!isMounted}
     class:blur-sm={!isMounted}
     class:translate-y-[6px]={!isMounted}
@@ -116,5 +116,59 @@
     class:translate-y-0={isMounted}
     aria-label="Expand view"
 >
-    <img src="/ui/expand.svg" alt="" class="w-[24px] h-[24px]" />
+    <img src="/ui/expand.svg" alt="" class="block w-full h-full" />
 </button>
+
+<style>
+    .title-lockup {
+        color: #ececef;
+        font-family: 'Exposure', sans-serif;
+        font-size: 41.76px;
+        font-weight: 394;
+        font-variation-settings: 'EXPO' -60;
+        line-height: 1;
+        letter-spacing: 0;
+        white-space: nowrap;
+    }
+
+    .subtitle-type {
+        color: #ececef;
+        font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+        font-size: 16px;
+        font-weight: 510;
+        line-height: 1;
+        letter-spacing: 0;
+        white-space: nowrap;
+    }
+
+    .subtitle-lockup {
+        align-items: center;
+        gap: 8px;
+        margin-top: 8px;
+    }
+
+    .subtitle-mobile {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        margin-top: 8px;
+    }
+
+    .subtitle-mobile-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .subtitle-star {
+        width: 18px;
+        height: 18px;
+        flex: 0 0 auto;
+    }
+
+    @media (min-width: 768px) {
+        .title-lockup {
+            font-size: 62px;
+        }
+    }
+</style>
