@@ -1,5 +1,5 @@
 <!-- src/lib/components/LandingBackground.svelte -->
-<div class="absolute inset-0 w-full h-full overflow-hidden bg-[#2A6FF5] z-0">
+<div class="absolute inset-0 w-full h-full overflow-hidden bg-[#0283F7] z-0">
 
     <div class="scene-canvas">
 
