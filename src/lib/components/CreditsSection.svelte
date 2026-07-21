@@ -26,7 +26,7 @@
         playsinline
         class="absolute left-1/2 top-1/2
            -translate-x-1/2 -translate-y-1/2
-           w-[605px] h-[340px]
+           w-[443px] h-[270px] md:w-[605px] md:h-[340px]
            object-cover z-[1]"
     >
         <source src="/data/Stormhacks2026Video.mp4" type="video/mp4" />
@@ -45,11 +45,11 @@
                 <div class="credits-content">
                     {#each credits as person}
                         <div class="credit">
-                            <p class="mb-2 text-xs uppercase tracking-[0.35em] text-[#0278FF]">
+                            <p class="mb-2 text-[18px] mb:text-xs uppercase tracking-[0.35em] text-[#0278FF]">
                                 {person.title}
                             </p>
 
-                            <h2 class="brush-stroke text-[64px] text-center text-white font-bold">
+                            <h2 class="brush-stroke text-[32px] md:text-[64px] text-center text-white font-bold">
                                 {person.name}
                             </h2>
                         </div>
@@ -59,11 +59,11 @@
                 <div class="credits-content">
                     {#each credits as person}
                         <div class="credit">
-                            <p class="mb-2 text-xs uppercase tracking-[0.35em] text-[#0278FF]">
+                            <p class="mb-2 text-xs md:text-xs uppercase tracking-[0.35em] text-[#0278FF]">
                                 {person.title}
                             </p>
 
-                            <h2 class="brush-stroke text-[64px] text-center text-white font-bold">
+                            <h2 class="brush-stroke text-[32px] md:text-[64px] text-center text-white font-bold">
                                 {person.name}
                             </h2>
                         </div>
@@ -86,12 +86,19 @@
 
     .credits-content {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
         column-gap: 5rem;
-        row-gap: 5rem;
+        row-gap: 3rem;
         max-width: 1282px;
         margin: auto;
         padding: 8rem 0;
+    }
+
+    @media (min-width: 768px) {
+        .credits-content {
+            grid-template-columns: repeat(2, 1fr);
+            row-gap: 5rem;
+        }
     }
 
     .credit {

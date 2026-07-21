@@ -8,13 +8,15 @@
     });
 </script>
 
+<!--Removed margin top-->
 <div
-    class="relative z-0 flex flex-col mt-50 items-center justify-center text-center text-[41px] leading-[118%] tracking-[0%] gap-10.25 w-147 brush-stroke font-regular transition-all duration-300 ease-out"
+    class="relative z-0 mt-30 flex flex-col items-center justify-center text-center text-2xl md:text-[41px] leading-[118%] tracking-[0%] md:gap-10.25 w-full max-w-[90vw] md:w-147 px-1 brush-stroke font-regular transition-all duration-300 ease-out"
     class:opacity-30={highlighted}
     class:blur-[4.5px]={highlighted}
 >
+    <div class="pointer-events-none absolute top-0 left-0 right-0 z-10 h-25 bg-gradient-to-b from-[#0278FF] via-[#0278FF]/70 to-transparent" ></div>    
     <div
-        class="transition-[opacity,filter,transform] duration-copy ease-copy flex flex-col items-center gap-10.25 max-h-[75vh] overflow-y-auto hide-scrollbar"
+        class="transition-[opacity,filter,transform] duration-copy ease-copy flex flex-col items-center gap-6 md:gap-10.25 max-h-[90vh] pt-25 md:pt-35 md:max-h-[100vh] overflow-y-auto hide-scrollbar"
         class:opacity-0={!isMounted}
         class:blur-sm={!isMounted}
         class:translate-y-[6px]={!isMounted}
@@ -63,7 +65,8 @@
             <span class="font-semibold">This is your moment to do what you truly love</span>. 
         </p>
     </div>
-    <div class="pointer-events-none absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#0278FF] via-[#0278FF]/70 to-transparent"></div>
+    
+    <div class="pointer-events-none absolute -bottom-1 left-0 right-0 z-10 h-25 bg-gradient-to-t from-[#0278FF] via-[#0278FF]/70 to-transparent"></div>
 </div>
 
 <style>

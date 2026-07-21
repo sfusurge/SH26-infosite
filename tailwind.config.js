@@ -28,7 +28,7 @@ export default {
         'copy': 'cubic-bezier(.2,.6,.2,1)',
       },
       transitionDuration: {
-        'copy': '1400ms',
+        'copy': '2200ms',
       },
       keyframes: {
         'stagger-in': {
