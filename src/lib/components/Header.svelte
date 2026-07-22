@@ -1,15 +1,14 @@
+<!-- src/lib/components/Header.svelte -->
 <script lang="ts">
-    import Button from "$lib/ui/Button.svelte";
+    import ApplyButton from "$lib/ui/ApplyButton.svelte";
     import { page } from "$app/state";
 
     let {
         pageLabel = "Info",
         backHref = "/",
-        applyHref = "/apply"
     }: {
         pageLabel?: string;
         backHref?: string;
-        applyHref?: string;
     } = $props();
 </script>
 
@@ -35,7 +34,8 @@
         </div>
     </div>
 
+    <!-- Interactive Morphing Apply Button (Renders light variant on /credits) -->
     <div class="font-bold">
-        <Button href={applyHref} letter="A" label="APPLY >" variant={page.url.pathname === "/credits" ? "light" : "dark"} />
+        <ApplyButton variant={page.url.pathname === "/credits" ? "light" : "dark"} />
     </div>
 </header>
