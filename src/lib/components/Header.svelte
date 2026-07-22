@@ -34,7 +34,6 @@
         </div>
     </div>
 
-    <!-- Interactive Morphing Apply Button (Renders light variant on /credits) -->
     <div class="font-bold">
         <ApplyButton variant={page.url.pathname === "/credits" ? "light" : "dark"} />
     </div>

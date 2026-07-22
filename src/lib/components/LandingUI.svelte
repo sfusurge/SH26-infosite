@@ -52,12 +52,12 @@
         </div>
     </div>
 
-    <!-- Responsive Navbar Component -->
+
     <Navbar {isMounted} />
 
 </header>
 
-<!-- Utility Controls -->
+
 <button
     class="absolute left-5 bottom-5 grid place-items-center w-[32px] h-[32px] rounded-md bg-[#ececef] z-10 transition-[opacity,filter,transform] duration-copy ease-copy delay-700"
     class:opacity-0={!isMounted}

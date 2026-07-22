@@ -1,4 +1,3 @@
-<!-- src/lib/components/Navbar.svelte -->
 <script lang="ts">
     import { fly } from 'svelte/transition';
     import { cubicOut } from 'svelte/easing';
@@ -33,7 +32,6 @@
     class:translate-y-0={isMounted}
 >
     <div class="menu-bar">
-        <!-- Strict Clipping Stage -->
         <div class="nav-stage">
             {#if !isExpanded}
                 <div
@@ -51,7 +49,6 @@
                     in:fly={{ y: -35, duration: 700, opacity: 1, easing: cubicOut, delay: 35 }}
                     out:fly={{ y: -35, duration: 600, opacity: 1, easing: cubicOut }}
                 >
-                    <!-- Back Button matching the exact button background color -->
                     <Button 
                         onclick={() => (isExpanded = false)} 
                         showBadge={false} 
@@ -73,7 +70,6 @@
             {/if}
         </div>
 
-        <!-- Morphing Primary Button Wrapper -->
         <div class="morph-wrapper rounded-[6px]" class:expanded={isExpanded}>
             <Button
                 variant="dark"
@@ -81,7 +77,6 @@
                 onclick={handlePrimaryClick}
             >
                 <div class="flex flex-row gap-[10px] items-center">
-                    <!-- Key Badge Stack (A -> H) -->
                     <div class="stack-wrapper w-[25px] h-[25px]">
                         <div
                             class="flex items-center justify-center px-[3px] py-[10px] w-[25px] h-[25px] bg-[#ECECEF] text-[#101A21] group-hover:bg-[#0278FF] group-hover:text-white"
@@ -97,7 +92,6 @@
                         </div>
                     </div>
 
-                    <!-- Label Stack (APPLY > -> AS HACKER >) -->
                     <div class="stack-wrapper text-center text-[16px] font-extrabold leading-normal text-primary-white group-hover:text-[#0278FF]">
                         <span class="morph-label" class:active={!isExpanded}>APPLY &gt;</span>
                         <span class="morph-label" class:active={isExpanded}>AS HACKER &gt;</span>
@@ -130,7 +124,6 @@
         }
     }
 
-    /* Clipping Stage */
     .nav-stage {
         display: grid;
         place-items: center end;
@@ -156,7 +149,6 @@
         flex-wrap: wrap;
     }
 
-    /* Morphing Expansion Mechanics */
     .morph-wrapper {
         max-width: 115px;
         transition: max-width 1.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -174,7 +166,6 @@
         place-items: center start;
     }
 
-    /* 1.1s continuous crossfade & floating transform */
     .stack-wrapper > * {
         grid-area: 1 / 1;
         opacity: 0;
