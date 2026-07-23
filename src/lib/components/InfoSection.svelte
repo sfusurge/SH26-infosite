@@ -9,14 +9,14 @@
 </script>
 
 <div
-    class="relative z-0 flex flex-col mt-30 items-center text-2xl md:text-4xl leading-[118%] tracking-[0%] gap-10.25 w-full max-w-[90vw] md:w-125 brush-stroke font-regular transition-all duration-300 ease-out"
+    class="relative z-0 flex flex-col mt-30 items-center text-2xl md:text-4xl leading-[118%] tracking-[0%] gap-10.25 w-full max-w-[90vw] md:w-147 brush-stroke font-regular transition-all duration-300 ease-out"
     class:opacity-30={highlighted}
     class:blur-[4.5px]={highlighted}
 >
     <div class="pointer-events-none absolute top-0 left-0 right-0 z-10 h-25 bg-gradient-to-b from-[#FF5D0B] via-[#FF5D0B]/70 to-transparent" ></div>    
 
     <div
-        class="transition-[opacity,filter,transform] duration-copy ease-copy flex flex-col items-center gap-10.25 max-h-[75vh] overflow-y-auto hide-scrollbar"
+        class="transition-[opacity,filter,transform] duration-copy ease-copy flex flex-col items-center gap-10.25 max-h-[90vh] pt-25 md:pt-35 md:max-h-[100vh] overflow-y-auto hide-scrollbar"
         class:opacity-0={!isMounted}
         class:blur-sm={!isMounted}
         class:translate-y-[6px]={!isMounted}

@@ -8,7 +8,6 @@
     });
 </script>
 
-<!--Removed margin top-->
 <div
     class="relative z-0 mt-30 flex flex-col items-center justify-center text-center text-2xl md:text-[41px] leading-[118%] tracking-[0%] md:gap-10.25 w-full max-w-[90vw] md:w-147 px-1 brush-stroke font-regular transition-all duration-300 ease-out"
     class:opacity-30={highlighted}
