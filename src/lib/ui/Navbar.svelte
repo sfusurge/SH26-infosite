@@ -55,12 +55,12 @@
                         variant="light"
                         aria-label="Go back"
                     >
-                        <div class="flex items-center justify-center w-[25px] h-[25px] bg-[#ECECEF] group-hover:bg-[#0278FF] transition-colors rounded-[2px]">
+                        <div class="flex items-center justify-center w-[25px] h-[25px] bg-[#ECECEF] transition-colors rounded-[2px]">
                             <img 
                                 src="/ui/arrowback.svg" 
                                 alt="" 
                                 aria-hidden="true" 
-                                class="w-[14px] h-[14px] group-hover:brightness-0 group-hover:invert transition-all" 
+                                class="w-[25px] h-[25px] group-hover:brightness-0 transition-all" 
                             />
                         </div>
                     </Button>

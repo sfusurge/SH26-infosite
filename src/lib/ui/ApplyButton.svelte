@@ -1,6 +1,6 @@
 <script lang="ts">
     import { fly } from 'svelte/transition';
-    import { cubicOut } from 'svelte/easing';
+    import { cubicOut, cubicIn } from 'svelte/easing';
     import Button from '$lib/ui/Button.svelte';
 
     let { variant = "dark" }: { variant?: "light" | "dark" } = $props();
@@ -16,13 +16,13 @@
     }
 </script>
 
-<div class="apply-button-stage flex items-center gap-2">
-    <div class="volunteer-stage">
+<div class="apply-button-stage flex items-center justify-end gap-1 md:gap-2 whitespace-nowrap flex-nowrap">
+    <div class="volunteer-stage flex-shrink-0">
         {#if isExpanded}
             <div
-                class="volunteer-group flex items-center gap-2"
-                in:fly={{ y: -25, duration: 600, opacity: 1, easing: cubicOut, delay: 35 }}
-                out:fly={{ y: -25, duration: 500, opacity: 1, easing: cubicOut }}
+                class="volunteer-group flex items-center gap-1 md:gap-2 whitespace-nowrap flex-nowrap"
+                in:fly={{ y: -25, duration: 600, opacity: 1, easing: cubicOut, delay: 10 }}
+                out:fly={{ y: -35, duration: 400, opacity: 1, easing: cubicIn }}
             >
                 <Button 
                     onclick={() => (isExpanded = false)} 
@@ -30,12 +30,12 @@
                     variant="light"
                     aria-label="Go back"
                 >
-                    <div class="flex items-center justify-center w-[25px] h-[25px] bg-transparent group-hover:bg-[#0278FF] transition-colors rounded-[2px]">
+                    <div class="flex items-center justify-center w-[25px] h-[25px] bg-[#ECECEF] rounded-[2px] flex-shrink-0">
                         <img 
                             src="/ui/arrowback.svg" 
                             alt="" 
                             aria-hidden="true" 
-                            class="w-[14px] h-[14px] group-hover:brightness-0 group-hover:invert transition-all" 
+                            class="w-[25px] h-[25px]" 
                         />
                     </div>
                 </Button>
@@ -45,14 +45,14 @@
         {/if}
     </div>
 
-    <div class="morph-wrapper rounded-[6px]" class:expanded={isExpanded}>
+    <div class="morph-wrapper rounded-[6px] flex-shrink-0" class:expanded={isExpanded}>
         <Button
             {variant}
             showBadge={false}
             onclick={handlePrimaryClick}
         >
-            <div class="flex flex-row gap-[10px] items-center">
-                <div class="stack-wrapper w-[25px] h-[25px]">
+            <div class="flex flex-row gap-[6px] md:gap-[10px] items-center whitespace-nowrap flex-nowrap">
+                <div class="stack-wrapper w-[25px] h-[25px] flex-shrink-0">
                     <div
                         class="flex items-center justify-center px-[3px] py-[10px] w-[25px] h-[25px] transition-colors {variant === 'light' ? 'bg-[#101A21] text-white group-hover:bg-[#0278FF]' : 'bg-[#ECECEF] text-[#101A21] group-hover:bg-[#0278FF] group-hover:text-white'}"
                         class:active={!isExpanded}
@@ -67,9 +67,9 @@
                     </div>
                 </div>
 
-                <div class="stack-wrapper text-center text-[16px] font-extrabold leading-normal transition-colors {variant === 'light' ? 'text-[#101A21] group-hover:text-[#0278FF]' : 'text-primary-white group-hover:text-[#0278FF]'}">
-                    <span class="morph-label" class:active={!isExpanded}>APPLY &gt;</span>
-                    <span class="morph-label" class:active={isExpanded}>AS HACKER &gt;</span>
+                <div class="stack-wrapper text-center text-[12px] sm:text-[14px] md:text-[16px] font-extrabold leading-normal transition-colors {variant === 'light' ? 'text-[#101A21] group-hover:text-[#0278FF]' : 'text-primary-white group-hover:text-[#0278FF]'}">
+                    <span class="morph-label whitespace-nowrap" class:active={!isExpanded}>APPLY &gt;</span>
+                    <span class="morph-label whitespace-nowrap" class:active={isExpanded}>AS HACKER &gt;</span>
                 </div>
             </div>
         </Button>
@@ -80,26 +80,38 @@
     .volunteer-stage {
         display: grid;
         place-items: center end;
-        clip-path: inset(0px 0px 0px 0px);
+        clip-path: inset(-10px 0px 0px 0px);
         padding: 2px 0;
         overflow: hidden;
     }
 
     .volunteer-group {
         grid-area: 1 / 1;
-        will-change: transform;
+        will-change: transform, opacity;
     }
 
     .morph-wrapper {
-        max-width: 110px;
+        max-width: 95px;
         transition: max-width 1.4s cubic-bezier(0.16, 1, 0.3, 1);
         overflow: hidden;
         will-change: max-width;
         display: inline-block;
     }
 
+    @media (min-width: 640px) {
+        .morph-wrapper {
+            max-width: 115px;
+        }
+    }
+
     .morph-wrapper.expanded {
-        max-width: 175px;
+        max-width: 150px;
+    }
+
+    @media (min-width: 640px) {
+        .morph-wrapper.expanded {
+            max-width: 175px;
+        }
     }
 
     .stack-wrapper {
