@@ -1,0 +1,38 @@
+[
+  {
+    "question": "What is StormHacks?",
+    "answer": "StormHacks is one of Canada's largest student hackathons, where participants from different backgrounds and all skill levels come together to collaborate, innovate, and create unique design, software or hardware projects from the ground up.\n\nWithin just 24 hours, teams bring their ideas to life. We empower and enable teams by providing an abundance of workshops, mentors, sponsors, and hardware. StormHacks fosters creativity, learning, and teamwork in an energetic, inclusive environment."
+  },
+  {
+    "question": "Who can participate?",
+    "answer": "Students from all backgrounds and any education level are encouraged to apply!"
+  },
+  {
+    "question": "How much does it cost to attend StormHacks?",
+    "answer": "Admission to StormHacks is completely free! We provide everyone with food for the entire event on top of the resources and mentorship hackers need to innovate."
+  },
+  {
+    "question": "What if I've never been to a hackathon before?",
+    "answer": "StormHacks welcomes students of all skill levels and backgrounds. Many students attend StormHacks as their very first hackathon and they always come back yearning for more!"
+  },
+  {
+    "question": "Will StormHacks 2026 happen in person or virtually?",
+    "answer": "StormHacks will be an in-person hackathon hosted at Simon Fraser University on the Burnaby Mountain Campus."
+  },
+  {
+    "question": "How many people can be on a team?",
+    "answer": "Hackers may form teams of up to 4 people. There are no restrictions for who they can be, so you can team up with hackers from any school or experience level! Teams can be formed before or during the event at the hackers' own discretion. Just be sure that everyone on the team is in attendance at the event."
+  },
+  {
+    "question": "What kind of workshops, talks and activities will there be?",
+    "answer": "Previously, we've held workshops and talks for a range of skill levels from beginner to advanced like \"Intro to React\" and \"Exploring Data Science with Pandas and SKlearn\". We've also hosted sessions that explore various topics such as design fundamentals, effective pitching, and product management.\n\nAdditionally, there will be interactive activities such as meetups, networking events and even esports tournaments to keep participants engaged throughout the weekend. Our team has prepared something for everyone to enjoy!"
+  },
+  {
+    "question": "Do you offer travel reimbursements?",
+    "answer": "Unfortunately, we are unable to offer travel reimbursements at this time. However, StormHacks 2026 is easily accessible by public transit and we encourage participants to explore different options to make attending more convenient."
+  },
+  {
+    "question": "I'm not currently enrolled as a student, can I still attend StormHacks?",
+    "answer": "StormHacks is geared towards students who are interested in tech, but we want to open doors for anyone who wants to learn. We ask that all applicants are still enrolled in school or are recent graduates within the last 4 months."
+  }
+]

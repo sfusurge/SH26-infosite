@@ -17,7 +17,7 @@
         if (!isExpanded) {
             isExpanded = true;
         } else {
-            window.location.href = '/apply/hacker';
+            window.location.href = 'https://portal.sfusurge.com/apply';
         }
     }
 </script>

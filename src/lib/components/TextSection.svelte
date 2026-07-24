@@ -1,9 +1,12 @@
-<script>
+<script lang="ts">
     import { onMount } from 'svelte';
 
     let {
         highlighted = false,
         onScrollProgress
+    }: {
+        highlighted?: boolean;
+        onScrollProgress?: (progress: number) => void;
     } = $props();
 
     let isMounted = $state(false);
@@ -12,7 +15,7 @@
         isMounted = true;
     });
 
-    function handleScroll(event) {
+    function handleScroll(event: UIEvent & { currentTarget: EventTarget & HTMLDivElement }) {
         const element = event.currentTarget;
         const maxScroll = element.scrollHeight - element.clientHeight;
 

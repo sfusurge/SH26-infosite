@@ -1,9 +1,22 @@
-<script>
+<script lang="ts">
     import { onMount } from 'svelte';
+
+    type FAQItem = {
+        question: string;
+        answer: string;
+    };
+
     let { highlighted = false } = $props();
     let isMounted = $state(false);
+    let faqItems = $state<FAQItem[]>([]);
 
-    onMount(() => {
+    onMount(async () => {
+        try {
+            const response = await fetch('/data/faq.json');
+            faqItems = await response.json();
+        } catch (e) {
+            console.error('Failed to load FAQ data:', e);
+        }
         isMounted = true;
     });
 </script>
@@ -24,65 +37,19 @@
         class:blur-none={isMounted}
         class:translate-y-0={isMounted}
     >
-        <div class="max-w-xl mb-15">
-            <h2 class="mb-6 text-2xl md:text-[41px] leading-none" class:animate-stagger-in={isMounted} class:opacity-0={!isMounted}>
-                Do I have to dress like Harry Park at StormHacks 26?
-            </h2>
+        {#each faqItems as item, index}
+            <div class="max-w-xl {index === faqItems.length - 1 ? 'mb-30' : 'mb-15'}">
+                <h2 class="mb-6 text-2xl md:text-[41px] leading-none" class:animate-stagger-in={isMounted} class:opacity-0={!isMounted}>
+                    {item.question}
+                </h2>
 
-            <div class="border-l-2 border-black md:text-[41px]" class:animate-stagger-in={isMounted} class:opacity-0={!isMounted}>
-                <p class="text-lg leading-7 px-3" >
-                    You don’t necessarily have to, but you could! We recommend coming to StormHacks with a fresh Low Taper Fade, and maybe - just maybe - your mom.                
-                </p>
+                <div class="border-l-2 border-black pl-5" class:animate-stagger-in={isMounted} class:opacity-0={!isMounted}>
+                    <p class="text-lg leading-7 px-3 whitespace-pre-line">
+                        {item.answer}
+                    </p>
+                </div>
             </div>
-        </div>
-
-        <div class="max-w-xl mb-15">
-            <h2 class="mb-6 text-2xl md:text-[41px] leading-none" class:animate-stagger-in={isMounted} class:opacity-0={!isMounted}>
-                Do I have to dress like Harry Park at StormHacks 26?
-            </h2>
-
-            <div class="border-l-2 border-black pl-5" class:animate-stagger-in={isMounted} class:opacity-0={!isMounted}>
-                <p class="text-lg leading-7 px-3" >
-                    You don’t necessarily have to, but you could! We recommend coming to StormHacks with a fresh Low Taper Fade, and maybe - just maybe - your mom.                
-                </p>
-            </div>
-        </div>
-
-        <div class="max-w-xl mb-15">
-            <h2 class="mb-6 text-2xl md:text-[41px] leading-none" class:animate-stagger-in={isMounted} class:opacity-0={!isMounted}>
-                Do I have to dress like Harry Park at StormHacks 26?
-            </h2>
-
-            <div class="border-l-2 border-black pl-5" class:animate-stagger-in={isMounted} class:opacity-0={!isMounted}>
-                <p class="text-lg leading-7 px-3" >
-                    You don’t necessarily have to, but you could! We recommend coming to StormHacks with a fresh Low Taper Fade, and maybe - just maybe - your mom.                
-                </p>
-            </div>
-        </div>
-
-        <div class="max-w-xl mb-15">
-            <h2 class="mb-6 text-2xl md:text-[41px] leading-none" class:animate-stagger-in={isMounted} class:opacity-0={!isMounted}>
-                Do I have to dress like Harry Park at StormHacks 26?
-            </h2>
-
-            <div class="border-l-2 border-black pl-5" class:animate-stagger-in={isMounted} class:opacity-0={!isMounted}>
-                <p class="text-lg leading-7 px-3" >
-                    You don’t necessarily have to, but you could! We recommend coming to StormHacks with a fresh Low Taper Fade, and maybe - just maybe - your mom.                
-                </p>
-            </div>
-        </div>
-
-        <div class="max-w-xl mb-30">
-            <h2 class="mb-6 text-2xl md:text-[41px] leading-none" class:animate-stagger-in={isMounted} class:opacity-0={!isMounted}>
-                Do I have to dress like Harry Park at StormHacks 26?
-            </h2>
-
-            <div class="border-l-2 border-black pl-5" class:animate-stagger-in={isMounted} class:opacity-0={!isMounted}>
-                <p class="text-lg leading-7 px-3" >
-                    You don’t necessarily have to, but you could! We recommend coming to StormHacks with a fresh Low Taper Fade, and maybe - just maybe - your mom.                
-                </p>
-            </div>
-        </div>
+        {/each}
     </div>
     <div class="pointer-events-none absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#FF5D0B] via-[#FF5D0B]/70 to-transparent"></div>
 </div>
