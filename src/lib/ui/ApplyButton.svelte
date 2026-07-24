@@ -3,20 +3,46 @@
     import { cubicOut, cubicIn } from 'svelte/easing';
     import Button from '$lib/ui/Button.svelte';
 
-    let { variant = "dark" }: { variant?: "light" | "dark" } = $props();
+    let { 
+        variant = "dark",
+        isExpanded = $bindable(false)
+    }: { 
+        variant?: "light" | "dark";
+        isExpanded?: boolean;
+    } = $props();
 
-    let isExpanded = $state(false);
+    let applyButtonEl = $state<HTMLElement | null>(null);
 
     function handlePrimaryClick(e: MouseEvent) {
+        e.stopPropagation();
         if (!isExpanded) {
             isExpanded = true;
         } else {
             window.location.href = 'https://portal.sfusurge.com/apply';
         }
     }
+
+    function handleWindowClick(e: MouseEvent) {
+        if (isExpanded && applyButtonEl && !applyButtonEl.contains(e.target as Node)) {
+            isExpanded = false;
+        }
+    }
 </script>
 
-<div class="apply-button-stage flex items-center justify-end gap-1 md:gap-2 whitespace-nowrap flex-nowrap">
+<svelte:window onclick={handleWindowClick} />
+
+{#if isExpanded}
+    <div 
+        class="fixed inset-0 z-10 bg-transparent pointer-events-auto"
+        onclick={() => (isExpanded = false)}
+        aria-hidden="true"
+    ></div>
+{/if}
+
+<div 
+    bind:this={applyButtonEl}
+    class="apply-button-stage relative z-20 flex items-center justify-end gap-1 md:gap-2 whitespace-nowrap flex-nowrap"
+>
     <div class="volunteer-stage flex-shrink-0">
         {#if isExpanded}
             <div
