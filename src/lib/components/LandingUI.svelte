@@ -1,25 +1,18 @@
-<!-- src/lib/components/LandingHeader.svelte -->
+<!-- src/lib/components/Header.svelte -->
 <script lang="ts">
     import { onMount } from 'svelte';
-    import Button from "$lib/ui/Button.svelte";
+    import Navbar from "$lib/ui/Navbar.svelte";
 
     let isMounted = $state(false);
 
     onMount(() => {
         isMounted = true;
     });
-
-    const navItems = [
-        { key: 'I', label: 'INFO', href: '/info' },
-        { key: 'W', label: 'THE WORKSHOP', href: 'https://workshop.stormhacks.com' },
-        { key: 'F', label: 'FAQ', href: '/faq' },
-        { key: 'C', label: 'CREDITS', href: '/credits' },
-        { key: 'A', label: 'APPLY >', href: '/apply', variant: 'dark' as const }
-    ];
 </script>
 
-<div class="absolute top-0 left-0 w-full flex flex-col md:flex-row items-start justify-between p-4 md:p-8 z-10">
+<header class="absolute top-0 left-0 w-full flex flex-col md:flex-row items-start justify-between p-4 md:p-8 z-10">
 
+    <!-- StormHacks Branding & Subtitles -->
     <div class="flex flex-col gap-4">
         <div
             class="flex items-start gap-4 transition-[opacity,filter,transform] duration-copy ease-copy"
@@ -37,7 +30,7 @@
                     [ StormHacks 26' ]
                 </h1>
 
-                <!-- desktop -->
+                <!-- Desktop Subtitle -->
                 <p class="font-sf text-white text-base mt-1 hidden md:flex items-center gap-2 whitespace-nowrap">
                     <span>West Canada's Largest Hackathon</span>
                     <img src="/ui/star.svg" alt="" aria-hidden="true" class="w-[18px] h-[18px]" />
@@ -46,7 +39,7 @@
                     <span>SFU Burnaby</span>
                 </p>
 
-                <!-- mobile -->
+                <!-- Mobile Subtitle -->
                 <p class="font-sf text-white text-lg mt-1 md:hidden">
                     West Canada's Largest Hackathon
                 </p>
@@ -57,40 +50,12 @@
                 </p>
             </div>
         </div>
-
-        <!-- mobile nav -->
-        <nav
-            class="font-sans font-bold flex md:hidden flex-col items-start gap-3 mt-4 transition-[opacity,filter,transform] duration-copy ease-copy delay-500"
-            class:opacity-0={!isMounted}
-            class:blur-sm={!isMounted}
-            class:translate-y-[6px]={!isMounted}
-            class:opacity-100={isMounted}
-            class:blur-none={isMounted}
-            class:translate-y-0={isMounted}
-        >
-            {#each navItems as item}
-                <Button href={item.href} letter={item.key} label={item.label} variant={item.variant ?? 'light'} showBadge={false} />
-            {/each}
-        </nav>
     </div>
 
-    <!-- desktop nav -->
-    <nav
-        class="font-sans font-bold hidden md:flex items-center gap-3 transition-[opacity,filter,transform] duration-copy ease-copy delay-500"
-        class:opacity-0={!isMounted}
-        class:blur-sm={!isMounted}
-        class:translate-y-[6px]={!isMounted}
-        class:opacity-100={isMounted}
-        class:blur-none={isMounted}
-        class:translate-y-0={isMounted}
-    >
-        {#each navItems as item}
-            <Button href={item.href} letter={item.key} label={item.label} variant={item.variant ?? 'light'} />
-        {/each}
-    </nav>
 
-</div>
+    <Navbar {isMounted} />
 
+</header>
 
 
 <button

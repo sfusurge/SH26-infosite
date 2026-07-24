@@ -18,8 +18,7 @@
 </script>
 
 <div class="fixed inset-0 overflow-hidden bg-background-blue flex justify-center items-center">
-    <Header pageLabel="Info" backHref="/" applyHref="/apply" />
-
+    <Header pageLabel="Info" backHref="/" />
     <div class="relative flex justify-center items-center h-full text-primary-black gap-19 flex-col origin-center">
         <TextSection
             onScrollProgress={handleScrollProgress}

@@ -5,7 +5,7 @@
 </script>
 
 <div class="fixed inset-0 overflow-hidden bg-[#FF5D0B] flex justify-center items-center">
-    <Header pageLabel="FAQ" backHref="/" applyHref="/apply" />
+    <Header pageLabel="FAQ" backHref="/" />
     <div class="relative flex justify-center items-center h-full text-primary-black gap-19 flex-col origin-center">
         <InfoSection />
     </div>
