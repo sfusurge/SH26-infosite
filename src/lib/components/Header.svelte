@@ -1,18 +1,18 @@
+<!-- src/lib/components/Header.svelte -->
 <script lang="ts">
-    import Button from "$lib/ui/Button.svelte";
+    import ApplyButton from "$lib/ui/ApplyButton.svelte";
+    import { page } from "$app/state";
 
     let {
         pageLabel = "Info",
         backHref = "/",
-        applyHref = "/apply"
     }: {
         pageLabel?: string;
         backHref?: string;
-        applyHref?: string;
     } = $props();
 </script>
 
-<header class="font-sans absolute top-0 left-0 w-full z-[999] flex items-center justify-between px-4 py-4 md:px-6 md:py-5">
+<header class="font-sans absolute top-0 left-0 w-full z-[999] flex items-center justify-between px-4 py-4 md:px-8 md:py-7">
     <div class="flex items-center gap-3 md:gap-4">
         
         <a href={backHref}
@@ -35,6 +35,6 @@
     </div>
 
     <div class="font-bold">
-        <Button href={applyHref} letter="A" label="APPLY >" variant="dark" />
+        <ApplyButton variant={page.url.pathname === "/credits" ? "light" : "dark"} />
     </div>
 </header>

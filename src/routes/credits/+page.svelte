@@ -5,7 +5,7 @@
 </script>
 
 <div class="font-exposure">
-    <Header pageLabel="Credits" backHref="/" applyHref="/apply" />
+    <Header pageLabel="Credits" backHref="/" />
     <CreditsSection />
     <SoundButton />
 </div>

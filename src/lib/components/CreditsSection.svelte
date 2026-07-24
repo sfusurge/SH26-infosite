@@ -49,7 +49,7 @@
                                 {person.title}
                             </p>
 
-                            <h2 class="brush-stroke text-[32px] mb:text-[64px] text-center text-white font-bold">
+                            <h2 class="brush-stroke text-[32px] md:text-[64px] text-center text-white font-bold">
                                 {person.name}
                             </h2>
                         </div>
@@ -59,11 +59,11 @@
                 <div class="credits-content">
                     {#each credits as person}
                         <div class="credit">
-                            <p class="mb-2 text-xs mb:text-xs uppercase tracking-[0.35em] text-[#0278FF]">
+                            <p class="mb-2 text-xs md:text-xs uppercase tracking-[0.35em] text-[#0278FF]">
                                 {person.title}
                             </p>
 
-                            <h2 class="brush-stroke text-[32px] mb:text-[64px] text-center text-white font-bold">
+                            <h2 class="brush-stroke text-[32px] md:text-[64px] text-center text-white font-bold">
                                 {person.name}
                             </h2>
                         </div>
