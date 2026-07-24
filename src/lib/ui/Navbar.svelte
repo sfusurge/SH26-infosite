@@ -28,6 +28,18 @@
             isExpanded = false;
         }
     }
+
+    export function toggleExpand(expand?: boolean) {
+        if (expand !== undefined) {
+            isExpanded = expand;
+        } else {
+            isExpanded = !isExpanded;
+        }
+    }
+
+    export function getIsExpanded() {
+        return isExpanded;
+    }
 </script>
 
 <svelte:window onclick={handleWindowClick} />
@@ -123,7 +135,12 @@
     <div class="mobile-menu-bar flex xl:hidden">
         <div class="mobile-main-nav">
             {#each mainNav as item}
-                <Button href={item.href} letter={item.key} label={item.label} variant="light" />
+                <Button 
+                    href={item.href} 
+                    label={item.label} 
+                    showBadge={false} 
+                    variant="light" 
+                />
             {/each}
         </div>
 
@@ -135,7 +152,7 @@
                         in:fly={{ x: -25, duration: 800, opacity: 0, easing: cubicOut }}
                         out:fly={{ x: -25, duration: 800, opacity: 0, easing: cubicOut }}
                     >
-                        <Button href="/volunteer" letter="V" label="VOLUNTEER >" variant="light" />
+                        <Button href="/volunteer" showBadge={false} label="VOLUNTEER >" variant="light" />
                     </div>
                 {/if}
             </div>
@@ -146,26 +163,8 @@
                     showBadge={false}
                     onclick={handlePrimaryClick}
                 >
-                    <div class="flex flex-row gap-[10px] items-center">
-                        <div class="stack-wrapper w-[25px] h-[25px]">
-                            <div
-                                class="flex items-center justify-center w-[25px] h-[25px] bg-[#ECECEF] text-[#101A21] group-hover:bg-[#0278FF] group-hover:text-white text-[16px] rounded-[2px]"
-                                class:active={!isExpanded}
-                            >
-                                A
-                            </div>
-                            <div
-                                class="flex items-center justify-center w-[25px] h-[25px] bg-[#ECECEF] text-[#101A21] group-hover:bg-[#0278FF] group-hover:text-white text-[16px] rounded-[2px]"
-                                class:active={isExpanded}
-                            >
-                                H
-                            </div>
-                        </div>
-
-                        <div class="stack-wrapper text-center text-[16px] font-extrabold leading-normal text-primary-white group-hover:text-[#0278FF]">
-                            <span class="morph-label" class:active={!isExpanded}>APPLY &gt;</span>
-                            <span class="morph-label" class:active={isExpanded}>HACKER &gt;</span>
-                        </div>
+                    <div class="px-1 py-0.5 text-[16px] font-extrabold leading-normal text-primary-white group-hover:text-[#0278FF]">
+                        <span>{isExpanded ? 'HACKER >' : 'APPLY >'}</span>
                     </div>
                 </Button>
             </div>
@@ -209,7 +208,7 @@
     .mobile-menu-bar {
         flex-direction: column;
         align-items: flex-start;
-        gap: 12px;
+        gap: 8px;
         width: fit-content;
     }
 
@@ -217,7 +216,7 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: 12px;
+        gap: 8px;
         width: fit-content;
     }
 

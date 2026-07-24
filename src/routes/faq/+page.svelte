@@ -12,7 +12,8 @@
     <div class="fixed bottom-4 left-4 z-50">
         <SoundButton />
     </div>
-    <div class="fixed bottom-4 right-4 z-50">
+    
+    <div class="hidden md:block fixed bottom-4 right-4 z-50">
         <img
             src="/FAQOtter.gif"
             alt="FAQ Otter"

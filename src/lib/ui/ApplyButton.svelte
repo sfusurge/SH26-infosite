@@ -2,6 +2,7 @@
     import { fly } from 'svelte/transition';
     import { cubicOut, cubicIn } from 'svelte/easing';
     import Button from '$lib/ui/Button.svelte';
+    import { goto } from '$app/navigation';
 
     let { 
         variant = "dark",
@@ -27,9 +28,32 @@
             isExpanded = false;
         }
     }
+
+    function handleKeyDown(e: KeyboardEvent) {
+        const target = e.target as HTMLElement;
+        if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)) {
+            return;
+        }
+
+        const key = e.key.toLowerCase();
+
+        if (!isExpanded) {
+            if (key === 'a') {
+                isExpanded = true;
+            }
+        } else {
+            if (key === 'v') {
+                goto('/volunteer');
+            } else if (key === 'h') {
+                window.location.href = 'https://portal.sfusurge.com/apply';
+            } else if (key === 'escape') {
+                isExpanded = false;
+            }
+        }
+    }
 </script>
 
-<svelte:window onclick={handleWindowClick} />
+<svelte:window onclick={handleWindowClick} onkeydown={handleKeyDown} />
 
 {#if isExpanded}
     <div 

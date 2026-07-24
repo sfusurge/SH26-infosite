@@ -30,8 +30,9 @@
     </div>
 
     <div
-        class="fixed bottom-4 z-50 transition-all duration-700 ease-out left-4"
-        style={`transform: translateX(calc(${otterProgress} * (100vw - 344px - 16px)));`}    >
+        class="hidden md:block fixed bottom-4 z-50 transition-all duration-700 ease-out left-4"
+        style={`transform: translateX(calc(${otterProgress} * (100vw - 344px - 16px)));`}
+    >
         <img
             src="/OtterInfo.gif"
             alt="Info Otter"
@@ -39,4 +40,4 @@
             style={`transform: scaleX(${otterDirection === 1 ? 1 : -1});`}
         />
     </div>
-</div> 
+</div>
