@@ -1,11 +1,28 @@
 <script>
     import { onMount } from 'svelte';
-    let { highlighted = false } = $props();
+
+    let {
+        highlighted = false,
+        onScrollProgress
+    } = $props();
+
     let isMounted = $state(false);
 
     onMount(() => {
         isMounted = true;
     });
+
+    function handleScroll(event) {
+        const element = event.currentTarget;
+        const maxScroll = element.scrollHeight - element.clientHeight;
+
+        const scrollProgress =
+            maxScroll > 0
+                ? element.scrollTop / maxScroll
+                : 0;
+
+        onScrollProgress?.(scrollProgress);
+    }
 </script>
 
 <div
@@ -13,9 +30,13 @@
     class:opacity-30={highlighted}
     class:blur-[4.5px]={highlighted}
 >
-    <div class="pointer-events-none absolute top-0 left-0 right-0 z-10 h-25 bg-gradient-to-b from-[#0278FF] via-[#0278FF]/70 to-transparent" ></div>    
+    <div
+        class="pointer-events-none absolute top-0 left-0 right-0 z-10 h-25 bg-gradient-to-b from-[#0278FF] via-[#0278FF]/70 to-transparent"
+    ></div>
+
     <div
         class="transition-[opacity,filter,transform] duration-copy ease-copy flex flex-col items-center gap-6 md:gap-10.25 max-h-[90vh] pt-25 md:pt-35 md:max-h-[100vh] overflow-y-auto hide-scrollbar"
+        onscroll={handleScroll}
         class:opacity-0={!isMounted}
         class:blur-sm={!isMounted}
         class:translate-y-[6px]={!isMounted}
@@ -23,9 +44,9 @@
         class:blur-none={isMounted}
         class:translate-y-0={isMounted}
     >
-    
+
         <p class:animate-stagger-in-delayed={isMounted} class:opacity-0={!isMounted}>
-            Most people think that the way to success is linear, and if you don’t follow said path, you’re doomed. 
+            Most people think that the way to success is linear, and if you don’t follow said path, you’re doomed.
         </p>
 
         <p class:animate-stagger-in-delayed={isMounted} class:opacity-0={!isMounted}>
@@ -41,7 +62,7 @@
         </p>
 
         <p class:animate-stagger-in-delayed={isMounted} class:opacity-0={!isMounted}>
-            It means pushing past what you <span class="font-semibold"> think you're capable of </span>.
+            It means pushing past what you <span class="font-semibold">think you're capable of</span>.
         </p>
 
         <p class:animate-stagger-in-delayed={isMounted} class:opacity-0={!isMounted}>
@@ -53,28 +74,35 @@
         </p>
 
         <p class:animate-stagger-in-delayed={isMounted} class:opacity-0={!isMounted}>
-            Join us on <span class="font-semibold"> October 3rd & 4th </span> with mentors, community opportunities, and every resource we can give you to make sure you don't have to figure it out alone.
+            Join us on <span class="font-semibold">October 3rd & 4th</span> with mentors, community opportunities, and every resource we can give you to make sure you don't have to figure it out alone.
         </p>
 
         <p class:animate-stagger-in-delayed={isMounted} class:opacity-0={!isMounted}>
             This is not just a hackathon.
         </p>
-        
-        <p class:animate-stagger-in-delayed={isMounted} class:opacity-0={!isMounted} class="mb-30">
-            <span class="font-semibold">This is your moment to do what you truly love</span>. 
+
+        <p
+            class:animate-stagger-in-delayed={isMounted}
+            class:opacity-0={!isMounted}
+            class="mb-30"
+        >
+            <span class="font-semibold">This is your moment to do what you truly love</span>.
         </p>
+
     </div>
-    
-    <div class="pointer-events-none absolute -bottom-1 left-0 right-0 z-10 h-25 bg-gradient-to-t from-[#0278FF] via-[#0278FF]/70 to-transparent"></div>
+
+    <div
+        class="pointer-events-none absolute -bottom-1 left-0 right-0 z-10 h-25 bg-gradient-to-t from-[#0278FF] via-[#0278FF]/70 to-transparent"
+    ></div>
 </div>
 
 <style>
-  .hide-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
+    .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
 
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
+    .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
 </style>

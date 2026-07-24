@@ -49,7 +49,7 @@
         </div>
 
         <div class="max-w-xl mb-15">
-            <h2 class="mb-6 text-2xl md:text-4xl leading-none" class:animate-stagger-in={isMounted} class:opacity-0={!isMounted}>
+            <h2 class="mb-6 text-2xl md:text-[41px] leading-none" class:animate-stagger-in={isMounted} class:opacity-0={!isMounted}>
                 Do I have to dress like Harry Park at StormHacks 26?
             </h2>
 
@@ -61,7 +61,7 @@
         </div>
 
         <div class="max-w-xl mb-15">
-            <h2 class="mb-6 text-2xl md:text-3xl leading-none" class:animate-stagger-in={isMounted} class:opacity-0={!isMounted}>
+            <h2 class="mb-6 text-2xl md:text-[41px] leading-none" class:animate-stagger-in={isMounted} class:opacity-0={!isMounted}>
                 Do I have to dress like Harry Park at StormHacks 26?
             </h2>
 
@@ -72,8 +72,8 @@
             </div>
         </div>
 
-        <div class="max-w-xl mb-15">
-            <h2 class="mb-6 text-2xl md:text-3xl leading-none" class:animate-stagger-in={isMounted} class:opacity-0={!isMounted}>
+        <div class="max-w-xl mb-30">
+            <h2 class="mb-6 text-2xl md:text-[41px] leading-none" class:animate-stagger-in={isMounted} class:opacity-0={!isMounted}>
                 Do I have to dress like Harry Park at StormHacks 26?
             </h2>
 

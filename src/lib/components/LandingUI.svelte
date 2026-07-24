@@ -11,7 +11,7 @@
 
     const navItems = [
         { key: 'I', label: 'INFO', href: '/info' },
-        { key: 'W', label: 'THE WORKSHOP', href: '/workshop' },
+        { key: 'W', label: 'THE WORKSHOP', href: 'https://workshop.stormhacks.com' },
         { key: 'F', label: 'FAQ', href: '/faq' },
         { key: 'C', label: 'CREDITS', href: '/credits' },
         { key: 'A', label: 'APPLY >', href: '/apply', variant: 'dark' as const }
