@@ -229,11 +229,11 @@
     }
 
     .text-bubble {
-        --nudge: 10vw;
+        --nudge: 1.5vw;
         position: absolute;
         z-index: 20;
-        left: calc(50% + var(--nudge) - max(22vh, 14vw));
-        top: calc(89.8796vh - var(--nudge) - max(38vh, 25vw));
+        left: calc(50% + var(--nudge) - max(20vh, 12.8vw));
+        top: calc(89.8796vh - var(--nudge) - max(39vh, 25vw));
     }
 
     .bubble-img {
@@ -259,12 +259,6 @@
     @media (min-width: 768px) {
         .title-lockup {
             font-size: 62px;
-        }
-
-        .text-bubble {
-            left: 38%;
-            top: auto;
-            bottom: 45%;
         }
 
         .bubble-img {

@@ -39,6 +39,8 @@ class AudioManager {
             const savedMute = localStorage.getItem('sh26_muted');
             if (savedMute !== null) {
                 this.isMutedState = savedMute === 'true';
+            } else {
+                this.isMutedState = false;
             }
         }
     }
@@ -125,15 +127,20 @@ class AudioManager {
         const unlockAudio = () => {
             if (this.activeBgTracks.length > 0) {
                 this.activeBgTracks.forEach((track) => {
+                    track.muted = this.isMutedState;
                     track.play().catch(() => {});
                 });
             }
             window.removeEventListener('pointerdown', unlockAudio);
             window.removeEventListener('keydown', unlockAudio);
+            window.removeEventListener('touchstart', unlockAudio);
+            window.removeEventListener('click', unlockAudio);
         };
 
         window.addEventListener('pointerdown', unlockAudio);
         window.addEventListener('keydown', unlockAudio);
+        window.addEventListener('touchstart', unlockAudio);
+        window.addEventListener('click', unlockAudio);
 
         // Hover sound delegation
         const handleMouseOver = (e: MouseEvent) => {
@@ -198,12 +205,12 @@ class AudioManager {
             // Landing Page Song + Ambience (LOOPS)
             const landing = this.getAudioElement('landingSong');
             landing.loop = true;
-            landing.volume = 0.5;
+            landing.volume = 0.25;
             tracksToPlay.push(landing);
 
             const ambience = this.getAudioElement('ambience');
             ambience.loop = true;
-            ambience.volume = 0.4;
+            ambience.volume = 0.75;
             tracksToPlay.push(ambience);
         } else if (route.startsWith('/info')) {
             // Info site song (LOOPS)

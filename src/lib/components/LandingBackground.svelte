@@ -1,4 +1,4 @@
-<div class="absolute inset-0 w-full h-full overflow-hidden bg-[#0283F7] z-0">
+<div class="absolute inset-0 w-full h-full overflow-hidden bg-[#0283F7]">
 
     <div class="scene-canvas">
 
@@ -8,13 +8,6 @@
         </div>
 
         <img src="/landing-page/road.svg" alt="" class="absolute left-0 top-[32.5%] w-full" />
-
-        <img
-            src="/landing-page/sidewalk.svg"
-            alt=""
-            class="absolute left-0 w-full"
-            style="bottom: -2.65%;"
-        />
 
     </div>
 

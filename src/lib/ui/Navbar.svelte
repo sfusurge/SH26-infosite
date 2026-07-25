@@ -2,6 +2,7 @@
     import { fly } from 'svelte/transition';
     import { cubicOut } from 'svelte/easing';
     import Button from '$lib/ui/Button.svelte';
+    import { audioManager } from '$lib/audioManager.js';
 
     let { isMounted = true }: { isMounted?: boolean } = $props();
     let isExpanded = $state(false);
@@ -16,6 +17,7 @@
 
     function handlePrimaryClick(e: MouseEvent) {
         e.stopPropagation();
+        audioManager.playClick();
         if (!isExpanded) {
             isExpanded = true;
         } else {

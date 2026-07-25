@@ -13,10 +13,10 @@
         "/gifs/LandingPage/purpleWalk.gif",
         "/gifs/LandingPage/Truck.gif"
     ];
-    const minRespawnDelay = 5_000;
-    const maxRespawnDelay = 20_000;
+    const minRespawnDelay = 7_000;
+    const maxRespawnDelay = 15_000;
 
-    let activeWalker = $state<Walker | null>(null);
+    let activeWalkers = $state<Walker[]>([]);
     let walkerId = 0;
     let spawnTimer: ReturnType<typeof setTimeout> | undefined;
 
@@ -29,19 +29,26 @@
 
         if (!src) return;
 
-        activeWalker = {
+        const newWalker: Walker = {
             id: ++walkerId,
             src
         };
 
-        // Trigger car sound fade in/out during sidewalk crossing animation (18s)
-        audioManager.startCarSound(18000);
+        activeWalkers = [...activeWalkers, newWalker];
+
+        if (src.includes("Truck")) {
+            // Trigger car sound fade in/out during sidewalk crossing animation (18s)
+            audioManager.startCarSound(18000);
+        }
+
+        scheduleWalker();
     }
 
-    function finishWalker() {
-        activeWalker = null;
-        audioManager.stopCarSound();
-        scheduleWalker();
+    function finishWalker(id: number, src: string) {
+        activeWalkers = activeWalkers.filter((w) => w.id !== id);
+        if (src.includes("Truck")) {
+            audioManager.stopCarSound();
+        }
     }
 
     function scheduleWalker(delay = randomRespawnDelay()) {
@@ -52,7 +59,7 @@
     onMount(() => {
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-        scheduleWalker(1_200);
+        scheduleWalker(1_000);
 
         return () => {
             if (spawnTimer) clearTimeout(spawnTimer);
@@ -69,11 +76,22 @@
     />
 
     <div class="walking-scene">
-        {#if activeWalker}
-            <div class="sidewalk-walker" data-testid="sidewalk-walker" onanimationend={finishWalker}>
-                <img src={activeWalker.src} alt="" />
+        {#each activeWalkers as walker (walker.id)}
+            <div
+                class="sidewalk-walker"
+                class:is-truck={walker.src.includes("Truck")}
+                data-testid="sidewalk-walker"
+                onanimationend={() => finishWalker(walker.id, walker.src)}
+            >
+                <img src={walker.src} alt="" />
             </div>
-        {/if}
+        {/each}
+
+        <img
+            src="/landing-page/sidewalk.svg"
+            alt=""
+            class="sidewalk-overlay"
+        />
     </div>
 </div>
 
@@ -102,12 +120,22 @@
         --walker-exit: 65.5%;
 
         position: absolute;
-        z-index: 5;
         bottom: 0;
         left: 50%;
         width: var(--landing-scene-width);
         height: var(--landing-scene-height);
         transform: translateX(-50%);
+    }
+
+    .sidewalk-overlay {
+        position: absolute;
+        left: 0;
+        bottom: -2.65%;
+        width: 100%;
+        max-width: none;
+        z-index: 3;
+        pointer-events: none;
+        user-select: none;
     }
 
     .sidewalk-walker {
@@ -116,9 +144,16 @@
         left: -11%;
         width: 10.714%;
         max-width: none;
+        z-index: 4;
         transform-origin: center bottom;
         animation: sidewalk-crossing 18s linear forwards;
         will-change: top, left, transform;
+    }
+
+    .sidewalk-walker.is-truck {
+        width: 18.5%;
+        z-index: 2;
+        margin-top: -1.5%;
     }
 
     .sidewalk-walker img {
