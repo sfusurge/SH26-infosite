@@ -54,7 +54,7 @@
 
 <div 
     bind:this={navContainerEl}
-    class="nav-container font-sans font-bold transition-[opacity,filter,transform] duration-500 ease-out z-20 relative w-fit"
+    class="nav-container font-sf font-bold transition-[opacity,filter,transform] duration-500 ease-out z-20 relative w-fit"
     class:opacity-0={!isMounted}
     class:blur-sm={!isMounted}
     class:translate-y-[6px]={!isMounted}

@@ -3,14 +3,21 @@
     import { cubicOut, cubicIn } from 'svelte/easing';
     import Button from '$lib/ui/Button.svelte';
     import { goto } from '$app/navigation';
+    import { page } from '$app/state';
 
     let { 
         variant = "dark",
+        highlightColor = undefined,
         isExpanded = $bindable(false)
     }: { 
         variant?: "light" | "dark";
+        highlightColor?: "blue" | "orange";
         isExpanded?: boolean;
     } = $props();
+
+    let activeHighlight = $derived(
+        highlightColor ?? (page.url.pathname.startsWith('/faq') ? 'orange' : 'blue')
+    );
 
     let applyButtonEl = $state<HTMLElement | null>(null);
 
@@ -30,25 +37,8 @@
     }
 
     function handleKeyDown(e: KeyboardEvent) {
-        const target = e.target as HTMLElement;
-        if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)) {
-            return;
-        }
-
-        const key = e.key.toLowerCase();
-
-        if (!isExpanded) {
-            if (key === 'a') {
-                isExpanded = true;
-            }
-        } else {
-            if (key === 'v') {
-                goto('/volunteer');
-            } else if (key === 'h') {
-                window.location.href = 'https://portal.sfusurge.com/apply';
-            } else if (key === 'escape') {
-                isExpanded = false;
-            }
+        if (e.key === 'Escape' && isExpanded) {
+            isExpanded = false;
         }
     }
 </script>
@@ -65,7 +55,7 @@
 
 <div 
     bind:this={applyButtonEl}
-    class="apply-button-stage relative z-20 flex items-center justify-end gap-1 md:gap-2 whitespace-nowrap flex-nowrap"
+    class="apply-button-stage font-sf relative z-20 flex items-center justify-end gap-1 md:gap-2 whitespace-nowrap flex-nowrap"
 >
     <div class="volunteer-stage flex-shrink-0">
         {#if isExpanded}
@@ -78,6 +68,7 @@
                     onclick={() => (isExpanded = false)} 
                     showBadge={false} 
                     variant="light"
+                    highlightColor={activeHighlight}
                     aria-label="Go back"
                 >
                     <div class="flex items-center justify-center w-[25px] h-[25px] bg-[#ECECEF] rounded-[2px] flex-shrink-0">
@@ -90,7 +81,7 @@
                     </div>
                 </Button>
 
-                <Button href="/volunteer" letter="V" label="AS VOLUNTEER >" variant="light" />
+                <Button href="https://forms.gle/gWBZMF9gCMXk2q4y8" letter="V" label="AS VOLUNTEER >" variant="light" highlightColor={activeHighlight} />
             </div>
         {/if}
     </div>
@@ -99,25 +90,26 @@
         <Button
             {variant}
             showBadge={false}
+            highlightColor={activeHighlight}
             onclick={handlePrimaryClick}
         >
             <div class="flex flex-row gap-[6px] md:gap-[10px] items-center whitespace-nowrap flex-nowrap">
                 <div class="stack-wrapper w-[25px] h-[25px] flex-shrink-0">
                     <div
-                        class="flex items-center justify-center px-[3px] py-[10px] w-[25px] h-[25px] transition-colors {variant === 'light' ? 'bg-[#101A21] text-white group-hover:bg-[#0278FF]' : 'bg-[#ECECEF] text-[#101A21] group-hover:bg-[#0278FF] group-hover:text-white'}"
+                        class="flex items-center justify-center px-[3px] py-[10px] w-[25px] h-[25px] transition-colors {variant === 'light' ? (activeHighlight === 'orange' ? 'bg-[#101A21] text-white group-hover:bg-[#FF5D0B]' : 'bg-[#101A21] text-white group-hover:bg-[#0278FF]') : (activeHighlight === 'orange' ? 'bg-[#ECECEF] text-[#101A21] group-hover:bg-[#FF5D0B] group-hover:text-white' : 'bg-[#ECECEF] text-[#101A21] group-hover:bg-[#0278FF] group-hover:text-white')}"
                         class:active={!isExpanded}
                     >
                         A
                     </div>
                     <div
-                        class="flex items-center justify-center px-[3px] py-[10px] w-[25px] h-[25px] transition-colors {variant === 'light' ? 'bg-[#101A21] text-white group-hover:bg-[#0278FF]' : 'bg-[#ECECEF] text-[#101A21] group-hover:bg-[#0278FF] group-hover:text-white'}"
+                        class="flex items-center justify-center px-[3px] py-[10px] w-[25px] h-[25px] transition-colors {variant === 'light' ? (activeHighlight === 'orange' ? 'bg-[#101A21] text-white group-hover:bg-[#FF5D0B]' : 'bg-[#101A21] text-white group-hover:bg-[#0278FF]') : (activeHighlight === 'orange' ? 'bg-[#ECECEF] text-[#101A21] group-hover:bg-[#FF5D0B] group-hover:text-white' : 'bg-[#ECECEF] text-[#101A21] group-hover:bg-[#0278FF] group-hover:text-white')}"
                         class:active={isExpanded}
                     >
                         H
                     </div>
                 </div>
 
-                <div class="stack-wrapper text-center text-[12px] sm:text-[14px] md:text-[16px] font-extrabold leading-normal transition-colors {variant === 'light' ? 'text-[#101A21] group-hover:text-[#0278FF]' : 'text-primary-white group-hover:text-[#0278FF]'}">
+                <div class="stack-wrapper text-center text-[12px] sm:text-[14px] md:text-[16px] font-extrabold leading-normal transition-colors {variant === 'light' ? (activeHighlight === 'orange' ? 'text-[#101A21] group-hover:text-[#FF5D0B]' : 'text-[#101A21] group-hover:text-[#0278FF]') : (activeHighlight === 'orange' ? 'text-primary-white group-hover:text-[#FF5D0B]' : 'text-primary-white group-hover:text-[#0278FF]')}">
                     <span class="morph-label whitespace-nowrap" class:active={!isExpanded}>APPLY &gt;</span>
                     <span class="morph-label whitespace-nowrap" class:active={isExpanded}>AS HACKER &gt;</span>
                 </div>

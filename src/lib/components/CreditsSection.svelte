@@ -44,12 +44,12 @@
 
                 <div class="credits-content">
                     {#each credits as person}
-                        <div class="credit">
-                            <p class="mb-2 text-[18px] mb:text-xs uppercase tracking-[0.35em] text-[#0278FF]">
+                        <div class="credit w-full max-w-[489px] mx-auto flex flex-col items-center justify-center">
+                            <p class="text-center font-sf-text text-[20px] not-italic font-[590] leading-tight text-[#0278FF] mb-0">
                                 {person.title}
                             </p>
 
-                            <h2 class="brush-stroke text-[32px] md:text-[64px] text-center text-white font-bold">
+                            <h2 class="brush-stroke text-[32px] md:text-[64px] text-center text-white font-bold leading-none mt-0">
                                 {person.name}
                             </h2>
                         </div>
@@ -58,12 +58,12 @@
 
                 <div class="credits-content">
                     {#each credits as person}
-                        <div class="credit">
-                            <p class="mb-2 text-xs md:text-xs uppercase tracking-[0.35em] text-[#0278FF]">
+                        <div class="credit w-full max-w-[489px] mx-auto flex flex-col items-center justify-center">
+                            <p class="text-center font-sf-text text-[20px] not-italic font-[590] leading-tight text-[#0278FF] mb-0">
                                 {person.title}
                             </p>
 
-                            <h2 class="brush-stroke text-[32px] md:text-[64px] text-center text-white font-bold">
+                            <h2 class="brush-stroke text-[32px] md:text-[64px] text-center text-white font-bold leading-none mt-0">
                                 {person.name}
                             </h2>
                         </div>

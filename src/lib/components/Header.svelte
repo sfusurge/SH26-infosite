@@ -15,7 +15,7 @@
     let isExpanded = $state(false);
 </script>
 
-<header class="font-sans absolute top-0 left-0 w-full z-[999] flex items-center justify-between px-4 py-4 md:px-8 md:py-7 text-[16px]">
+<header class="font-sf-text absolute top-0 left-0 w-full z-[999] flex items-center justify-between px-4 py-4 md:px-8 md:py-7 text-[16px]">
     <div class="hidden md:flex items-center gap-4 flex-grow min-w-0">
         <a 
             href={backHref}
@@ -25,13 +25,13 @@
             <img src="/ui/arrowback.svg" alt="" class="w-[24px] h-[24px]" />
         </a>
 
-        <span class="text-primary-white text-[16px] font-semibold whitespace-nowrap">
+        <span class="text-primary-white text-[16px] font-semibold whitespace-nowrap font-sf-text">
             StormHacks 2026
         </span>
 
         <div class="flex items-center gap-1.5 text-primary-white whitespace-nowrap">
             <img src="/ui/star.svg" alt="" aria-hidden="true" class="w-[18px] h-[18px] flex-shrink-0" />
-            <span class="text-[16px] font-medium">
+            <span class="text-[16px] font-medium font-sf-text">
                 {pageLabel}
             </span>
         </div>
@@ -54,7 +54,7 @@
 
                 <div class="flex items-center gap-1.5 text-primary-white whitespace-nowrap">
                     <img src="/ui/star.svg" alt="" aria-hidden="true" class="w-[18px] h-[18px] flex-shrink-0" />
-                    <span class="text-[16px] font-medium">
+                    <span class="text-[16px] font-medium font-sf-text">
                         {pageLabel}
                     </span>
                 </div>
