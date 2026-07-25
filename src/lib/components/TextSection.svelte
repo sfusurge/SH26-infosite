@@ -3,10 +3,8 @@
 
     let {
         highlighted = false,
-        onScrollProgress
     }: {
         highlighted?: boolean;
-        onScrollProgress?: (progress: number) => void;
     } = $props();
 
     let isMounted = $state(false);
@@ -14,18 +12,6 @@
     onMount(() => {
         isMounted = true;
     });
-
-    function handleScroll(event: UIEvent & { currentTarget: EventTarget & HTMLDivElement }) {
-        const element = event.currentTarget;
-        const maxScroll = element.scrollHeight - element.clientHeight;
-
-        const scrollProgress =
-            maxScroll > 0
-                ? element.scrollTop / maxScroll
-                : 0;
-
-        onScrollProgress?.(scrollProgress);
-    }
 </script>
 
 <div
@@ -39,7 +25,6 @@
 
     <div
         class="transition-[opacity,filter,transform] duration-copy ease-copy flex flex-col items-center gap-6 md:gap-10.25 max-h-[90vh] pt-25 md:pt-35 md:max-h-[100vh] overflow-y-auto hide-scrollbar"
-        onscroll={handleScroll}
         class:opacity-0={!isMounted}
         class:blur-sm={!isMounted}
         class:translate-y-[6px]={!isMounted}
