@@ -65,7 +65,7 @@
                         </div>
                     </Button>
 
-                    <Button href="/volunteer" letter="V" label="AS VOLUNTEER >" variant="light" />
+                    <Button href="https://forms.gle/gWBZMF9gCMXk2q4y8" letter="V" label="AS VOLUNTEER >" variant="light" />
                 </div>
             {/if}
         </div>

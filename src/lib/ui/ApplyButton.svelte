@@ -1,19 +1,57 @@
 <script lang="ts">
+    import { onMount } from 'svelte';
     import { fly } from 'svelte/transition';
     import { cubicOut, cubicIn } from 'svelte/easing';
+    import { goto } from '$app/navigation';
     import Button from '$lib/ui/Button.svelte';
+    import { audioManager } from '$lib/audioManager.js';
 
     let { variant = "dark" }: { variant?: "light" | "dark" } = $props();
 
     let isExpanded = $state(false);
 
-    function handlePrimaryClick(e: MouseEvent) {
+    function handlePrimaryClick(e?: MouseEvent) {
         if (!isExpanded) {
             isExpanded = true;
         } else {
             window.location.href = 'https://portal.sfusurge.com/apply';
         }
     }
+
+    onMount(() => {
+        function handleKeyDown(e: KeyboardEvent) {
+            if (e.defaultPrevented || e.ctrlKey || e.altKey || e.metaKey) return;
+            const target = e.target as HTMLElement | null;
+            if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)) return;
+
+            const key = e.key.toUpperCase();
+            if (key === 'I') {
+                audioManager.playClick();
+                goto('/info');
+            } else if (key === 'W') {
+                audioManager.playClick();
+                window.location.href = 'https://workshop.stormhacks.com';
+            } else if (key === 'F') {
+                audioManager.playClick();
+                goto('/faq');
+            } else if (key === 'C') {
+                audioManager.playClick();
+                goto('/credits');
+            } else if (key === 'A') {
+                audioManager.playClick();
+                handlePrimaryClick();
+            } else if (key === 'H') {
+                audioManager.playClick();
+                window.location.href = 'https://portal.sfusurge.com/apply';
+            } else if (key === 'V') {
+                audioManager.playClick();
+                window.location.href = 'https://forms.gle/gWBZMF9gCMXk2q4y8';
+            }
+        }
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    });
 </script>
 
 <div class="apply-button-stage flex items-center justify-end gap-1 md:gap-2 whitespace-nowrap flex-nowrap">
@@ -40,7 +78,7 @@
                     </div>
                 </Button>
 
-                <Button href="/volunteer" letter="V" label="AS VOLUNTEER >" variant="light" />
+                <Button href="https://forms.gle/gWBZMF9gCMXk2q4y8" letter="V" label="AS VOLUNTEER >" variant="light" />
             </div>
         {/if}
     </div>

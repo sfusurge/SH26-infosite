@@ -1,11 +1,27 @@
 <script lang="ts">
-    let { muted = $bindable(false) }: { muted?: boolean } = $props();
+    import { onMount } from "svelte";
+    import { audioManager } from "$lib/audioManager.js";
+
+    let { class: className = "absolute left-5 bottom-5" }: { class?: string } = $props();
+    let isMuted = $state(false);
+
+    onMount(() => {
+        isMuted = audioManager.isMuted;
+    });
+
+    function toggle() {
+        isMuted = audioManager.toggleMute();
+    }
 </script>
 
 <button
-    class="absolute left-5 bottom-5 grid place-items-center w-[32px] h-[32px] rounded-md bg-[#ececef] z-10"
-    onclick={() => muted = !muted}
-    aria-label={muted ? "Unmute sound" : "Mute sound"}
+    class={`grid place-items-center w-[32px] h-[32px] rounded-md bg-[#ececef] z-10 transition-all ${className}`}
+    onclick={toggle}
+    aria-label={isMuted ? "Unmute sound" : "Mute sound"}
 >
-    <img src="/ui/sound.svg" alt="" class="w-[24px] h-[24px]" />
+    <img
+        src="/ui/sound.svg"
+        alt=""
+        class={`w-[24px] h-[24px] transition-opacity ${isMuted ? "opacity-30" : "opacity-100"}`}
+    />
 </button>

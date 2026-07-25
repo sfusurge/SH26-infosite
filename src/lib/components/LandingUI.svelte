@@ -2,6 +2,7 @@
 <script lang="ts">
     import { onMount } from 'svelte';
     import Navbar from "$lib/ui/Navbar.svelte";
+    import SoundButton from "$lib/ui/SoundButton.svelte";
 
     let isMounted = $state(false);
 
@@ -58,18 +59,9 @@
 </header>
 
 
-<button
-    class="absolute left-5 bottom-5 grid place-items-center w-[32px] h-[32px] rounded-md bg-[#ececef] z-10 transition-[opacity,filter,transform] duration-copy ease-copy delay-700"
-    class:opacity-0={!isMounted}
-    class:blur-sm={!isMounted}
-    class:translate-y-[6px]={!isMounted}
-    class:opacity-100={isMounted}
-    class:blur-none={isMounted}
-    class:translate-y-0={isMounted}
-    aria-label="Toggle sound"
->
-    <img src="/ui/sound.svg" alt="" class="w-[24px] h-[24px]" />
-</button>
+<SoundButton
+    class={`absolute left-5 bottom-5 transition-[opacity,filter,transform] duration-copy ease-copy delay-700 ${!isMounted ? 'opacity-0 blur-sm translate-y-[6px]' : 'opacity-100 blur-none translate-y-0'}`}
+/>
 
 <button
     class="absolute right-5 bottom-5 grid place-items-center w-[32px] h-[32px] rounded-md bg-[#ececef] z-10 transition-[opacity,filter,transform] duration-copy ease-copy delay-700"

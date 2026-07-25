@@ -1,5 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
+    import { audioManager } from "$lib/audioManager.js";
 
     type Walker = {
         id: number;
@@ -28,6 +29,9 @@
             id: ++walkerId,
             src
         };
+
+        // Trigger car sound fade in/out during sidewalk crossing animation (18s)
+        audioManager.startCarSound(18000);
     }
 
     function scheduleWalker(delay = randomRespawnDelay()) {
@@ -37,6 +41,7 @@
 
     function finishWalker() {
         activeWalker = null;
+        audioManager.stopCarSound();
         scheduleWalker();
     }
 
@@ -47,6 +52,7 @@
 
         return () => {
             if (spawnTimer) clearTimeout(spawnTimer);
+            audioManager.stopCarSound();
         };
     });
 </script>
