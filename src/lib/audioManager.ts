@@ -205,7 +205,7 @@ class AudioManager {
             // Landing Page Song + Ambience (LOOPS)
             const landing = this.getAudioElement('landingSong');
             landing.loop = true;
-            landing.volume = 0.1;
+            landing.volume = 0.5;
             tracksToPlay.push(landing);
 
             const ambience = this.getAudioElement('ambience');
