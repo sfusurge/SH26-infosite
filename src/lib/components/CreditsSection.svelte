@@ -13,7 +13,7 @@
 
     $effect(() => {
         if (videoEl) {
-            videoEl.volume = 0.5;
+            videoEl.volume = 0.04;
         }
     });
 
@@ -101,7 +101,7 @@
 
 <style>
     .credits-wrapper {
-        animation: credits 45s linear infinite;
+        animation: credits 110s linear infinite;
         will-change: transform;
     }
 

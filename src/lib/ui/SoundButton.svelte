@@ -1,8 +1,20 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { audioManager } from "$lib/audioManager.js";
+    import { page } from "$app/state";
 
-    let { class: className = "absolute left-5 bottom-5" }: { class?: string } = $props();
+    let { 
+        class: className = "absolute left-5 bottom-5",
+        highlightColor = undefined
+    }: { 
+        class?: string;
+        highlightColor?: "blue" | "orange";
+    } = $props();
+
+    let activeHighlight = $derived(
+        highlightColor ?? (page.url.pathname.startsWith('/faq') ? 'orange' : 'blue')
+    );
+
     let isMuted = $state(false);
 
     onMount(() => {
@@ -23,7 +35,7 @@
     aria-label={isMuted ? "Unmute sound" : "Mute sound"}
 >
     <div
-        class={`w-[24px] h-[24px] bg-black group-hover:bg-[#0278FF] transition-colors ${isMuted ? "opacity-30" : "opacity-100"}`}
+        class={`w-[24px] h-[24px] bg-black transition-colors ${activeHighlight === 'orange' ? 'group-hover:bg-[#FF5D0B]' : 'group-hover:bg-[#0278FF]'} ${isMuted ? "opacity-30" : "opacity-100"}`}
         style="mask: url('/ui/sound.svg') no-repeat center / contain; -webkit-mask: url('/ui/sound.svg') no-repeat center / contain;"
         aria-hidden="true"
     ></div>

@@ -1,6 +1,7 @@
 <script lang="ts">
     import ApplyButton from "$lib/ui/ApplyButton.svelte";
     import { page } from "$app/state";
+    import { goto } from "$app/navigation";
     import { fly } from "svelte/transition";
     import { cubicOut, cubicIn } from "svelte/easing";
 
@@ -13,7 +14,50 @@
     } = $props();
 
     let isExpanded = $state(false);
+
+    function handleKeyDown(event: KeyboardEvent) {
+        const target = event.target as HTMLElement;
+        if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)) {
+            return;
+        }
+
+        const key = event.key.toLowerCase();
+
+        if (!isExpanded) {
+            switch (key) {
+                case 'escape':
+                    goto(backHref);
+                    break;
+                case 'i':
+                    goto('/info');
+                    break;
+                case 'f':
+                    goto('/faq');
+                    break;
+                case 'c':
+                    goto('/credits');
+                    break;
+                case 'a':
+                    isExpanded = true;
+                    break;
+            }
+        } else {
+            switch (key) {
+                case 'v':
+                    window.location.href = 'https://forms.gle/gWBZMF9gCMXk2q4y8';
+                    break;
+                case 'h':
+                    window.location.href = 'https://portal.sfusurge.com/apply';
+                    break;
+                case 'escape':
+                    isExpanded = false;
+                    break;
+            }
+        }
+    }
 </script>
+
+<svelte:window onkeydown={handleKeyDown} />
 
 <header class="font-sf-text absolute top-0 left-0 w-full z-[999] flex items-center justify-between px-4 py-4 md:px-8 md:py-7 text-[16px]">
     <div class="hidden md:flex items-center gap-4 flex-grow min-w-0">
