@@ -147,13 +147,13 @@
     </a> -->
 
     <div
-    class="text-bubble float-bob transition-opacity duration-300"
-    class:opacity-0={isExpanded}
-    class:pointer-events-none={isExpanded}
->
-    <img src="/landing-page/textBubbleTemp.png" alt="Even more fun coming soon >.<" class="bubble-img md:hidden" />
-    <img src="/landing-page/textBubbleTemp.png" alt="Even more fun coming soon >.<" class="bubble-img hidden md:block" />
-</div>
+        class="text-bubble float-bob transition-opacity duration-300"
+        class:opacity-0={isExpanded}
+        class:pointer-events-none={isExpanded}
+    >
+        <img src="/landing-page/textBubbleTem.webp" alt="Even more fun coming soon >.<" class="bubble-img md:hidden" />
+        <img src="/landing-page/textBubbleTem.webp" alt="Even more fun coming soon >.<" class="bubble-img hidden md:block" />
+    </div>
 
     <button
         onclick={toggleMute}
