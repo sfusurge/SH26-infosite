@@ -82,7 +82,7 @@
                 class:translate-y-0={isMounted}
             >
                 <img 
-                    src="/mlhBanner.svg" 
+                    src="/mlhBanner.webp" 
                     alt="MLH Official 2027 Season" 
                     class="hidden md:block w-15 h-20 transition-opacity duration-300" 
                     class:opacity-0={isExpanded}
@@ -104,9 +104,9 @@
                         class:mt-1={!isExpanded}
                     >
                         <span>West Canada's Largest Hackathon</span>
-                        <img src="/ui/star.svg" alt="" aria-hidden="true" class="w-[18px] h-[18px] subtitle-star" />
+                        <img src="/ui/star.webp" alt="" aria-hidden="true" class="w-[18px] h-[18px] subtitle-star" />
                         <span>Oct 3 + 4</span>
-                        <img src="/ui/star.svg" alt="" aria-hidden="true" class="w-[18px] h-[18px] subtitle-star" />
+                        <img src="/ui/star.webp" alt="" aria-hidden="true" class="w-[18px] h-[18px] subtitle-star" />
                         <span>SFU Burnaby</span>
                     </p>
 
@@ -118,7 +118,7 @@
                         <span>West Canada's Largest Hackathon</span>
                         <span class="subtitle-mobile-row flex items-center gap-2">
                             <span>Oct 3 + 4</span>
-                            <img src="/ui/star.svg" alt="" aria-hidden="true" class="w-[16px] h-[16px]" />
+                            <img src="/ui/star.webp" alt="" aria-hidden="true" class="w-[16px] h-[16px]" />
                             <span>SFU Burnaby</span>
                         </span>
                     </div>
@@ -142,8 +142,8 @@
         class:opacity-0={isExpanded}
         class:pointer-events-none={isExpanded}
     >
-        <img src="/landing-page/textBubbleM.svg" alt="Check out our 3D Workshop" class="bubble-img md:hidden" />
-        <img src="/landing-page/textBubble.svg" alt="Check out our 3D Workshop" class="bubble-img hidden md:block" />
+        <img src="/landing-page/textBubbleM.webp" alt="Check out our 3D Workshop" class="bubble-img md:hidden" />
+        <img src="/landing-page/textBubble.webp" alt="Check out our 3D Workshop" class="bubble-img hidden md:block" />
     </a> -->
 
     <div
@@ -169,7 +169,7 @@
     >
         <div
             class={`w-[24px] h-[24px] bg-black group-hover:bg-[#0278FF] transition-colors ${isMuted ? "opacity-30" : "opacity-100"}`}
-            style="mask: url('/ui/sound.svg') no-repeat center / contain; -webkit-mask: url('/ui/sound.svg') no-repeat center / contain;"
+            style="mask: url('/ui/sound.webp') no-repeat center / contain; -webkit-mask: url('/ui/sound.webp') no-repeat center / contain;"
             aria-hidden="true"
         ></div>
     </button>
@@ -187,7 +187,7 @@
     >
         <div
             class="w-[24px] h-[24px] bg-black group-hover:bg-[#0278FF] transition-colors"
-            style={`mask: url('${isExpanded ? "/ui/minimize.svg" : "/ui/expand.svg"}') no-repeat center / contain; -webkit-mask: url('${isExpanded ? "/ui/minimize.svg" : "/ui/expand.svg"}') no-repeat center / contain;`}
+            style={`mask: url('${isExpanded ? "/ui/minimize.webp" : "/ui/expand.webp"}') no-repeat center / contain; -webkit-mask: url('${isExpanded ? "/ui/minimize.webp" : "/ui/expand.webp"}') no-repeat center / contain;`}
             aria-hidden="true"
         ></div>
     </button>

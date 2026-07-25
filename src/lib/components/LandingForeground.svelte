@@ -2,49 +2,49 @@
     <div class="foreground-canvas">
         <!-- The stairs asset also contains the building wall and railings. -->
         <img
-            src="/landing-page/stairs.svg"
+            src="/landing-page/stairs.webp"
             alt=""
             class="stairs"
         />
 
         <img
-            src="/landing-page/bush3.svg"
+            src="/landing-page/bush3.webp"
             alt=""
             class="bush-rustle bush-rustle-back bush-3"
         />
 
         <img
-            src="/landing-page/bush2.svg"
+            src="/landing-page/bush2.webp"
             alt=""
             class="bush-rustle bush-rustle-middle bush-2"
         />
 
         <img
-            src="/landing-page/bush1.svg"
+            src="/landing-page/bush1.webp"
             alt=""
             class="bush-rustle bush-rustle-front bush-1"
         />
 
         <img
-            src="/landing-page/flower.svg"
+            src="/landing-page/flower.webp"
             alt=""
             class="flower-sway flower-sway-1 flower-1"
         />
 
         <img
-            src="/landing-page/flower2.svg"
+            src="/landing-page/flower2.webp"
             alt=""
             class="flower-sway flower-sway-2 flower-2"
         />
 
         <img
-            src="/landing-page/flower3.svg"
+            src="/landing-page/flower3.webp"
             alt=""
             class="flower-sway flower-sway-3 flower-3"
         />
 
         <img
-            src="/landing-page/flower4.svg"
+            src="/landing-page/flower4.webp"
             alt=""
             class="flower-sway flower-sway-4 flower-4"
         />

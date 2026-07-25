@@ -3,11 +3,11 @@
     <div class="scene-canvas">
 
         <div class="cloud-window" aria-hidden="true">
-            <img src="/landing-page/cloud-shape.svg" alt="" class="cloud-copy cloud-copy-1" />
-            <img src="/landing-page/cloud-shape.svg" alt="" class="cloud-copy cloud-copy-2" />
+            <img src="/landing-page/cloud-shape.webp" alt="" class="cloud-copy cloud-copy-1" />
+            <img src="/landing-page/cloud-shape.webp" alt="" class="cloud-copy cloud-copy-2" />
         </div>
 
-        <img src="/landing-page/road.svg" alt="" class="absolute left-0 top-[32.5%] w-full" />
+        <img src="/landing-page/road.webp" alt="" class="absolute left-0 top-[32.5%] w-full" />
 
     </div>
 

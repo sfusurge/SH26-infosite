@@ -36,7 +36,7 @@
 >
     <div
         class={`w-[24px] h-[24px] bg-black transition-colors ${activeHighlight === 'orange' ? 'group-hover:bg-[#FF5D0B]' : 'group-hover:bg-[#0278FF]'} ${isMuted ? "opacity-30" : "opacity-100"}`}
-        style="mask: url('/ui/sound.svg') no-repeat center / contain; -webkit-mask: url('/ui/sound.svg') no-repeat center / contain;"
+        style="mask: url('/ui/sound.webp') no-repeat center / contain; -webkit-mask: url('/ui/sound.webp') no-repeat center / contain;"
         aria-hidden="true"
     ></div>
 </button>

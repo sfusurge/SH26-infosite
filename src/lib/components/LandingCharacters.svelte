@@ -101,7 +101,7 @@
         {/each}
 
         <img
-            src="/landing-page/sidewalk.svg"
+            src="/landing-page/sidewalk.webp"
             alt=""
             class="sidewalk-overlay"
         />

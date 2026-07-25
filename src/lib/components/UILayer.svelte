@@ -38,9 +38,9 @@
 
     <div class="subtitle-lockup">
       <span>West Canada’s Largest Hackathon</span>
-      <img class="subtitle-star" src="/ui/star.svg" alt="" aria-hidden="true" />
+      <img class="subtitle-star" src="/ui/star.webp" alt="" aria-hidden="true" />
       <span>Oct 3 + 4</span>
-      <img class="subtitle-star" src="/ui/star.svg" alt="" aria-hidden="true" />
+      <img class="subtitle-star" src="/ui/star.webp" alt="" aria-hidden="true" />
       <span>SFU Burnaby</span>
     </div>
   </div>
@@ -59,11 +59,11 @@
     </nav>
 
     <button class="corner-button sound-button" aria-label="Toggle sound">
-        <img src="/ui/sound.svg" alt="" />
+        <img src="/ui/sound.webp" alt="" />
         </button>
 
         <button class="corner-button expand-button" aria-label="Expand view">
-        <img src="/ui/expand.svg" alt="" />
+        <img src="/ui/expand.webp" alt="" />
     </button>
 </div>
 

@@ -68,7 +68,7 @@
         >
             <div 
                 class={`w-[24px] h-[24px] bg-black transition-colors ${page.url.pathname.startsWith('/faq') ? 'group-hover:bg-[#FF5D0B]' : 'group-hover:bg-[#0278FF]'}`}
-                style="mask: url('/ui/arrowback.svg') no-repeat center / contain; -webkit-mask: url('/ui/arrowback.svg') no-repeat center / contain;"
+                style="mask: url('/ui/arrowback.webp') no-repeat center / contain; -webkit-mask: url('/ui/arrowback.webp') no-repeat center / contain;"
                 aria-hidden="true"
             ></div>
         </a>
@@ -78,7 +78,7 @@
         </span>
 
         <div class="flex items-center gap-1.5 text-primary-white whitespace-nowrap">
-            <img src="/ui/star.svg" alt="" aria-hidden="true" class="w-[18px] h-[18px] flex-shrink-0" />
+            <img src="/ui/star.webp" alt="" aria-hidden="true" class="w-[18px] h-[18px] flex-shrink-0" />
             <span class="text-[16px] font-medium font-sf-text">
                 {pageLabel}
             </span>
@@ -99,13 +99,13 @@
                 >
                     <div 
                         class={`w-[24px] h-[24px] bg-black transition-colors ${page.url.pathname.startsWith('/faq') || page.url.pathname.startsWith('/coc') ? 'group-hover:bg-[#FF5D0B]' : 'group-hover:bg-[#0278FF]'}`}
-                        style="mask: url('/ui/arrowback.svg') no-repeat center / contain; -webkit-mask: url('/ui/arrowback.svg') no-repeat center / contain;"
+                        style="mask: url('/ui/arrowback.webp') no-repeat center / contain; -webkit-mask: url('/ui/arrowback.webp') no-repeat center / contain;"
                         aria-hidden="true"
                     ></div>
                 </a>
 
                 <div class="flex items-center gap-1.5 text-primary-white whitespace-nowrap">
-                    <img src="/ui/star.svg" alt="" aria-hidden="true" class="w-[18px] h-[18px] flex-shrink-0" />
+                    <img src="/ui/star.webp" alt="" aria-hidden="true" class="w-[18px] h-[18px] flex-shrink-0" />
                     <span class="text-[16px] font-medium font-sf-text">
                         {pageLabel}
                     </span>
