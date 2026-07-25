@@ -186,9 +186,22 @@
         </a>
     </div>
 
+    <div
+        class="sm:hidden transition-[opacity,filter,transform] duration-copy ease-copy delay-700 absolute bottom-5 left-1/2 -translate-x-1/2 z-30 flex"
+        class:opacity-0={!isMounted || isExpanded}
+        class:blur-sm={!isMounted}
+        class:translate-y-[6px]={!isMounted}
+        class:opacity-100={isMounted && !isExpanded}
+        class:blur-none={isMounted}
+        class:translate-y-0={isMounted}
+        class:pointer-events-none={isExpanded}
+    >
+        <SponsorsBar />
+    </div>
+
     <div class="absolute right-5 bottom-5 z-30 flex items-center gap-3">
         <div
-            class="transition-[opacity,filter,transform] duration-copy ease-copy delay-700 fixed sm:relative left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0 bottom-5 sm:bottom-auto flex"
+            class="hidden sm:flex transition-[opacity,filter,transform] duration-copy ease-copy delay-700"
             class:opacity-0={!isMounted || isExpanded}
             class:blur-sm={!isMounted}
             class:translate-y-[6px]={!isMounted}
