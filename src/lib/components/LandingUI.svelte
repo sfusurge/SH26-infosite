@@ -3,14 +3,25 @@
     import Navbar from "$lib/ui/Navbar.svelte";
     import { goto } from '$app/navigation';
 
+    import { audioManager } from '$lib/audioManager.js';
+
     let isMounted = $state(false);
     let isExpanded = $state(false);
+    let isMuted = $state(false);
     
     let navRef = $state<ReturnType<typeof Navbar> | null>(null);
 
     onMount(() => {
         isMounted = true;
+        const unsubscribe = audioManager.subscribeMuteState((muted) => {
+            isMuted = muted;
+        });
+        return unsubscribe;
     });
+
+    function toggleMute() {
+        audioManager.toggleMute();
+    }
 
     function handleKeyDown(event: KeyboardEvent) {
         const target = event.target as HTMLElement;
@@ -145,7 +156,8 @@
 </div>
 
     <button
-        class="absolute left-5 bottom-5 grid place-items-center w-[32px] h-[32px] p-[2px] rounded-[6px] bg-[#ececef] z-20 transition-[opacity,filter,transform] duration-300"
+        onclick={toggleMute}
+        class="group absolute left-5 bottom-5 grid place-items-center w-[32px] h-[32px] p-[2px] rounded-[6px] bg-[#ececef] z-20 transition-[opacity,filter,transform] duration-300 cursor-pointer"
         class:opacity-0={!isMounted || isExpanded}
         class:blur-sm={!isMounted}
         class:translate-y-[6px]={!isMounted}
@@ -153,14 +165,18 @@
         class:blur-none={isMounted}
         class:translate-y-0={isMounted}
         class:pointer-events-none={isExpanded}
-        aria-label="Toggle sound"
+        aria-label={isMuted ? "Unmute sound" : "Mute sound"}
     >
-        <img src="/ui/sound.svg" alt="" class="w-[24px] h-[24px]" />
+        <div
+            class={`w-[24px] h-[24px] bg-black group-hover:bg-[#0278FF] transition-colors ${isMuted ? "opacity-30" : "opacity-100"}`}
+            style="mask: url('/ui/sound.svg') no-repeat center / contain; -webkit-mask: url('/ui/sound.svg') no-repeat center / contain;"
+            aria-hidden="true"
+        ></div>
     </button>
 
     <button
         onclick={() => (isExpanded = !isExpanded)}
-        class="absolute right-5 bottom-5 grid place-items-center w-[32px] h-[32px] p-[2px] rounded-[6px] bg-[#ececef] z-30 transition-[opacity,filter,transform] duration-copy ease-copy delay-700 cursor-pointer"
+        class="group absolute right-5 bottom-5 grid place-items-center w-[32px] h-[32px] p-[2px] rounded-[6px] bg-[#ececef] z-30 transition-[opacity,filter,transform] duration-copy ease-copy delay-700 cursor-pointer"
         class:opacity-0={!isMounted}
         class:blur-sm={!isMounted}
         class:translate-y-[6px]={!isMounted}
@@ -169,11 +185,11 @@
         class:translate-y-0={isMounted}
         aria-label={isExpanded ? "Exit focus view" : "Expand view"}
     >
-        <img 
-            src={isExpanded ? "/ui/minimize.svg" : "/ui/expand.svg"} 
-            alt="" 
-            class="w-[24px] h-[24px]" 
-        />
+        <div
+            class="w-[24px] h-[24px] bg-black group-hover:bg-[#0278FF] transition-colors"
+            style={`mask: url('${isExpanded ? "/ui/minimize.svg" : "/ui/expand.svg"}') no-repeat center / contain; -webkit-mask: url('${isExpanded ? "/ui/minimize.svg" : "/ui/expand.svg"}') no-repeat center / contain;`}
+            aria-hidden="true"
+        ></div>
     </button>
 
     <div
@@ -184,7 +200,7 @@
     >
         <a
             href="/coc"
-            class="font-sfreg text-[16px] italic leading-normal text-[#ECECEF] hover:underline"
+            class="font-sfreg text-[16px] italic leading-normal text-[#ECECEF] mix-blend-exclusion hover:underline"
         >
             MLH Code of Conduct
         </a>

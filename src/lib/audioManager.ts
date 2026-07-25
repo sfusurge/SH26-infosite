@@ -13,7 +13,7 @@ type SoundKey =
 const SOUND_PATHS: Record<SoundKey, string[]> = {
     buttonHover: ['/sounds/buttonHover.mp3'],
     buttonClick: ['/sounds/buttonClick.mp3'],
-    landingSong: ['/sounds/environmentAmbience.mp3'],
+    landingSong: ['/sounds/landingSong.mp3'],
     ambience: ['/sounds/environmentAmbience.mp3'],
     infoSong: ['/sounds/infoSong.mp3'],
     faqSong: ['/sounds/faqSong.mp3'],

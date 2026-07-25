@@ -18,13 +18,13 @@
 </script>
 
 <button
-    class={`grid place-items-center w-[32px] h-[32px] rounded-md bg-[#ececef] z-10 transition-all ${className}`}
+    class={`group grid place-items-center w-[32px] h-[32px] rounded-md bg-[#ececef] z-10 transition-all ${className}`}
     onclick={toggle}
     aria-label={isMuted ? "Unmute sound" : "Mute sound"}
 >
-    <img
-        src="/ui/sound.svg"
-        alt=""
-        class={`w-[24px] h-[24px] transition-opacity ${isMuted ? "opacity-30" : "opacity-100"}`}
-    />
+    <div
+        class={`w-[24px] h-[24px] bg-black group-hover:bg-[#0278FF] transition-colors ${isMuted ? "opacity-30" : "opacity-100"}`}
+        style="mask: url('/ui/sound.svg') no-repeat center / contain; -webkit-mask: url('/ui/sound.svg') no-repeat center / contain;"
+        aria-hidden="true"
+    ></div>
 </button>
