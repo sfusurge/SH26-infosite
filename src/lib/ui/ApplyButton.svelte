@@ -16,7 +16,7 @@
     } = $props();
 
     let activeHighlight = $derived(
-        highlightColor ?? (page.url.pathname.startsWith('/faq') ? 'orange' : 'blue')
+        highlightColor ?? (page.url.pathname.startsWith('/faq') || page.url.pathname.startsWith('/coc') ? 'orange' : 'blue')
     );
 
     let applyButtonEl = $state<HTMLElement | null>(null);

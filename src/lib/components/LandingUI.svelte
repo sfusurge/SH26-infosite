@@ -26,9 +26,9 @@
                 case 'i':
                     goto('/info');
                     break;
-                case 'w':
-                    window.location.href = 'https://workshop.stormhacks.com';
-                    break;
+                // case 'w':
+                //     window.location.href = 'https://workshop.stormhacks.com';
+                //     break;
                 case 'f':
                     goto('/faq');
                     break;
@@ -125,7 +125,7 @@
 
     </header>
 
-    <a 
+    <!-- <a 
         href="/workshop" 
         class="text-bubble float-bob transition-opacity duration-300"
         class:opacity-0={isExpanded}
@@ -133,7 +133,16 @@
     >
         <img src="/landing-page/textBubbleM.svg" alt="Check out our 3D Workshop" class="bubble-img md:hidden" />
         <img src="/landing-page/textBubble.svg" alt="Check out our 3D Workshop" class="bubble-img hidden md:block" />
-    </a>
+    </a> -->
+
+    <div
+    class="text-bubble float-bob transition-opacity duration-300"
+    class:opacity-0={isExpanded}
+    class:pointer-events-none={isExpanded}
+>
+    <img src="/landing-page/textBubbleTemp.png" alt="Even more fun coming soon >.<" class="bubble-img md:hidden" />
+    <img src="/landing-page/textBubbleTemp.png" alt="Even more fun coming soon >.<" class="bubble-img hidden md:block" />
+</div>
 
     <button
         class="absolute left-5 bottom-5 grid place-items-center w-[32px] h-[32px] p-[2px] rounded-[6px] bg-[#ececef] z-20 transition-[opacity,filter,transform] duration-300"
@@ -166,6 +175,20 @@
             class="w-[24px] h-[24px]" 
         />
     </button>
+
+    <div
+        class="fixed inset-x-0 bottom-5 z-50 flex justify-center transition-opacity duration-copy ease-copy"
+        class:opacity-0={!isMounted || isExpanded}
+        class:pointer-events-none={!isMounted || isExpanded}
+        class:animate-fade-in-after-text={isMounted}
+    >
+        <a
+            href="/coc"
+            class="font-sfreg text-[16px] italic leading-normal text-[#ECECEF] hover:underline"
+        >
+            MLH Code of Conduct
+        </a>
+    </div>
 </div>
 
 <style>

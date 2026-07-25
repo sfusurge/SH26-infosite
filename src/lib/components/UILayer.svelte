@@ -6,11 +6,11 @@
       label: 'INFO',
       href: '#info'
     },
-    {
-      key: 'W',
-      label: 'THE WORKSHOP',
-      href: '#workshop'
-    },
+    // {
+    //   key: 'W',
+    //   label: 'THE WORKSHOP',
+    //   href: '#workshop'
+    // },
     {
       key: 'F',
       label: 'FAQ',

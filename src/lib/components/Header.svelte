@@ -54,7 +54,7 @@
                     class="group flex items-center justify-center w-9 h-9 rounded-[6px] bg-primary-white flex-shrink-0"
                 >
                     <div 
-                        class={`w-[24px] h-[24px] bg-black transition-colors ${page.url.pathname.startsWith('/faq') ? 'group-hover:bg-[#FF5D0B]' : 'group-hover:bg-[#0278FF]'}`}
+                        class={`w-[24px] h-[24px] bg-black transition-colors ${page.url.pathname.startsWith('/faq') || page.url.pathname.startsWith('/coc') ? 'group-hover:bg-[#FF5D0B]' : 'group-hover:bg-[#0278FF]'}`}
                         style="mask: url('/ui/arrowback.svg') no-repeat center / contain; -webkit-mask: url('/ui/arrowback.svg') no-repeat center / contain;"
                         aria-hidden="true"
                     ></div>

@@ -35,6 +35,10 @@ export default {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
         },
+        'fade-in-after-text': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
         'shake': {
           '0%, 100%': { transform: 'translateX(0)' },
           '20%, 60%': { transform: 'translateX(-10px)' },
@@ -44,6 +48,7 @@ export default {
       animation: {
         'stagger-in': 'stagger-in 1.6s cubic-bezier(.2,.6,.2,1) 0.2s backwards',
         'stagger-in-delayed': 'stagger-in 1.6s cubic-bezier(.2,.6,.2,1) 0.4s backwards',
+        'fade-in-after-text': 'fade-in-after-text 1.6s cubic-bezier(.2,.6,.2,1) 0.8s backwards',
         'shake': 'shake 0.4s cubic-bezier(.36,.07,.19,.97) 0.3s both',
       },
     },

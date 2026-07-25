@@ -7,8 +7,12 @@
         src: string;
     };
 
-    // Add the four delivered walking GIF paths here when they are available.
-    const walkerSources = ["/landing-page/stormy.svg"];
+    const walkerSources = [
+        "/gifs/LandingPage/PinkWalk.gif",
+        "/gifs/LandingPage/blueWalk.gif",
+        "/gifs/LandingPage/purpleWalk.gif",
+        "/gifs/LandingPage/Truck.gif"
+    ];
     const minRespawnDelay = 5_000;
     const maxRespawnDelay = 20_000;
 
@@ -34,15 +38,15 @@
         audioManager.startCarSound(18000);
     }
 
-    function scheduleWalker(delay = randomRespawnDelay()) {
-        if (spawnTimer) clearTimeout(spawnTimer);
-        spawnTimer = setTimeout(spawnWalker, delay);
-    }
-
     function finishWalker() {
         activeWalker = null;
         audioManager.stopCarSound();
         scheduleWalker();
+    }
+
+    function scheduleWalker(delay = randomRespawnDelay()) {
+        if (spawnTimer) clearTimeout(spawnTimer);
+        spawnTimer = setTimeout(spawnWalker, delay);
     }
 
     onMount(() => {
@@ -58,9 +62,8 @@
 </script>
 
 <div class="landing-characters" aria-hidden="true">
-    <!-- Replace this source with the final animated otter when it is delivered. -->
     <img
-        src="/landing-page/boba-otter.svg"
+        src="/gifs/LandingPage/SparkyBoba.gif"
         alt=""
         class="landing-otter"
     />
@@ -88,8 +91,8 @@
         position: absolute;
         z-index: 15;
         left: calc(50% + var(--nudge) - max(29.1648vh, 18.7293vw));
-        top: calc(89.8796vh - var(--nudge) - max(26.9656vh, 17.3279vw));
-        width: max(30.9571vh, 19.8929vw);
+        top: calc(89.8796vh - var(--nudge) - max(31.8vh, 20.4vw));
+        width: max(36.5vh, 23.5vw);
         max-width: none;
         height: auto;
         user-select: none;

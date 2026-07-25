@@ -32,6 +32,7 @@ class AudioManager {
     private lastHoveredEl: Element | null = null;
     private listenersAdded = false;
     private listeners: Array<() => void> = [];
+    private muteSubscribers: Array<(muted: boolean) => void> = [];
 
     constructor() {
         if (typeof window !== 'undefined') {
@@ -65,6 +66,9 @@ class AudioManager {
         if (this.carAudio) {
             this.carAudio.muted = muted;
         }
+
+        // Notify subscribers
+        this.muteSubscribers.forEach((cb) => cb(muted));
 
         if (!muted) {
             // Attempt to resume bg music for current route if unmuted
@@ -294,9 +298,10 @@ class AudioManager {
 
     public subscribeMuteState(cb: (muted: boolean) => void): () => void {
         cb(this.isMutedState);
-        const listener = () => cb(this.isMutedState);
-        // We can publish changes
-        return () => {};
+        this.muteSubscribers.push(cb);
+        return () => {
+            this.muteSubscribers = this.muteSubscribers.filter((s) => s !== cb);
+        };
     }
 }
 

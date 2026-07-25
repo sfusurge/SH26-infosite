@@ -1,5 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte';
+    import { audioManager } from '$lib/audioManager.js';
 
     type Credit = {
         title: string;
@@ -8,11 +9,31 @@
 
     let credits = $state<Credit[]>([]);
     let isMounted = $state(false);
+    let videoEl = $state<HTMLVideoElement | null>(null);
 
-    onMount(async () => {
-        const response = await fetch('/data/credits.json');
-        credits = await response.json();
-        isMounted = true;
+    $effect(() => {
+        if (videoEl) {
+            videoEl.volume = 0.5;
+        }
+    });
+
+    onMount(() => {
+        fetch('/data/credits.json')
+            .then((res) => res.json())
+            .then((data) => {
+                credits = data;
+                isMounted = true;
+            });
+
+        const unsubscribe = audioManager.subscribeMuteState((muted) => {
+            if (videoEl) {
+                videoEl.muted = muted;
+            }
+        });
+
+        return () => {
+            unsubscribe();
+        };
     });
 </script>
 
@@ -20,8 +41,8 @@
 <div class="relative h-screen w-full overflow-hidden align-middle bg-[#101A21]">
 
     <video
+        bind:this={videoEl}
         autoplay
-        muted
         loop
         playsinline
         class="absolute left-1/2 top-1/2

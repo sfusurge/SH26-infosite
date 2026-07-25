@@ -6,11 +6,14 @@
     let isMuted = $state(false);
 
     onMount(() => {
-        isMuted = audioManager.isMuted;
+        const unsubscribe = audioManager.subscribeMuteState((muted) => {
+            isMuted = muted;
+        });
+        return unsubscribe;
     });
 
     function toggle() {
-        isMuted = audioManager.toggleMute();
+        audioManager.toggleMute();
     }
 </script>
 
