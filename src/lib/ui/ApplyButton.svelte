@@ -26,7 +26,7 @@
         if (!isExpanded) {
             isExpanded = true;
         } else {
-            window.location.href = 'https://portal.sfusurge.com/apply';
+            window.location.href = 'https://portal.sfusurge.com/application';
         }
     }
 
