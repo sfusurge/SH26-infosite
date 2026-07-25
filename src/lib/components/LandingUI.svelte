@@ -188,7 +188,7 @@
 
     <div class="absolute right-5 bottom-5 z-30 flex items-center gap-3">
         <div
-            class="transition-[opacity,filter,transform] duration-copy ease-copy delay-700 hidden sm:flex"
+            class="transition-[opacity,filter,transform] duration-copy ease-copy delay-700 fixed sm:relative left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0 bottom-5 sm:bottom-auto flex"
             class:opacity-0={!isMounted || isExpanded}
             class:blur-sm={!isMounted}
             class:translate-y-[6px]={!isMounted}

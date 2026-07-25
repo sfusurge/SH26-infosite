@@ -38,7 +38,7 @@
 </script>
 
 <div
-    class={`flex flex-col items-start w-[280px] px-[16px] py-[14px] gap-[10px] rounded-[6px] bg-[#ececef] shrink-0 select-none ${className}`}
+    class={`flex flex-col justify-center items-start w-[280px] h-[32px] sm:h-auto max-w-[calc(100vw-110px)] sm:max-w-[280px] px-[12px] sm:px-[16px] py-[4px] sm:py-[14px] gap-[10px] rounded-[6px] bg-[#ececef] shrink-0 select-none ${className}`}
 >
     <div class="flex items-center justify-between w-full">
         {#each sponsorsList as sponsor (sponsor.name)}

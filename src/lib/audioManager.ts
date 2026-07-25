@@ -7,7 +7,6 @@ type SoundKey =
     | 'ambience'
     | 'infoSong'
     | 'faqSong'
-    | 'carSound'
     | 'creditSong';
 
 const SOUND_PATHS: Record<SoundKey, string[]> = {
@@ -17,7 +16,6 @@ const SOUND_PATHS: Record<SoundKey, string[]> = {
     ambience: ['/sounds/environmentAmbience.mp3'],
     infoSong: ['/sounds/infoSong.mp3'],
     faqSong: ['/sounds/faqSong.mp3'],
-    carSound: ['/sounds/carSound.mp3'],
     creditSong: ['/sounds/creditsSong.mp3']
 };
 
@@ -250,58 +248,10 @@ class AudioManager {
         this.activeBgTracks = [];
     }
 
-    public startCarSound(durationMs = 18000): void {
-        if (typeof window === 'undefined') return;
-        this.stopCarSound();
 
-        const car = this.getAudioElement('carSound');
-        this.carAudio = car;
-        car.currentTime = 0;
-        car.loop = true;
-        car.volume = 0;
-        car.muted = this.isMutedState;
+    public startCarSound(_duration = 18000): void {}
 
-        car.play().catch(() => {});
-
-        const startTime = Date.now();
-        const maxVol = 0.7;
-
-        this.carFadeInterval = window.setInterval(() => {
-            const elapsed = Date.now() - startTime;
-            const progress = Math.min(1, elapsed / durationMs);
-
-            let vol = 0;
-            if (progress < 0.25) {
-                // Fade in (0% to 25%)
-                vol = (progress / 0.25) * maxVol;
-            } else if (progress > 0.75) {
-                // Fade out (75% to 100%)
-                vol = ((1 - progress) / 0.25) * maxVol;
-            } else {
-                vol = maxVol;
-            }
-
-            if (this.carAudio) {
-                this.carAudio.volume = Math.max(0, Math.min(maxVol, vol));
-            }
-
-            if (progress >= 1) {
-                this.stopCarSound();
-            }
-        }, 100);
-    }
-
-    public stopCarSound(): void {
-        if (this.carFadeInterval) {
-            clearInterval(this.carFadeInterval);
-            this.carFadeInterval = null;
-        }
-        if (this.carAudio) {
-            this.carAudio.pause();
-            this.carAudio.currentTime = 0;
-            this.carAudio = null;
-        }
-    }
+    public stopCarSound(): void {}
 
     public subscribeMuteState(cb: (muted: boolean) => void): () => void {
         cb(this.isMutedState);
