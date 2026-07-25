@@ -87,12 +87,11 @@
                         aria-label="Go back"
                     >
                         <div class="flex items-center justify-center w-[25px] h-[25px] bg-[#ECECEF] transition-colors rounded-[2px]">
-                            <img 
-                                src="/ui/arrowback.svg" 
-                                alt="" 
-                                aria-hidden="true" 
-                                class="w-[25px] h-[25px] group-hover:brightness-0 transition-all" 
-                            />
+                            <div 
+                                class="w-[25px] h-[25px] bg-black group-hover:bg-[#0278FF] transition-colors"
+                                style="mask: url('/ui/arrowback.svg') no-repeat center / contain; -webkit-mask: url('/ui/arrowback.svg') no-repeat center / contain;"
+                                aria-hidden="true"
+                            ></div>
                         </div>
                     </Button>
 

@@ -88,7 +88,7 @@
                     </h1>
 
                     <p 
-                        class="font-sf text-white text-base hidden md:flex items-center gap-2 whitespace-nowrap subtitle-lockup subtitle-type transition-all duration-300"
+                        class="font-sf-text text-white text-base hidden md:flex items-center gap-2 whitespace-nowrap subtitle-lockup subtitle-type transition-all duration-300"
                         class:focused-subtitle-desktop={isExpanded}
                         class:mt-1={!isExpanded}
                     >
@@ -100,7 +100,7 @@
                     </p>
 
                     <div 
-                        class="subtitle-mobile subtitle-type flex md:hidden flex-col items-start font-sf text-white text-lg transition-all duration-300"
+                        class="subtitle-mobile subtitle-type flex md:hidden flex-col items-start font-sf-text text-white text-lg transition-all duration-300"
                         class:focused-subtitle-mobile={isExpanded}
                         class:mt-1={!isExpanded}
                     >

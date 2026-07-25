@@ -17,7 +17,7 @@
     }
 </script>
 
-<div class="fixed inset-0 overflow-hidden bg-background-blue flex justify-center items-center">
+<div class="info-page fixed inset-0 overflow-hidden bg-background-blue flex justify-center items-center">
     <Header pageLabel="Info" backHref="/" />
     <div class="relative flex justify-center items-center h-full text-primary-black gap-19 flex-col origin-center">
         <TextSection
@@ -41,3 +41,10 @@
         />
     </div>
 </div>
+
+<style>
+    :global(.info-page ::selection) {
+        background: #141417;
+        color: #0278FF;
+    }
+</style>

@@ -1,0 +1,144 @@
+[
+	{
+		"title": "Introduction",
+		"blocks": [
+			[
+				"Be respectful. Harassment, discrimination, racism, and abuse are never tolerated. SFU Surge is committed to a safe, inclusive, welcoming environment.",
+				"SFU Surge follows and upholds the Major League Hacking (MLH) Code of Conduct. All members, participants, mentors, judges, executives, and representatives are expected to follow these standards at all SFU Surge-related events, meetings, online spaces, and public communications."
+			]
+		]
+	},
+	{
+		"title": "Our Commitment",
+		"blocks": [
+			[
+				"SFU Surge believes that every individual has the right to participate in a community free from harassment, racism, and discrimination, regardless of race, ethnicity, gender, age, sexual orientation, disability, physical appearance, religion, or socioeconomic background.",
+				"We are actively committed to anti-racism, equity, and accountability, both internally and in our public representation of the club.",
+				"If your actions make someone feel uncomfortable, unsafe, or excluded, that behaviour is unacceptable and must stop immediately."
+			]
+		]
+	},
+	{
+		"title": "Anti-Racism & Media Responsibility",
+		"blocks": [
+			{
+				"title": "What This Means",
+				"items": [
+					"Treat individuals of all racial and ethnic backgrounds with dignity and respect",
+					"Avoid any language, behaviour, or content that reinforces stereotypes, exclusion, or harmful narratives",
+					"Be mindful of how words, jokes, imagery, and assumptions may impact others"
+				]
+			},
+			{
+				"title": "Racism Includes (But Is Not Limited To)",
+				"items": [
+					"Racial slurs, insults, or derogatory language",
+					"Mocking accents, names, cultural practices, or appearances",
+					"Stereotyping or generalizing groups based on race or ethnicity",
+					"Tokenizing individuals or communities for optics or representation",
+					"Sharing or promoting racially harmful images, memes, or narratives"
+				]
+			},
+			{
+				"title": "Microaggressions",
+				"items": [
+					"Assuming someone's abilities, background, or interests based on race",
+					"Questioning someone's belonging or legitimacy in the space",
+					"Making \"jokes\" or comments that rely on racial stereotypes",
+					"Dismissing concerns about racism as overreactions",
+					"Impact matters more than intent. If a behaviour causes harm or discomfort, it must stop immediately when addressed."
+				]
+			},
+			{
+				"title": "Media & Public Representation",
+				"items": [
+					"Avoid racial stereotypes and harmful portrayals",
+					"Represent communities respectfully and accurately",
+					"Not exploit or misrepresent individuals or cultures"
+				]
+			}
+		]
+	},
+	{
+		"title": "Harassment & Discrimination Policy",
+		"blocks": [
+			{
+				"intro": "Harassment includes, but is not limited to:",
+				"items": [
+					"Racist, sexist, or discriminatory language or behaviour",
+					"Offensive verbal or written comments related to identity or background",
+					"Sexualized language, images, or conduct",
+					"Intimidation, stalking, or following",
+					"Doxxing or sharing private information",
+					"Unwelcome physical contact or sexual attention",
+					"Sustained disruption of talks, workshops, or events",
+					"Harassing photography or recording"
+				]
+			},
+			{
+				"intro": "Sexualized or racially harmful content is not permitted in:",
+				"items": [
+					"Hacks or project submissions",
+					"Presentations or demos",
+					"Clothing, visuals, or promotional materials",
+					"Online spaces associated with SFU Surge"
+				]
+			}
+		]
+	},
+	{
+		"title": "Guidelines by Role",
+		"blocks": [
+			{
+				"title": "For Hackers / Participants",
+				"items": [
+					"Respect all individuals and perspectives",
+					"Collaborate inclusively and communicate constructively",
+					"Avoid harmful stereotypes or offensive content in projects",
+					"Respect personal boundaries and consent",
+					"Stop immediately if asked to discontinue any behaviour",
+					"Report any unsafe, racist, or uncomfortable situations"
+				]
+			},
+			{
+				"title": "For Mentors & Judges",
+				"items": [
+					"Provide equitable, unbiased, and respectful guidance",
+					"Evaluate projects fairly and without discrimination",
+					"Maintain professional boundaries with participants",
+					"Avoid language or conduct that reinforces bias or exclusion",
+					"Model inclusive, anti-racist behaviour"
+				]
+			},
+			{
+				"title": "For Executives & Organizers",
+				"items": [
+					"Uphold and enforce this Code of Conduct consistently",
+					"Actively intervene when harmful or racist behaviour occurs",
+					"Ensure events, content, and decisions reflect equity and inclusion",
+					"Respond promptly and confidentially to reports",
+					"Prioritize safety, accessibility, and fairness in all decisions"
+				]
+			}
+		]
+	},
+	{
+		"title": "Enforcement",
+		"blocks": [
+			[
+				"Violations of this Code of Conduct may result in formal warnings, removal from events or responsibilities, suspension or removal from SFU Surge, or escalation in alignment with MLH or SFU policies.",
+				"Severity and intent will be considered, but harm caused will always be taken seriously."
+			]
+		]
+	},
+	{
+		"title": "Reporting & Support",
+		"blocks": [
+			[
+				"If you experience or witness harassment, racism, or feel unsafe, reports may be made anonymously through our incident report form at https://forms.gle/aL4Rk72jraE8J6oA8",
+				"All reports will be confidential and respectful. SFU Surge follows MLH's official reporting procedures for incidents occurring at MLH-affiliated events."
+			]
+		]
+	}
+]
+

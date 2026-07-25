@@ -20,9 +20,13 @@
         <a 
             href={backHref}
             aria-label="Go back"
-            class="flex items-center justify-center w-10 h-10 rounded-[6px] bg-primary-white flex-shrink-0"
+            class="group flex items-center justify-center w-10 h-10 rounded-[6px] bg-primary-white flex-shrink-0"
         >
-            <img src="/ui/arrowback.svg" alt="" class="w-[24px] h-[24px]" />
+            <div 
+                class={`w-[24px] h-[24px] bg-black transition-colors ${page.url.pathname.startsWith('/faq') ? 'group-hover:bg-[#FF5D0B]' : 'group-hover:bg-[#0278FF]'}`}
+                style="mask: url('/ui/arrowback.svg') no-repeat center / contain; -webkit-mask: url('/ui/arrowback.svg') no-repeat center / contain;"
+                aria-hidden="true"
+            ></div>
         </a>
 
         <span class="text-primary-white text-[16px] font-semibold whitespace-nowrap font-sf-text">
@@ -47,9 +51,13 @@
                 <a 
                     href={backHref}
                     aria-label="Go back"
-                    class="flex items-center justify-center w-9 h-9 rounded-[6px] bg-primary-white flex-shrink-0"
+                    class="group flex items-center justify-center w-9 h-9 rounded-[6px] bg-primary-white flex-shrink-0"
                 >
-                    <img src="/ui/arrowback.svg" alt="" class="w-[24px] h-[24px]" />
+                    <div 
+                        class={`w-[24px] h-[24px] bg-black transition-colors ${page.url.pathname.startsWith('/faq') ? 'group-hover:bg-[#FF5D0B]' : 'group-hover:bg-[#0278FF]'}`}
+                        style="mask: url('/ui/arrowback.svg') no-repeat center / contain; -webkit-mask: url('/ui/arrowback.svg') no-repeat center / contain;"
+                        aria-hidden="true"
+                    ></div>
                 </a>
 
                 <div class="flex items-center gap-1.5 text-primary-white whitespace-nowrap">
