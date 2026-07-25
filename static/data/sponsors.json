@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Vercel",
+    "url": "https://vercel.com",
+    "image": "/sponsors/vercel.webp",
+    "class": "h-[10px] sm:h-[11px]"
+  },
+  {
+    "name": "Arc'teryx",
+    "url": "https://arcteryx.com",
+    "image": "/sponsors/arcteryx.webp",
+    "class": "h-[18px] sm:h-[28px]"
+  },
+  {
+    "name": "GitHub",
+    "url": "https://github.com",
+    "image": "/sponsors/github.webp",
+    "class": "h-[14px] sm:h-[16px]"
+  },
+  {
+    "name": "Transoft Solutions",
+    "url": "https://www.transoftsolutions.com",
+    "image": "/sponsors/transoft.webp",
+    "class": "h-[16px] sm:h-[20px]"
+  }
+]

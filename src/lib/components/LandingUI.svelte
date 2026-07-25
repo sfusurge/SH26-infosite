@@ -4,6 +4,7 @@
     import { goto } from '$app/navigation';
 
     import { audioManager } from '$lib/audioManager.js';
+    import SponsorsBar from "$lib/components/SponsorsBar.svelte";
 
     let isMounted = $state(false);
     let isExpanded = $state(false);
@@ -155,9 +156,8 @@
         <img src="/landing-page/textBubbleTem.webp" alt="Even more fun coming soon >.<" class="bubble-img hidden md:block" />
     </div>
 
-    <button
-        onclick={toggleMute}
-        class="group absolute left-5 bottom-5 grid place-items-center w-[32px] h-[32px] p-[2px] rounded-[6px] bg-[#ececef] z-20 transition-[opacity,filter,transform] duration-300 cursor-pointer"
+    <div
+        class="absolute left-5 bottom-5 z-20 flex items-center gap-3 transition-[opacity,filter,transform] duration-300"
         class:opacity-0={!isMounted || isExpanded}
         class:blur-sm={!isMounted}
         class:translate-y-[6px]={!isMounted}
@@ -165,45 +165,71 @@
         class:blur-none={isMounted}
         class:translate-y-0={isMounted}
         class:pointer-events-none={isExpanded}
-        aria-label={isMuted ? "Unmute sound" : "Mute sound"}
     >
-        <div
-            class={`w-[24px] h-[24px] bg-black group-hover:bg-[#0278FF] transition-colors ${isMuted ? "opacity-30" : "opacity-100"}`}
-            style="mask: url('/ui/sound.webp') no-repeat center / contain; -webkit-mask: url('/ui/sound.webp') no-repeat center / contain;"
-            aria-hidden="true"
-        ></div>
-    </button>
+        <button
+            onclick={toggleMute}
+            class="group grid place-items-center w-[32px] h-[32px] p-[2px] rounded-[6px] bg-[#ececef] cursor-pointer flex-shrink-0"
+            aria-label={isMuted ? "Unmute sound" : "Mute sound"}
+        >
+            <div
+                class={`w-[24px] h-[24px] bg-black group-hover:bg-[#0278FF] transition-colors ${isMuted ? "opacity-30" : "opacity-100"}`}
+                style="mask: url('/ui/sound.webp') no-repeat center / contain; -webkit-mask: url('/ui/sound.webp') no-repeat center / contain;"
+                aria-hidden="true"
+            ></div>
+        </button>
 
-    <button
-        onclick={() => (isExpanded = !isExpanded)}
-        class="group absolute right-5 bottom-5 grid place-items-center w-[32px] h-[32px] p-[2px] rounded-[6px] bg-[#ececef] z-30 transition-[opacity,filter,transform] duration-copy ease-copy delay-700 cursor-pointer"
-        class:opacity-0={!isMounted}
-        class:blur-sm={!isMounted}
-        class:translate-y-[6px]={!isMounted}
-        class:opacity-100={isMounted}
-        class:blur-none={isMounted}
-        class:translate-y-0={isMounted}
-        aria-label={isExpanded ? "Exit focus view" : "Expand view"}
-    >
-        <div
-            class="w-[24px] h-[24px] bg-black group-hover:bg-[#0278FF] transition-colors"
-            style={`mask: url('${isExpanded ? "/ui/minimize.webp" : "/ui/expand.webp"}') no-repeat center / contain; -webkit-mask: url('${isExpanded ? "/ui/minimize.webp" : "/ui/expand.webp"}') no-repeat center / contain;`}
-            aria-hidden="true"
-        ></div>
-    </button>
-
-    <div
-        class="fixed inset-x-0 bottom-5 z-50 flex justify-center transition-opacity duration-copy ease-copy"
-        class:opacity-0={!isMounted || isExpanded}
-        class:pointer-events-none={!isMounted || isExpanded}
-        class:animate-fade-in-after-text={isMounted}
-    >
         <a
             href="/coc"
-            class="font-sfreg text-[16px] italic leading-normal text-[#ECECEF] mix-blend-exclusion hover:underline"
+            class="hidden md:block font-sfreg text-[16px] italic font-[508] leading-normal text-[#ECECEF] mix-blend-exclusion hover:underline whitespace-nowrap"
         >
             MLH Code of Conduct
         </a>
+    </div>
+
+    <div
+        class="sm:hidden transition-[opacity,filter,transform] duration-copy ease-copy delay-700 absolute bottom-5 left-1/2 -translate-x-1/2 z-30 flex"
+        class:opacity-0={!isMounted || isExpanded}
+        class:blur-sm={!isMounted}
+        class:translate-y-[6px]={!isMounted}
+        class:opacity-100={isMounted && !isExpanded}
+        class:blur-none={isMounted}
+        class:translate-y-0={isMounted}
+        class:pointer-events-none={isExpanded}
+    >
+        <SponsorsBar />
+    </div>
+
+    <div class="absolute right-5 bottom-5 z-30 flex items-center gap-3">
+        <div
+            class="hidden sm:flex transition-[opacity,filter,transform] duration-copy ease-copy delay-700"
+            class:opacity-0={!isMounted || isExpanded}
+            class:blur-sm={!isMounted}
+            class:translate-y-[6px]={!isMounted}
+            class:opacity-100={isMounted && !isExpanded}
+            class:blur-none={isMounted}
+            class:translate-y-0={isMounted}
+            class:pointer-events-none={isExpanded}
+        >
+            <SponsorsBar />
+        </div>
+
+        <button
+            onclick={() => (isExpanded = !isExpanded)}
+            class="group grid place-items-center w-[32px] h-[32px] p-[2px] rounded-[6px] bg-[#ececef] transition-[opacity,filter,transform] duration-copy ease-copy delay-700 cursor-pointer flex-shrink-0"
+            class:opacity-0={!isMounted}
+            class:blur-sm={!isMounted}
+            class:translate-y-[6px]={!isMounted}
+            class:opacity-100={isMounted}
+            class:blur-none={isMounted}
+            class:translate-y-0={isMounted}
+            aria-label={isExpanded ? "Exit focus view" : "Expand view"}
+        >
+            <div
+                class="w-[24px] h-[24px] bg-black group-hover:bg-[#0278FF] transition-colors"
+                style={`mask: url('${isExpanded ? "/ui/minimize.webp" : "/ui/expand.webp"}') no-repeat center / contain; -webkit-mask: url('${isExpanded ? "/ui/minimize.webp" : "/ui/expand.webp"}') no-repeat center / contain;`}
+                aria-hidden="true"
+            ></div>
+        </button>
     </div>
 </div>
 

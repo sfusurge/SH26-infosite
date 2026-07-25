@@ -7,7 +7,6 @@ type SoundKey =
     | 'ambience'
     | 'infoSong'
     | 'faqSong'
-    | 'carSound'
     | 'creditSong';
 
 const SOUND_PATHS: Record<SoundKey, string[]> = {
@@ -17,7 +16,6 @@ const SOUND_PATHS: Record<SoundKey, string[]> = {
     ambience: ['/sounds/environmentAmbience.mp3'],
     infoSong: ['/sounds/infoSong.mp3'],
     faqSong: ['/sounds/faqSong.mp3'],
-    carSound: ['/sounds/carSound.mp3'],
     creditSong: ['/sounds/creditsSong.mp3']
 };
 
@@ -33,6 +31,7 @@ class AudioManager {
     private listenersAdded = false;
     private listeners: Array<() => void> = [];
     private muteSubscribers: Array<(muted: boolean) => void> = [];
+    private wasPausedByVisibility = false;
 
     constructor() {
         if (typeof window !== 'undefined') {
@@ -72,8 +71,8 @@ class AudioManager {
         // Notify subscribers
         this.muteSubscribers.forEach((cb) => cb(muted));
 
-        if (!muted) {
-            // Attempt to resume bg music for current route if unmuted
+        if (!muted && (typeof document === 'undefined' || !document.hidden)) {
+            // Attempt to resume bg music for current route if unmuted and tab is visible
             this.updateRouteMusic(this.currentRoute);
         }
     }
@@ -125,7 +124,7 @@ class AudioManager {
 
         // Autoplay unlock
         const unlockAudio = () => {
-            if (this.activeBgTracks.length > 0) {
+            if (this.activeBgTracks.length > 0 && (typeof document === 'undefined' || !document.hidden)) {
                 this.activeBgTracks.forEach((track) => {
                     track.muted = this.isMutedState;
                     track.play().catch(() => {});
@@ -141,6 +140,32 @@ class AudioManager {
         window.addEventListener('keydown', unlockAudio);
         window.addEventListener('touchstart', unlockAudio);
         window.addEventListener('click', unlockAudio);
+
+        // Background / Tab visibility listeners to pause music when exiting browser / switching apps on mobile
+        const handleVisibilityChange = () => {
+            if (document.hidden) {
+                this.pauseAllAudio();
+            } else {
+                this.resumeAllAudio();
+            }
+        };
+
+        const handlePageHide = () => {
+            this.pauseAllAudio();
+        };
+
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+        window.addEventListener('pagehide', handlePageHide);
+        window.addEventListener('blur', () => {
+            if (document.hidden) {
+                this.pauseAllAudio();
+            }
+        });
+        window.addEventListener('focus', () => {
+            if (!document.hidden) {
+                this.resumeAllAudio();
+            }
+        });
 
         // Hover sound delegation
         const handleMouseOver = (e: MouseEvent) => {
@@ -165,6 +190,8 @@ class AudioManager {
         window.addEventListener('click', handleClick);
 
         this.listeners.push(() => {
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+            window.removeEventListener('pagehide', handlePageHide);
             window.removeEventListener('mouseover', handleMouseOver);
             window.removeEventListener('click', handleClick);
             window.removeEventListener('pointerdown', unlockAudio);
@@ -172,8 +199,30 @@ class AudioManager {
         });
     }
 
+    public pauseAllAudio(): void {
+        this.wasPausedByVisibility = true;
+        this.activeBgTracks.forEach((track) => {
+            track.pause();
+        });
+        if (this.carAudio) {
+            this.carAudio.pause();
+        }
+    }
+
+    public resumeAllAudio(): void {
+        if (this.wasPausedByVisibility && !this.isMutedState && (typeof document === 'undefined' || !document.hidden)) {
+            this.wasPausedByVisibility = false;
+            this.activeBgTracks.forEach((track) => {
+                track.play().catch(() => {});
+            });
+            if (this.carAudio) {
+                this.carAudio.play().catch(() => {});
+            }
+        }
+    }
+
     public playHover(): void {
-        if (this.isMutedState || typeof window === 'undefined') return;
+        if (this.isMutedState || typeof window === 'undefined' || (typeof document !== 'undefined' && document.hidden)) return;
         try {
             const sound = this.getAudioElement('buttonHover');
             const clone = sound.cloneNode() as HTMLAudioElement;
@@ -183,7 +232,7 @@ class AudioManager {
     }
 
     public playClick(): void {
-        if (this.isMutedState || typeof window === 'undefined') return;
+        if (this.isMutedState || typeof window === 'undefined' || (typeof document !== 'undefined' && document.hidden)) return;
         try {
             const sound = this.getAudioElement('buttonClick');
             const clone = sound.cloneNode() as HTMLAudioElement;
@@ -236,9 +285,13 @@ class AudioManager {
 
         tracksToPlay.forEach((track) => {
             track.muted = this.isMutedState;
-            track.play().catch(() => {
-                // Will play after user interaction unlock if blocked
-            });
+            if (typeof document === 'undefined' || !document.hidden) {
+                track.play().catch(() => {
+                    // Will play after user interaction unlock if blocked
+                });
+            } else {
+                this.wasPausedByVisibility = true;
+            }
         });
     }
 
@@ -250,58 +303,9 @@ class AudioManager {
         this.activeBgTracks = [];
     }
 
-    public startCarSound(durationMs = 18000): void {
-        if (typeof window === 'undefined') return;
-        this.stopCarSound();
+    public startCarSound(_duration = 18000): void {}
 
-        const car = this.getAudioElement('carSound');
-        this.carAudio = car;
-        car.currentTime = 0;
-        car.loop = true;
-        car.volume = 0;
-        car.muted = this.isMutedState;
-
-        car.play().catch(() => {});
-
-        const startTime = Date.now();
-        const maxVol = 0.7;
-
-        this.carFadeInterval = window.setInterval(() => {
-            const elapsed = Date.now() - startTime;
-            const progress = Math.min(1, elapsed / durationMs);
-
-            let vol = 0;
-            if (progress < 0.25) {
-                // Fade in (0% to 25%)
-                vol = (progress / 0.25) * maxVol;
-            } else if (progress > 0.75) {
-                // Fade out (75% to 100%)
-                vol = ((1 - progress) / 0.25) * maxVol;
-            } else {
-                vol = maxVol;
-            }
-
-            if (this.carAudio) {
-                this.carAudio.volume = Math.max(0, Math.min(maxVol, vol));
-            }
-
-            if (progress >= 1) {
-                this.stopCarSound();
-            }
-        }, 100);
-    }
-
-    public stopCarSound(): void {
-        if (this.carFadeInterval) {
-            clearInterval(this.carFadeInterval);
-            this.carFadeInterval = null;
-        }
-        if (this.carAudio) {
-            this.carAudio.pause();
-            this.carAudio.currentTime = 0;
-            this.carAudio = null;
-        }
-    }
+    public stopCarSound(): void {}
 
     public subscribeMuteState(cb: (muted: boolean) => void): () => void {
         cb(this.isMutedState);
