@@ -7,25 +7,38 @@
         src: string;
     };
 
-    const walkerSources = [
+    const otterColors = [
         "/gifs/LandingPage/PinkWalk.gif",
-        "/gifs/LandingPage/blueWalk.gif",
         "/gifs/LandingPage/purpleWalk.gif",
-        "/gifs/LandingPage/Truck.gif"
+        "/gifs/LandingPage/blueWalk.gif"
     ];
+
     const minRespawnDelay = 7_000;
     const maxRespawnDelay = 15_000;
 
     let activeWalkers = $state<Walker[]>([]);
     let walkerId = 0;
+    let spawnCount = 0;
     let spawnTimer: ReturnType<typeof setTimeout> | undefined;
 
     function randomRespawnDelay() {
         return minRespawnDelay + Math.random() * (maxRespawnDelay - minRespawnDelay);
     }
 
+    function getNextWalkerSource(): string {
+        spawnCount++;
+        if (spawnCount === 1) {
+            return "/gifs/LandingPage/PinkWalk.gif";
+        }
+        if (spawnCount % 4 === 0) {
+            return "/gifs/LandingPage/Truck.gif";
+        }
+        const idx = (spawnCount - 1) % otterColors.length;
+        return otterColors[idx];
+    }
+
     function spawnWalker() {
-        const src = walkerSources[Math.floor(Math.random() * walkerSources.length)];
+        const src = getNextWalkerSource();
 
         if (!src) return;
 
