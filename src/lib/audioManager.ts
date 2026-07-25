@@ -31,6 +31,7 @@ class AudioManager {
     private listenersAdded = false;
     private listeners: Array<() => void> = [];
     private muteSubscribers: Array<(muted: boolean) => void> = [];
+    private wasPausedByVisibility = false;
 
     constructor() {
         if (typeof window !== 'undefined') {
@@ -70,8 +71,8 @@ class AudioManager {
         // Notify subscribers
         this.muteSubscribers.forEach((cb) => cb(muted));
 
-        if (!muted) {
-            // Attempt to resume bg music for current route if unmuted
+        if (!muted && (typeof document === 'undefined' || !document.hidden)) {
+            // Attempt to resume bg music for current route if unmuted and tab is visible
             this.updateRouteMusic(this.currentRoute);
         }
     }
@@ -123,7 +124,7 @@ class AudioManager {
 
         // Autoplay unlock
         const unlockAudio = () => {
-            if (this.activeBgTracks.length > 0) {
+            if (this.activeBgTracks.length > 0 && (typeof document === 'undefined' || !document.hidden)) {
                 this.activeBgTracks.forEach((track) => {
                     track.muted = this.isMutedState;
                     track.play().catch(() => {});
@@ -139,6 +140,32 @@ class AudioManager {
         window.addEventListener('keydown', unlockAudio);
         window.addEventListener('touchstart', unlockAudio);
         window.addEventListener('click', unlockAudio);
+
+        // Background / Tab visibility listeners to pause music when exiting browser / switching apps on mobile
+        const handleVisibilityChange = () => {
+            if (document.hidden) {
+                this.pauseAllAudio();
+            } else {
+                this.resumeAllAudio();
+            }
+        };
+
+        const handlePageHide = () => {
+            this.pauseAllAudio();
+        };
+
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+        window.addEventListener('pagehide', handlePageHide);
+        window.addEventListener('blur', () => {
+            if (document.hidden) {
+                this.pauseAllAudio();
+            }
+        });
+        window.addEventListener('focus', () => {
+            if (!document.hidden) {
+                this.resumeAllAudio();
+            }
+        });
 
         // Hover sound delegation
         const handleMouseOver = (e: MouseEvent) => {
@@ -163,6 +190,8 @@ class AudioManager {
         window.addEventListener('click', handleClick);
 
         this.listeners.push(() => {
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+            window.removeEventListener('pagehide', handlePageHide);
             window.removeEventListener('mouseover', handleMouseOver);
             window.removeEventListener('click', handleClick);
             window.removeEventListener('pointerdown', unlockAudio);
@@ -170,8 +199,30 @@ class AudioManager {
         });
     }
 
+    public pauseAllAudio(): void {
+        this.wasPausedByVisibility = true;
+        this.activeBgTracks.forEach((track) => {
+            track.pause();
+        });
+        if (this.carAudio) {
+            this.carAudio.pause();
+        }
+    }
+
+    public resumeAllAudio(): void {
+        if (this.wasPausedByVisibility && !this.isMutedState && (typeof document === 'undefined' || !document.hidden)) {
+            this.wasPausedByVisibility = false;
+            this.activeBgTracks.forEach((track) => {
+                track.play().catch(() => {});
+            });
+            if (this.carAudio) {
+                this.carAudio.play().catch(() => {});
+            }
+        }
+    }
+
     public playHover(): void {
-        if (this.isMutedState || typeof window === 'undefined') return;
+        if (this.isMutedState || typeof window === 'undefined' || (typeof document !== 'undefined' && document.hidden)) return;
         try {
             const sound = this.getAudioElement('buttonHover');
             const clone = sound.cloneNode() as HTMLAudioElement;
@@ -181,7 +232,7 @@ class AudioManager {
     }
 
     public playClick(): void {
-        if (this.isMutedState || typeof window === 'undefined') return;
+        if (this.isMutedState || typeof window === 'undefined' || (typeof document !== 'undefined' && document.hidden)) return;
         try {
             const sound = this.getAudioElement('buttonClick');
             const clone = sound.cloneNode() as HTMLAudioElement;
@@ -234,9 +285,13 @@ class AudioManager {
 
         tracksToPlay.forEach((track) => {
             track.muted = this.isMutedState;
-            track.play().catch(() => {
-                // Will play after user interaction unlock if blocked
-            });
+            if (typeof document === 'undefined' || !document.hidden) {
+                track.play().catch(() => {
+                    // Will play after user interaction unlock if blocked
+                });
+            } else {
+                this.wasPausedByVisibility = true;
+            }
         });
     }
 
@@ -247,7 +302,6 @@ class AudioManager {
         });
         this.activeBgTracks = [];
     }
-
 
     public startCarSound(_duration = 18000): void {}
 
