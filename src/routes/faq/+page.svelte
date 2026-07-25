@@ -33,6 +33,8 @@
             src="/FAQOtter.gif"
             alt="FAQ Otter"
             class="w-86 h-86 object-contain"
+            class:animate-stagger-in-delayed={isMounted}
+            class:opacity-0={!isMounted}
         />
     </div>
 </div>

@@ -205,12 +205,12 @@ class AudioManager {
             // Landing Page Song + Ambience (LOOPS)
             const landing = this.getAudioElement('landingSong');
             landing.loop = true;
-            landing.volume = 0.25;
+            landing.volume = 0.1;
             tracksToPlay.push(landing);
 
             const ambience = this.getAudioElement('ambience');
             ambience.loop = true;
-            ambience.volume = 0.75;
+            ambience.volume = 1.0;
             tracksToPlay.push(ambience);
         } else if (route.startsWith('/info')) {
             // Info site song (LOOPS)
