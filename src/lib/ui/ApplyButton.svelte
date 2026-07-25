@@ -1,16 +1,21 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
     import { fly } from 'svelte/transition';
     import { cubicOut, cubicIn } from 'svelte/easing';
-    import { goto } from '$app/navigation';
     import Button from '$lib/ui/Button.svelte';
-    import { audioManager } from '$lib/audioManager.js';
+    import { goto } from '$app/navigation';
 
-    let { variant = "dark" }: { variant?: "light" | "dark" } = $props();
+    let { 
+        variant = "dark",
+        isExpanded = $bindable(false)
+    }: { 
+        variant?: "light" | "dark";
+        isExpanded?: boolean;
+    } = $props();
 
-    let isExpanded = $state(false);
+    let applyButtonEl = $state<HTMLElement | null>(null);
 
-    function handlePrimaryClick(e?: MouseEvent) {
+    function handlePrimaryClick(e: MouseEvent) {
+        e.stopPropagation();
         if (!isExpanded) {
             isExpanded = true;
         } else {
@@ -18,43 +23,50 @@
         }
     }
 
-    onMount(() => {
-        function handleKeyDown(e: KeyboardEvent) {
-            if (e.defaultPrevented || e.ctrlKey || e.altKey || e.metaKey) return;
-            const target = e.target as HTMLElement | null;
-            if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)) return;
+    function handleWindowClick(e: MouseEvent) {
+        if (isExpanded && applyButtonEl && !applyButtonEl.contains(e.target as Node)) {
+            isExpanded = false;
+        }
+    }
 
-            const key = e.key.toUpperCase();
-            if (key === 'I') {
-                audioManager.playClick();
-                goto('/info');
-            } else if (key === 'W') {
-                audioManager.playClick();
-                window.location.href = 'https://workshop.stormhacks.com';
-            } else if (key === 'F') {
-                audioManager.playClick();
-                goto('/faq');
-            } else if (key === 'C') {
-                audioManager.playClick();
-                goto('/credits');
-            } else if (key === 'A') {
-                audioManager.playClick();
-                handlePrimaryClick();
-            } else if (key === 'H') {
-                audioManager.playClick();
-                window.location.href = 'https://portal.sfusurge.com/apply';
-            } else if (key === 'V') {
-                audioManager.playClick();
-                window.location.href = 'https://forms.gle/gWBZMF9gCMXk2q4y8';
-            }
+    function handleKeyDown(e: KeyboardEvent) {
+        const target = e.target as HTMLElement;
+        if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)) {
+            return;
         }
 
-        window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
-    });
+        const key = e.key.toLowerCase();
+
+        if (!isExpanded) {
+            if (key === 'a') {
+                isExpanded = true;
+            }
+        } else {
+            if (key === 'v') {
+                goto('/volunteer');
+            } else if (key === 'h') {
+                window.location.href = 'https://portal.sfusurge.com/apply';
+            } else if (key === 'escape') {
+                isExpanded = false;
+            }
+        }
+    }
 </script>
 
-<div class="apply-button-stage flex items-center justify-end gap-1 md:gap-2 whitespace-nowrap flex-nowrap">
+<svelte:window onclick={handleWindowClick} onkeydown={handleKeyDown} />
+
+{#if isExpanded}
+    <div 
+        class="fixed inset-0 z-10 bg-transparent pointer-events-auto"
+        onclick={() => (isExpanded = false)}
+        aria-hidden="true"
+    ></div>
+{/if}
+
+<div 
+    bind:this={applyButtonEl}
+    class="apply-button-stage relative z-20 flex items-center justify-end gap-1 md:gap-2 whitespace-nowrap flex-nowrap"
+>
     <div class="volunteer-stage flex-shrink-0">
         {#if isExpanded}
             <div
@@ -78,7 +90,7 @@
                     </div>
                 </Button>
 
-                <Button href="https://forms.gle/gWBZMF9gCMXk2q4y8" letter="V" label="AS VOLUNTEER >" variant="light" />
+                <Button href="/volunteer" letter="V" label="AS VOLUNTEER >" variant="light" />
             </div>
         {/if}
     </div>
