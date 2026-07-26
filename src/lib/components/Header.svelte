@@ -47,7 +47,7 @@
                     window.location.href = 'https://forms.gle/gWBZMF9gCMXk2q4y8';
                     break;
                 case 'h':
-                    window.location.href = 'https://portal.sfusurge.com/apply';
+                    window.location.href = 'https://portal.sfusurge.com/application';
                     break;
                 case 'escape':
                     isExpanded = false;

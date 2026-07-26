@@ -57,7 +57,7 @@
                     goto('/volunteer');
                     break;
                 case 'h':
-                    window.location.href = 'https://portal.sfusurge.com/apply';
+                    window.location.href = 'https://portal.sfusurge.com/application';
                     break;
                 case 'escape':
                     navRef?.toggleExpand?.(false);

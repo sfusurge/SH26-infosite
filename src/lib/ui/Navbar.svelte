@@ -22,7 +22,7 @@
             isExpanded = true;
         } else {
             setTimeout(() => {
-                window.location.href = 'https://portal.sfusurge.com/apply';
+                window.location.href = 'https://portal.sfusurge.com/application';
             }, 150);
         }
     }
