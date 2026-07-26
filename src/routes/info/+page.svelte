@@ -7,6 +7,8 @@
     let isMounted = $state(false);
 
     onMount(() => {
+        const img = new Image();
+        img.src = "/OtterInfo.gif";
         isMounted = true;
     });
 </script>
@@ -50,21 +52,31 @@
 
     @keyframes walk-back-and-forth {
         0%, 100% {
-            transform: translateX(0) scaleX(1);
+            transform: translateX(0) scaleX(1) translateZ(0);
         }
         48% {
-            transform: translateX(calc(100vw - 380px)) scaleX(1);
+            transform: translateX(calc(100vw - 380px)) scaleX(1) translateZ(0);
         }
         50% {
-            transform: translateX(calc(100vw - 380px)) scaleX(-1);
+            transform: translateX(calc(100vw - 380px)) scaleX(-1) translateZ(0);
         }
         98% {
-            transform: translateX(0) scaleX(-1);
+            transform: translateX(0) scaleX(-1) translateZ(0);
         }
     }
 
     .info-otter-patrol {
         animation: walk-back-and-forth 18s ease-in-out infinite;
         will-change: transform;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        transform: translateZ(0);
+        -webkit-transform: translate3d(0, 0, 0);
+    }
+
+    .info-otter-patrol img {
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        transform: translateZ(0);
     }
 </style>

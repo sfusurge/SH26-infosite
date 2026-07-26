@@ -13,6 +13,12 @@
         "/gifs/LandingPage/blueWalk.gif"
     ];
 
+    const allGifs = [
+        ...otterColors,
+        "/gifs/LandingPage/SparkyBoba.gif",
+        "/gifs/LandingPage/Truck.gif"
+    ];
+
     const minRespawnDelay = 7_000;
     const maxRespawnDelay = 15_000;
 
@@ -70,6 +76,12 @@
     }
 
     onMount(() => {
+        // Preload GIF images in memory so WebKit has decoded frame buffers ready
+        allGifs.forEach((src) => {
+            const img = new Image();
+            img.src = src;
+        });
+
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
         scheduleWalker(1_000);
@@ -127,6 +139,10 @@
         max-width: none;
         height: auto;
         user-select: none;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        transform: translateZ(0);
+        -webkit-transform: translate3d(0, 0, 0);
     }
 
     .walking-scene {
@@ -160,7 +176,11 @@
         z-index: 4;
         transform-origin: center bottom;
         animation: sidewalk-crossing 18s linear forwards;
-        will-change: top, left, transform;
+        will-change: transform;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        transform: translateZ(0);
+        -webkit-transform: translate3d(0, 0, 0);
     }
 
     .sidewalk-walker.is-truck {
@@ -173,25 +193,28 @@
         display: block;
         width: 100%;
         height: auto;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        transform: translateZ(0);
     }
 
     @keyframes sidewalk-crossing {
         0% {
             top: 68%;
             left: -11%;
-            transform: scale(1);
+            transform: scale(1) translateZ(0);
         }
 
         82% {
             top: 56%;
             left: 51.73%;
-            transform: scale(0.85);
+            transform: scale(0.85) translateZ(0);
         }
 
         100% {
             top: 54%;
             left: var(--walker-exit);
-            transform: scale(0.8);
+            transform: scale(0.8) translateZ(0);
         }
     }
 

@@ -7,6 +7,8 @@
     let isMounted = $state(false);
 
     onMount(() => {
+        const img = new Image();
+        img.src = "/FAQOtter.gif";
         isMounted = true;
     });
 </script>
@@ -32,7 +34,7 @@
         <img
             src="/FAQOtter.gif"
             alt="FAQ Otter"
-            class="w-86 h-86 object-contain"
+            class="faq-otter-img w-86 h-86 object-contain"
             class:animate-stagger-in-delayed={isMounted}
             class:opacity-0={!isMounted}
         />
@@ -43,5 +45,12 @@
     :global(.faq-page ::selection) {
         background: #141417;
         color: #FF5D0B;
+    }
+
+    .faq-otter-img {
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        transform: translateZ(0);
+        -webkit-transform: translate3d(0, 0, 0);
     }
 </style>

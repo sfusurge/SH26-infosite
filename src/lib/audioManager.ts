@@ -9,27 +9,38 @@ type SoundKey =
     | 'faqSong'
     | 'creditSong';
 
-const SOUND_PATHS: Record<SoundKey, string[]> = {
-    buttonHover: ['/sounds/buttonHover.mp3'],
-    buttonClick: ['/sounds/buttonClick.mp3'],
-    landingSong: ['/sounds/landingSong.mp3'],
-    ambience: ['/sounds/environmentAmbience.mp3'],
-    infoSong: ['/sounds/infoSong.mp3'],
-    faqSong: ['/sounds/faqSong.mp3'],
-    creditSong: ['/sounds/creditsSong.mp3']
+const SOUND_PATHS: Record<SoundKey, string> = {
+    buttonHover: '/sounds/buttonHover.mp3',
+    buttonClick: '/sounds/buttonClick.mp3',
+    landingSong: '/sounds/landingSong.mp3',
+    ambience: '/sounds/environmentAmbience.mp3',
+    infoSong: '/sounds/infoSong.mp3',
+    faqSong: '/sounds/faqSong.mp3',
+    creditSong: '/sounds/creditsSong.mp3'
+};
+
+const DEFAULT_VOLUMES: Record<SoundKey, number> = {
+    buttonHover: 0.35,
+    buttonClick: 0.5,
+    landingSong: 0.45,
+    ambience: 0.25,
+    infoSong: 0.45,
+    faqSong: 0.45,
+    creditSong: 0.5
 };
 
 class AudioManager {
     private isMutedState = false;
-    private audioCache: Partial<Record<SoundKey, HTMLAudioElement>> = {};
+    private ctx: AudioContext | null = null;
+    private masterGain: GainNode | null = null;
+    private audioBuffers: Partial<Record<SoundKey, AudioBuffer>> = {};
+    private activeBgSources: Map<SoundKey, { source: AudioBufferSourceNode; gainNode: GainNode }> = new Map();
+    private carSource: { source: AudioBufferSourceNode; gainNode: GainNode } | null = null;
+
     private currentRoute = '';
-    private activeBgTracks: HTMLAudioElement[] = [];
-    private carAudio: HTMLAudioElement | null = null;
-    private carFadeInterval: number | null = null;
     private initialized = false;
     private lastHoveredEl: Element | null = null;
-    private listenersAdded = false;
-    private listeners: Array<() => void> = [];
+    private lastHoverTime = 0;
     private muteSubscribers: Array<(muted: boolean) => void> = [];
     private wasPausedByVisibility = false;
 
@@ -59,21 +70,18 @@ class AudioManager {
             localStorage.setItem('sh26_muted', String(muted));
         }
 
-        // Apply mute state to all active tracks
-        this.activeBgTracks.forEach((track) => {
-            track.muted = muted;
-        });
-
-        if (this.carAudio) {
-            this.carAudio.muted = muted;
+        if (this.masterGain && this.ctx) {
+            try {
+                this.masterGain.gain.setTargetAtTime(muted ? 0 : 1, this.ctx.currentTime, 0.03);
+            } catch {
+                this.masterGain.gain.value = muted ? 0 : 1;
+            }
         }
 
-        // Notify subscribers
         this.muteSubscribers.forEach((cb) => cb(muted));
 
-        if (!muted && (typeof document === 'undefined' || !document.hidden)) {
-            // Attempt to resume bg music for current route if unmuted and tab is visible
-            this.updateRouteMusic(this.currentRoute);
+        if (!muted) {
+            this.unlockAudioContext();
         }
     }
 
@@ -81,93 +89,201 @@ class AudioManager {
         if (typeof window === 'undefined' || this.initialized) return;
         this.initialized = true;
 
-        // Preload sounds
-        Object.keys(SOUND_PATHS).forEach((key) => {
-            this.getAudioElement(key as SoundKey);
-        });
-
-        // Set up global user interaction unlocker & event delegation
+        this.initAudioContext();
+        this.preloadAllBuffers();
         this.setupEventListeners();
     }
 
-    private getAudioElement(key: SoundKey): HTMLAudioElement {
-        if (this.audioCache[key]) {
-            return this.audioCache[key]!;
+    private initAudioContext(): void {
+        if (typeof window === 'undefined') return;
+        try {
+            const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+            if (AudioCtx) {
+                this.ctx = new AudioCtx();
+                this.masterGain = this.ctx.createGain();
+                this.masterGain.gain.value = this.isMutedState ? 0 : 1;
+                this.masterGain.connect(this.ctx.destination);
+            }
+        } catch (err) {
+            console.warn('Web Audio API initialization failed:', err);
+        }
+    }
+
+    private unlockAudioContext(): void {
+        if (this.ctx && this.ctx.state === 'suspended') {
+            this.ctx.resume().catch(() => {});
+        }
+    }
+
+    private async preloadAllBuffers(): Promise<void> {
+        if (!this.ctx) return;
+        const keys = Object.keys(SOUND_PATHS) as SoundKey[];
+        await Promise.all(keys.map((key) => this.loadBuffer(key)));
+    }
+
+    private async loadBuffer(key: SoundKey): Promise<AudioBuffer | null> {
+        if (this.audioBuffers[key]) {
+            return this.audioBuffers[key]!;
+        }
+        if (!this.ctx) return null;
+
+        try {
+            const response = await fetch(SOUND_PATHS[key]);
+            const arrayBuffer = await response.arrayBuffer();
+            const decoded = await this.ctx.decodeAudioData(arrayBuffer);
+            this.audioBuffers[key] = decoded;
+            return decoded;
+        } catch (err) {
+            console.warn(`Failed to decode audio for ${key}:`, err);
+            return null;
+        }
+    }
+
+    private playSfx(key: SoundKey, customVolume?: number): void {
+        if (this.isMutedState || typeof window === 'undefined' || (typeof document !== 'undefined' && document.hidden)) return;
+        this.unlockAudioContext();
+        if (!this.ctx || !this.masterGain) return;
+
+        const buffer = this.audioBuffers[key];
+        const vol = customVolume ?? DEFAULT_VOLUMES[key];
+        if (!buffer) {
+            this.loadBuffer(key).then((buf) => {
+                if (buf) this.playBufferSfx(buf, vol);
+            });
+            return;
+        }
+        this.playBufferSfx(buffer, vol);
+    }
+
+    private playBufferSfx(buffer: AudioBuffer, volume: number): void {
+        if (!this.ctx || !this.masterGain) return;
+        try {
+            const source = this.ctx.createBufferSource();
+            source.buffer = buffer;
+            const gain = this.ctx.createGain();
+            gain.gain.value = volume;
+            source.connect(gain);
+            gain.connect(this.masterGain);
+            source.start(0);
+        } catch {}
+    }
+
+    public playHover(): void {
+        const now = Date.now();
+        if (now - this.lastHoverTime < 50) return;
+        this.lastHoverTime = now;
+        this.playSfx('buttonHover');
+    }
+
+    public playClick(): void {
+        this.playSfx('buttonClick');
+    }
+
+    public startCarSound(durationMs = 18000): void {
+        if (typeof window === 'undefined' || this.isMutedState) return;
+        this.unlockAudioContext();
+    }
+
+    public stopCarSound(): void {
+        if (this.carSource) {
+            try {
+                this.carSource.source.stop();
+            } catch {}
+            this.carSource = null;
+        }
+    }
+
+    public updateRouteMusic(route: string): void {
+        if (typeof window === 'undefined') return;
+        if (this.currentRoute === route && this.activeBgSources.size > 0) {
+            return;
+        }
+        this.currentRoute = route;
+
+        const targetKeys: SoundKey[] = [];
+        if (route === '/' || route === '') {
+            targetKeys.push('landingSong', 'ambience');
+        } else if (route.startsWith('/info')) {
+            targetKeys.push('infoSong');
+        } else if (route.startsWith('/faq')) {
+            targetKeys.push('faqSong');
+        } else if (route.startsWith('/credits')) {
+            targetKeys.push('creditSong');
         }
 
-        const paths = SOUND_PATHS[key];
-        const audio = new Audio();
-        audio.preload = 'auto';
+        this.syncActiveBgTracks(targetKeys);
+    }
 
-        let pathIdx = 0;
-        const tryLoadPath = () => {
-            if (pathIdx < paths.length) {
-                audio.src = paths[pathIdx];
-                pathIdx++;
+    private syncActiveBgTracks(targetKeys: SoundKey[]): void {
+        for (const [key, item] of this.activeBgSources.entries()) {
+            if (!targetKeys.includes(key)) {
+                try {
+                    item.source.stop();
+                } catch {}
+                this.activeBgSources.delete(key);
             }
-        };
+        }
 
-        audio.addEventListener('error', () => {
-            if (pathIdx < paths.length) {
-                tryLoadPath();
+        for (const key of targetKeys) {
+            if (!this.activeBgSources.has(key)) {
+                this.startBgTrack(key);
             }
-        });
+        }
+    }
 
-        tryLoadPath();
-        this.audioCache[key] = audio;
-        return audio;
+    private startBgTrack(key: SoundKey): void {
+        if (!this.ctx || !this.masterGain) return;
+        const buffer = this.audioBuffers[key];
+        if (!buffer) {
+            this.loadBuffer(key).then((buf) => {
+                if (buf && this.currentRouteTrackKeys().includes(key)) {
+                    this.createBgSource(key, buf);
+                }
+            });
+            return;
+        }
+        this.createBgSource(key, buffer);
+    }
+
+    private currentRouteTrackKeys(): SoundKey[] {
+        const route = this.currentRoute;
+        if (route === '/' || route === '') return ['landingSong', 'ambience'];
+        if (route.startsWith('/info')) return ['infoSong'];
+        if (route.startsWith('/faq')) return ['faqSong'];
+        if (route.startsWith('/credits')) return ['creditSong'];
+        return [];
+    }
+
+    private createBgSource(key: SoundKey, buffer: AudioBuffer): void {
+        if (!this.ctx || !this.masterGain || this.activeBgSources.has(key)) return;
+        try {
+            const source = this.ctx.createBufferSource();
+            source.buffer = buffer;
+            source.loop = true;
+
+            const gainNode = this.ctx.createGain();
+            gainNode.gain.value = DEFAULT_VOLUMES[key];
+
+            source.connect(gainNode);
+            gainNode.connect(this.masterGain);
+
+            source.start(0);
+            this.activeBgSources.set(key, { source, gainNode });
+        } catch {}
     }
 
     private setupEventListeners(): void {
-        if (this.listenersAdded || typeof window === 'undefined') return;
-        this.listenersAdded = true;
+        if (typeof window === 'undefined') return;
 
-        // Autoplay unlock
-        const unlockAudio = () => {
-            if (this.activeBgTracks.length > 0 && (typeof document === 'undefined' || !document.hidden)) {
-                this.activeBgTracks.forEach((track) => {
-                    track.muted = this.isMutedState;
-                    track.play().catch(() => {});
-                });
-            }
-            window.removeEventListener('pointerdown', unlockAudio);
-            window.removeEventListener('keydown', unlockAudio);
-            window.removeEventListener('touchstart', unlockAudio);
-            window.removeEventListener('click', unlockAudio);
+        const unlock = () => {
+            this.unlockAudioContext();
         };
 
-        window.addEventListener('pointerdown', unlockAudio);
-        window.addEventListener('keydown', unlockAudio);
-        window.addEventListener('touchstart', unlockAudio);
-        window.addEventListener('click', unlockAudio);
-
-        // Background / Tab visibility listeners to pause music when exiting browser / switching apps on mobile
-        const handleVisibilityChange = () => {
-            if (document.hidden) {
-                this.pauseAllAudio();
-            } else {
-                this.resumeAllAudio();
-            }
-        };
-
-        const handlePageHide = () => {
-            this.pauseAllAudio();
-        };
-
-        document.addEventListener('visibilitychange', handleVisibilityChange);
-        window.addEventListener('pagehide', handlePageHide);
-        window.addEventListener('blur', () => {
-            if (document.hidden) {
-                this.pauseAllAudio();
-            }
-        });
-        window.addEventListener('focus', () => {
-            if (!document.hidden) {
-                this.resumeAllAudio();
-            }
+        const interactionEvents = ['pointerdown', 'mousedown', 'touchstart', 'touchend', 'click', 'keydown'];
+        interactionEvents.forEach((evt) => {
+            window.addEventListener(evt, unlock, { capture: true, passive: true });
         });
 
-        // Hover sound delegation
         const handleMouseOver = (e: MouseEvent) => {
             const target = (e.target as HTMLElement)?.closest('button, a, [role="button"], .btn');
             if (target && target !== this.lastHoveredEl) {
@@ -178,7 +294,6 @@ class AudioManager {
             }
         };
 
-        // Click sound delegation
         const handleClick = (e: MouseEvent) => {
             const target = (e.target as HTMLElement)?.closest('button, a, [role="button"], .btn');
             if (target) {
@@ -189,123 +304,28 @@ class AudioManager {
         window.addEventListener('mouseover', handleMouseOver);
         window.addEventListener('click', handleClick);
 
-        this.listeners.push(() => {
-            document.removeEventListener('visibilitychange', handleVisibilityChange);
-            window.removeEventListener('pagehide', handlePageHide);
-            window.removeEventListener('mouseover', handleMouseOver);
-            window.removeEventListener('click', handleClick);
-            window.removeEventListener('pointerdown', unlockAudio);
-            window.removeEventListener('keydown', unlockAudio);
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                this.pauseAllAudio();
+            } else {
+                this.resumeAllAudio();
+            }
         });
     }
 
     public pauseAllAudio(): void {
         this.wasPausedByVisibility = true;
-        this.activeBgTracks.forEach((track) => {
-            track.pause();
-        });
-        if (this.carAudio) {
-            this.carAudio.pause();
+        if (this.ctx && this.ctx.state === 'running') {
+            this.ctx.suspend().catch(() => {});
         }
     }
 
     public resumeAllAudio(): void {
         if (this.wasPausedByVisibility && !this.isMutedState && (typeof document === 'undefined' || !document.hidden)) {
             this.wasPausedByVisibility = false;
-            this.activeBgTracks.forEach((track) => {
-                track.play().catch(() => {});
-            });
-            if (this.carAudio) {
-                this.carAudio.play().catch(() => {});
-            }
+            this.unlockAudioContext();
         }
     }
-
-    public playHover(): void {
-        if (this.isMutedState || typeof window === 'undefined' || (typeof document !== 'undefined' && document.hidden)) return;
-        try {
-            const sound = this.getAudioElement('buttonHover');
-            const clone = sound.cloneNode() as HTMLAudioElement;
-            clone.volume = 0.6;
-            clone.play().catch(() => {});
-        } catch {}
-    }
-
-    public playClick(): void {
-        if (this.isMutedState || typeof window === 'undefined' || (typeof document !== 'undefined' && document.hidden)) return;
-        try {
-            const sound = this.getAudioElement('buttonClick');
-            const clone = sound.cloneNode() as HTMLAudioElement;
-            clone.volume = 0.8;
-            clone.play().catch(() => {});
-        } catch {}
-    }
-
-    public updateRouteMusic(route: string): void {
-        if (typeof window === 'undefined') return;
-        this.currentRoute = route;
-
-        // Stop all background tracks
-        this.stopBgTracks();
-
-        const tracksToPlay: HTMLAudioElement[] = [];
-
-        if (route === '/' || route === '') {
-            // Landing Page Song + Ambience (LOOPS)
-            const landing = this.getAudioElement('landingSong');
-            landing.loop = true;
-            landing.volume = 0.5;
-            tracksToPlay.push(landing);
-
-            const ambience = this.getAudioElement('ambience');
-            ambience.loop = true;
-            ambience.volume = 1.0;
-            tracksToPlay.push(ambience);
-        } else if (route.startsWith('/info')) {
-            // Info site song (LOOPS)
-            const info = this.getAudioElement('infoSong');
-            info.loop = true;
-            info.volume = 0.5;
-            tracksToPlay.push(info);
-        } else if (route.startsWith('/faq')) {
-            // FAQ song (LOOPS)
-            const faq = this.getAudioElement('faqSong');
-            faq.loop = true;
-            faq.volume = 0.5;
-            tracksToPlay.push(faq);
-        } else if (route.startsWith('/credits')) {
-            // Credits song (LOOPS)
-            const credits = this.getAudioElement('creditSong');
-            credits.loop = true;
-            credits.volume = 0.6;
-            tracksToPlay.push(credits);
-        }
-
-        this.activeBgTracks = tracksToPlay;
-
-        tracksToPlay.forEach((track) => {
-            track.muted = this.isMutedState;
-            if (typeof document === 'undefined' || !document.hidden) {
-                track.play().catch(() => {
-                    // Will play after user interaction unlock if blocked
-                });
-            } else {
-                this.wasPausedByVisibility = true;
-            }
-        });
-    }
-
-    private stopBgTracks(): void {
-        this.activeBgTracks.forEach((track) => {
-            track.pause();
-            track.currentTime = 0;
-        });
-        this.activeBgTracks = [];
-    }
-
-    public startCarSound(_duration = 18000): void {}
-
-    public stopCarSound(): void {}
 
     public subscribeMuteState(cb: (muted: boolean) => void): () => void {
         cb(this.isMutedState);
@@ -317,3 +337,4 @@ class AudioManager {
 }
 
 export const audioManager = new AudioManager();
+
