@@ -6,11 +6,11 @@
       label: 'INFO',
       href: '#info'
     },
-    // {
-    //   key: 'W',
-    //   label: 'THE WORKSHOP',
-    //   href: '#workshop'
-    // },
+    {
+      key: 'W',
+      label: 'THE WORKSHOP',
+      href: 'https://workshop.stormhacks.com'
+    },
     {
       key: 'F',
       label: 'FAQ',

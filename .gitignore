@@ -22,3 +22,9 @@ Thumbs.db
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+/.vscode/extensions.json
+/.vscode/settings.json
+/.idea/vcs.xml
+/.idea/SH26-infosite.iml
+/.idea/modules.xml
+/.idea/.gitignore
