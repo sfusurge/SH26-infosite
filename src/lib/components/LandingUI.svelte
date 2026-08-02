@@ -54,7 +54,7 @@
         } else {
             switch (key) {
                 case 'v':
-                    goto('/volunteer');
+                    goto('https://forms.gle/gWBZMF9gCMXk2q4y8');
                     break;
                 case 'h':
                     window.location.href = 'https://portal.sfusurge.com/application';
