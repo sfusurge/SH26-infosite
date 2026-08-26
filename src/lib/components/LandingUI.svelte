@@ -82,13 +82,31 @@
                 class:blur-none={isMounted}
                 class:translate-y-0={isMounted}
             >
-                <img 
-                    src="/mlhBanner.webp" 
-                    alt="MLH Official 2027 Season" 
-                    class="hidden md:block w-15 h-20 transition-opacity duration-300" 
-                    class:opacity-0={isExpanded}
-                    class:pointer-events-none={isExpanded}
-                />
+<!--                <img -->
+<!--                    src="/mlhBanner.webp" -->
+<!--                    alt="MLH Official 2027 Season" -->
+<!--                    class="hidden md:block w-15 h-20 transition-opacity duration-300" -->
+<!--                    class:opacity-0={isExpanded}-->
+<!--                    class:pointer-events-none={isExpanded}-->
+<!--                />-->
+
+                <a id="mlh-trust-badge"
+                   class="hidden md:block transition-opacity duration-300"
+                   style="max-width:100px;
+                   min-width:60px;
+                   right:50px;
+                   top:0;
+                   width:10%;
+                   z-index:10000"
+                   href="https://mlh.io/na?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2026-season&utm_content=white"
+                   target="_blank"
+                   class:opacity-0={isExpanded}
+                   class:pointer-events-none={isExpanded}
+                >
+                    <img src="https://logged-assets.s3.amazonaws.com/trust-badge/2027/mlh-trust-badge-2027-white.svg"
+                         alt="Major League Hacking 2026 Hackathon Season" style="width:100%"
+                    >
+                </a>
 
                 <div class="flex flex-col items-start gap-1">
                     <h1 
