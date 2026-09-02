@@ -38,7 +38,7 @@
                 case 'i':
                     goto('/info');
                     break;
-                case 'w':
+                case 's':
                     window.location.href = 'https://studio.stormhacks.com/';
                     break;
                 case 'f':
