@@ -47,6 +47,9 @@
                 case 'c':
                     goto('/credits');
                     break;
+                case 'w':
+                    window.open('https://www.webtoons.com/p/community/en/u/sfusurge', '_blank', 'noopener,noreferrer');
+                    break;
                 case 'a':
                     navRef?.toggleExpand?.(true);
                     break;

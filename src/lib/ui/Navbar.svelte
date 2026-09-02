@@ -12,7 +12,8 @@
         { key: 'I', label: 'INFO', href: '/info' },
         // { key: 'W', label: 'THE WORKSHOP', href: 'https://workshop.stormhacks.com' },
         { key: 'F', label: 'FAQ', href: '/faq' },
-        { key: 'C', label: 'CREDITS', href: '/credits' }
+        { key: 'C', label: 'CREDITS', href: '/credits' },
+        { key: 'W', label: 'WEBTOON', href: 'https://www.webtoons.com/p/community/en/u/sfusurge', external: true }
     ];
 
     function handlePrimaryClick(e: MouseEvent) {
@@ -75,7 +76,7 @@
                     out:fly={{ y: 35, duration: 700, opacity: 1, easing: cubicOut }}
                 >
                     {#each mainNav as item}
-                        <Button href={item.href} letter={item.key} label={item.label} variant="light" />
+                        <Button href={item.href} letter={item.key} label={item.label} variant="light" external={item.external} />
                     {/each}
                 </div>
             {:else}
@@ -142,7 +143,8 @@
                     href={item.href} 
                     label={item.label} 
                     showBadge={false} 
-                    variant="light" 
+                    variant="light"
+                    external={item.external}
                 />
             {/each}
         </div>

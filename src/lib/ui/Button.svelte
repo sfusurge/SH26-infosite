@@ -10,6 +10,7 @@
         variant = "light",
         highlightColor = "blue",
         showBadge = true,
+        external = false,
         "aria-label": ariaLabel = undefined,
         children = undefined
     }: {
@@ -20,6 +21,7 @@
         variant?: "light" | "dark";
         highlightColor?: "blue" | "orange";
         showBadge?: boolean;
+        external?: boolean;
         "aria-label"?: string;
         children?: Snippet;
     } = $props();
@@ -48,6 +50,8 @@
     <a 
         href={href}
         aria-label={ariaLabel}
+        target={external ? '_blank' : undefined}
+        rel={external ? 'noopener noreferrer' : undefined}
         class="font-sf group inline-flex items-center justify-center gap-[10px] rounded-[6px] px-[6px] py-[4px] {variant === 'light' ? 'bg-[#ECECEF]' : 'bg-[#101A21]'}"
     >
         {@render content()}
