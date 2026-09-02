@@ -38,7 +38,7 @@
                     goto('/credits');
                     break;
                 case 'w':
-                    window.open('https://www.webtoons.com/p/community/en/u/sfusurge', '_blank', 'noopener,noreferrer');
+                    window.open('https://www.webtoons.com/en/canvas/shades-of-time/list?title_no=1169505', '_blank', 'noopener,noreferrer');
                     break;
                 case 'a':
                     isExpanded = true;

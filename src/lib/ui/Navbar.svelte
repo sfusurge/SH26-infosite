@@ -13,7 +13,7 @@
         // { key: 'W', label: 'THE WORKSHOP', href: 'https://workshop.stormhacks.com' },
         { key: 'F', label: 'FAQ', href: '/faq' },
         { key: 'C', label: 'CREDITS', href: '/credits' },
-        { key: 'W', label: 'WEBTOON', href: 'https://www.webtoons.com/p/community/en/u/sfusurge', external: true }
+        { key: 'W', label: 'WEBTOON', href: 'https://www.webtoons.com/en/canvas/shades-of-time/list?title_no=1169505', external: true }
     ];
 
     function handlePrimaryClick(e: MouseEvent) {
