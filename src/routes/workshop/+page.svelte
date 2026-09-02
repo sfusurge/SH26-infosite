@@ -2,7 +2,7 @@
     import { onMount } from 'svelte';
 
     onMount(() => {
-        window.location.href = 'https://workshop.stormhacks.com';
+        window.location.href = 'https://studio.stormhacks.com/';
     });
 </script>
 

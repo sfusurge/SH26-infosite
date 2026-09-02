@@ -39,7 +39,7 @@
                     goto('/info');
                     break;
                 case 'w':
-                    window.location.href = 'https://workshop.stormhacks.com';
+                    window.location.href = 'https://studio.stormhacks.com/';
                     break;
                 case 'f':
                     goto('/faq');
@@ -138,7 +138,7 @@
     </header>
 
     <a 
-        href="https://workshop.stormhacks.com" 
+        href="https://studio.stormhacks.com/"
         class="text-bubble float-bob transition-opacity duration-300"
         class:opacity-0={isExpanded}
         class:pointer-events-none={isExpanded}

@@ -7,9 +7,9 @@
       href: '#info'
     },
     {
-      key: 'W',
-      label: 'THE WORKSHOP',
-      href: 'https://workshop.stormhacks.com'
+      key: 'S',
+      label: 'THE STUDIO',
+      href: 'https://studio.stormhacks.com/'
     },
     {
       key: 'F',
