@@ -160,12 +160,11 @@
 
     <a 
         href="https://studio.stormhacks.com/"
-        class="text-bubble float-bob transition-opacity duration-300"
+        class="text-bubble float-bob transition-opacity duration-300 hidden md:block"
         class:opacity-0={isExpanded}
         class:pointer-events-none={isExpanded}
     >
-        <img src="/landing-page/textBubbleM.webp" alt="Check out our 3D Workshop" class="bubble-img md:hidden" />
-        <img src="/landing-page/textBubble.webp" alt="Check out our 3D Workshop" class="bubble-img hidden md:block" />
+        <img src="/landing-page/textBubble.webp" alt="Check out our 3D Workshop" class="bubble-img" />
     </a>
 
     <div
