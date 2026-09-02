@@ -38,9 +38,9 @@
                 case 'i':
                     goto('/info');
                     break;
-                // case 'w':
-                //     window.location.href = 'https://workshop.stormhacks.com';
-                //     break;
+                case 'w':
+                    window.location.href = 'https://studio.stormhacks.com/';
+                    break;
                 case 'f':
                     goto('/faq');
                     break;
@@ -158,24 +158,15 @@
 
     </header>
 
-    <!-- <a 
-        href="/workshop" 
+    <a 
+        href="https://studio.stormhacks.com/"
         class="text-bubble float-bob transition-opacity duration-300"
         class:opacity-0={isExpanded}
         class:pointer-events-none={isExpanded}
     >
         <img src="/landing-page/textBubbleM.webp" alt="Check out our 3D Workshop" class="bubble-img md:hidden" />
         <img src="/landing-page/textBubble.webp" alt="Check out our 3D Workshop" class="bubble-img hidden md:block" />
-    </a> -->
-
-    <div
-        class="text-bubble float-bob transition-opacity duration-300"
-        class:opacity-0={isExpanded}
-        class:pointer-events-none={isExpanded}
-    >
-        <img src="/landing-page/textBubbleTem.webp" alt="Even more fun coming soon >.<" class="bubble-img md:hidden" />
-        <img src="/landing-page/textBubbleTem.webp" alt="Even more fun coming soon >.<" class="bubble-img hidden md:block" />
-    </div>
+    </a>
 
     <div
         class="absolute left-5 bottom-5 z-20 flex items-center gap-3 transition-[opacity,filter,transform] duration-300"
