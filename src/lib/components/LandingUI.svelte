@@ -59,6 +59,9 @@
                 case 'v':
                     goto('https://forms.gle/gWBZMF9gCMXk2q4y8');
                     break;
+                case 'm':
+                    goto('https://forms.gle/DDNJWe4iEnu6KSF29');
+                    break;
                 case 'h':
                     window.location.href = 'https://portal.sfusurge.com/application';
                     break;

@@ -100,6 +100,7 @@
                         </div>
                     </Button>
 
+                    <Button href="https://forms.gle/DDNJWe4iEnu6KSF29" letter="M" label="AS MENTOR >" variant="light" />
                     <Button href="https://forms.gle/gWBZMF9gCMXk2q4y8" letter="V" label="AS VOLUNTEER >" variant="light" />
                 </div>
             {/if}
@@ -157,6 +158,7 @@
                         in:fly={{ x: -25, duration: 800, opacity: 0, easing: cubicOut }}
                         out:fly={{ x: -25, duration: 800, opacity: 0, easing: cubicOut }}
                     >
+                        <Button href="https://forms.gle/DDNJWe4iEnu6KSF29" showBadge={false} label="MENTOR >" variant="light" />
                         <Button href="https://forms.gle/gWBZMF9gCMXk2q4y8" showBadge={false} label="VOLUNTEER >" variant="light" />
                     </div>
                 {/if}
@@ -246,7 +248,7 @@
     }
 
     .mobile-stage-wrapper.expanded {
-        max-width: 175px;
+        max-width: 275px;
         opacity: 1;
         margin-right: 0.5rem;
     }
