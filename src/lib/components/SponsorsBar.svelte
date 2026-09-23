@@ -38,16 +38,16 @@
 </script>
 
 <div
-    class={`flex flex-col justify-center items-start w-[280px] h-[32px] sm:h-auto max-w-[216px] sm:max-w-[280px] px-[12px] sm:px-[16px] py-[4px] sm:py-[14px] gap-[10px] rounded-[6px] bg-[#ececef] shrink-0 select-none ${className}`}
+    class={`flex flex-col justify-center items-start w-[236px] sm:w-[312px] max-w-[236px] sm:max-w-[312px] h-[32px] sm:h-auto px-[12px] sm:px-[16px] py-[4px] sm:py-[14px] gap-[10px] rounded-[6px] bg-[#ececef] shrink-0 select-none ${className}`}
 >
-    <div class="flex items-center justify-between w-full">
+    <div class="flex items-center justify-between w-full gap-2 sm:gap-3.5">
         {#each sponsorsList as sponsor (sponsor.name)}
             <a
                 href={sponsor.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 title={sponsor.name}
-                class="flex items-center hover:opacity-75 transition-opacity"
+                class="flex items-center hover:opacity-75 transition-opacity shrink-0"
             >
                 <img
                     src={sponsor.image}

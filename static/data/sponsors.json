@@ -22,5 +22,11 @@
     "url": "https://www.transoftsolutions.com",
     "image": "/sponsors/transoft.webp",
     "class": "h-[16px] sm:h-[20px]"
+  },
+  {
+    "name": "Pure Buttons",
+    "url": "https://www.purebuttons.com",
+    "image": "/sponsors/purebuttons.webp",
+    "class": "h-[12px] sm:h-[16px]"
   }
 ]
