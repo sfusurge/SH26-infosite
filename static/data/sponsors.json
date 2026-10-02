@@ -28,5 +28,11 @@
     "url": "https://www.purebuttons.com",
     "image": "/sponsors/purebuttons.webp",
     "class": "h-[12px] sm:h-[16px]"
+  },
+  {
+    "name": "CodeCrafters",
+    "url": "https://codecrafters.io",
+    "image": "/sponsors/codecrafters.webp",
+    "class": "h-[16px] sm:h-[20px]"
   }
 ]
